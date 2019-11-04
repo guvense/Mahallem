@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class House extends BaseEntity{
+public class Animal extends BaseEntity{
 
-    private String name;
+    private String type;
 
-    private long grade;
+    private String age;
 
-    private GeoLocation geoLocation;
+    private String sex;
 
-    private String houseStatus;
+
 }

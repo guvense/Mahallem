@@ -5,17 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class House extends BaseEntity{
+public class Responsibility extends BaseEntity {
 
     private String name;
+    private Date deadline;
+    private String type;
+    private String responsibilityStatus;
 
-    private long grade;
-
-    private GeoLocation geoLocation;
-
-    private String houseStatus;
 }
