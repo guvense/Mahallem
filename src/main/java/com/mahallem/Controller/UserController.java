@@ -1,5 +1,6 @@
 package com.mahallem.Controller;
 
+import com.mahallem.Exception.UserNotFoundException;
 import com.mahallem.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -18,6 +19,8 @@ public class UserController {
     @GetMapping()
     public void getGame(){
 
-         userService.get();
+
+        throw new  UserNotFoundException();
+
     }
 }
