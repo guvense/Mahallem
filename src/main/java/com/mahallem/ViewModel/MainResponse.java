@@ -1,9 +1,9 @@
-package com.mahallem.DTO;
+package com.mahallem.ViewModel;
 
 
 public class MainResponse <T> {
     private T Data;
-    private    boolean Success;
+    private boolean Success;
     private String ErrorMessage;
 
     public T getData() {
