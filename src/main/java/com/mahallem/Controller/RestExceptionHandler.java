@@ -1,6 +1,5 @@
 package com.mahallem.Controller;
 
-import com.mahallem.DTO.MainResponse;
 import com.mahallem.Exception.BaseException;
 
 import com.mahallem.Exception.ExceptionCode;
