@@ -1,10 +1,8 @@
 package com.mahallem.Controller;
 
-import com.mahallem.Service.AnimalService;
+import com.mahallem.Service.Impl.AnimalService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
