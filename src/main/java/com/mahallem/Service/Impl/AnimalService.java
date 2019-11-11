@@ -1,4 +1,4 @@
-package com.mahallem.Service;
+package com.mahallem.Service.Impl;
 
 import com.mahallem.Entity.Animal;
 import lombok.RequiredArgsConstructor;

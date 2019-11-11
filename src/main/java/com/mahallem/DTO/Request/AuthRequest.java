@@ -1,4 +1,5 @@
-package com.mahallem.Entity;
+package com.mahallem.DTO.Request;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,20 +10,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseEntity{
+public class AuthRequest {
+
 
     private String firstName;
 
     private String lastName;
 
-    private String sex;
-
-    private String email;
-
-    private String cellPhone;
-
     private String password;
-
 
 
 }
