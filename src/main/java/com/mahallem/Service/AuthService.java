@@ -1,9 +1,10 @@
 package com.mahallem.Service;
 
 import com.mahallem.DTO.Request.AuthRequest;
-import com.mahallem.DTO.Response.UserResponse;
+import com.mahallem.DTO.Response.AuthResponse;
+
 
 public interface AuthService {
 
-    UserResponse registerUser(AuthRequest authRequest);
+    AuthResponse registerUser(AuthRequest authRequest);
 }

@@ -1,10 +1,12 @@
 package com.mahallem.Service.Impl;
 
 import com.mahallem.DTO.Request.AuthRequest;
+import com.mahallem.DTO.Response.AuthResponse;
 import com.mahallem.DTO.Response.UserResponse;
 import com.mahallem.Entity.User;
 import com.mahallem.Repository.AuthRepository;
 import com.mahallem.Service.AuthService;
+import com.mahallem.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,16 +25,21 @@ public class AuthServiceImpl implements AuthService {
     private final ModelMapper modelMapper;
 
     @NotNull
+    private final JwtUtil jwtUtil;
+
+    @NotNull
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Override
-    public UserResponse registerUser(AuthRequest authRequest) {
+    public AuthResponse registerUser(AuthRequest authRequest) {
         final User user = modelMapper.map(authRequest, User.class);
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User savedUser = authRepository.save(user);
 
-        return modelMapper.map(savedUser, UserResponse.class);
+        AuthResponse authResponse = modelMapper.map(savedUser, AuthResponse.class);
+        authResponse.setToken(jwtUtil.createToken(savedUser.get_id()));
+        return authResponse;
     }
 }
