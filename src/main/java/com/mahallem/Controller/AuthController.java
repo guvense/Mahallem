@@ -1,6 +1,7 @@
 package com.mahallem.Controller;
 
 import com.mahallem.DTO.Request.AuthRequest;
+import com.mahallem.DTO.Response.AuthResponse;
 import com.mahallem.DTO.Response.UserResponse;
 import com.mahallem.Exception.UserNotFoundException;
 import com.mahallem.Service.AuthService;
@@ -24,7 +25,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("register")
-    public ResponseEntity<UserResponse> userRegisterController(AuthRequest  authRequest){
+    public ResponseEntity<AuthResponse> userRegisterController(AuthRequest  authRequest){
 
        return new ResponseEntity<>( authService.registerUser(authRequest), HttpStatus.OK);
 
