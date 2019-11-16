@@ -12,12 +12,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AuthRequest {
 
+    private String userName;
 
     private String firstName;
 
     private String lastName;
 
     private String password;
-
 
 }

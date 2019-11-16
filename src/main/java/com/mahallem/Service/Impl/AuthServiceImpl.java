@@ -4,6 +4,7 @@ import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Response.AuthResponse;
 import com.mahallem.DTO.Response.UserResponse;
 import com.mahallem.Entity.User;
+import com.mahallem.Exception.UserOrPasswordWrongException;
 import com.mahallem.Repository.AuthRepository;
 import com.mahallem.Service.AuthService;
 import com.mahallem.Util.JwtUtil;
@@ -42,4 +43,21 @@ public class AuthServiceImpl implements AuthService {
         authResponse.setToken(jwtUtil.createToken(savedUser.get_id()));
         return authResponse;
     }
+
+    @Override
+    public AuthResponse loginUser(String userName, String password) {
+        User user=authRepository.findByUserName(userName);
+
+        if(user!=null && bCryptPasswordEncoder.matches(password,user.getPassword())){
+            AuthResponse authResponse = modelMapper.map(user, AuthResponse.class);
+            authResponse.setToken(jwtUtil.createToken(user.get_id()));
+            return authResponse;
+        }
+        else{
+            throw new UserOrPasswordWrongException();
+        }
+
+
+    }
+
 }

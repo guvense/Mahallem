@@ -2,16 +2,11 @@ package com.mahallem.Controller;
 
 import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Response.AuthResponse;
-import com.mahallem.DTO.Response.UserResponse;
-import com.mahallem.Exception.UserNotFoundException;
 import com.mahallem.Service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -25,9 +20,18 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("register")
-    public ResponseEntity<AuthResponse> userRegisterController(AuthRequest  authRequest){
+    public ResponseEntity<AuthResponse> register(AuthRequest  authRequest){
 
        return new ResponseEntity<>( authService.registerUser(authRequest), HttpStatus.OK);
+
+    }
+
+    @GetMapping("login")
+    public ResponseEntity<AuthResponse> login(
+            @RequestParam(name = "username") String userName,
+            @RequestParam String password) {
+
+        return new ResponseEntity<>(authService.loginUser(userName, password), HttpStatus.OK);
 
     }
 }

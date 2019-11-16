@@ -29,6 +29,6 @@ public class RestExceptionHandler {
 
         logger.error(ex.getMessage());
         String a= Integer.toString(ExceptionCode.UNEXPECTED_ERROR);
-        return new ResponseEntity<>(a, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(a, HttpStatus.OK);
     }
 }
