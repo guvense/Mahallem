@@ -18,7 +18,8 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/auth/register" )
+        http.csrf().disable().authorizeRequests()
+                .antMatchers("/auth/register","/auth/login")
                 .permitAll();
     }
 
@@ -27,7 +28,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/v1/api-docs",
                 "/configuration/ui",
-                "/swagger-resources/**",
+                "**/swagger-resources/**",
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/webjars/**");

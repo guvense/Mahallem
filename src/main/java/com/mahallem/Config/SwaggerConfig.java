@@ -4,6 +4,8 @@ package com.mahallem.Config;
 import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -21,72 +23,35 @@ import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.servlet.ServletContext;
+import java.awt.print.Pageable;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
-
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig  extends WebMvcConfigurationSupport {
+public class SwaggerConfig {
 
     @Bean
-    public Docket api() {
+    public Docket api(ServletContext servletContext) {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo())
-                .securitySchemes(Collections.singletonList(apiKey()))
-                .securityContexts(Collections.singletonList(securityContext()))
-                .useDefaultResponseMessages(false);
-    }
-
-    private ApiKey apiKey() {
-        return new ApiKey("apiKey", "Authorization", "header");
-    }
-
-    private List<SecurityReference> defaultAuth() {
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-        authorizationScopes[0] = authorizationScope;
-        return Collections.singletonList(new SecurityReference("apiKey", authorizationScopes));
+               .securitySchemes(Arrays.asList(apiKey()))
+                .securityContexts(Collections.singletonList(securityContext()));
     }
 
     private SecurityContext securityContext() {
-        return SecurityContext.builder()
-                .securityReferences(defaultAuth())
-                .forPaths(PathSelectors.regex("/rest/*"))
-                .build();
+        return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.regex("/.*")).build();
     }
 
-    @Bean
-    public SecurityConfiguration security() {
-        return SecurityConfigurationBuilder.builder()
-                .clientId("api-client-id")
-                .clientSecret("api-client-secret")
-                .realm("api-realm")
-                .appName("api-app")
-                .scopeSeparator(",")
-                .additionalQueryStringParams(null)
-                .useBasicAuthenticationWithAccessCodeGrant(false)
-                .build();
+    private List<SecurityReference> defaultAuth() {
+        final AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        final AuthorizationScope[] authorizationScopes = new AuthorizationScope[]{authorizationScope};
+        return Collections.singletonList(new SecurityReference("Bearer", authorizationScopes));
     }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("REST API")
-                .description("Servicesx")
-                .build();
+    private ApiKey apiKey() {
+        return new ApiKey("Bearer", "Authorization", "header");
     }
-
-    @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-    }
-
-
 }

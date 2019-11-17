@@ -9,6 +9,8 @@ import lombok.*;
 @Setter
 public class AuthResponse {
 
+    private String userName;
+
     private String firstName;
 
     private String lastName;

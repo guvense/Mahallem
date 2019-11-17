@@ -1,49 +1,25 @@
 package com.mahallem.ViewModel;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class MainResponse <T> {
-    private T Data;
-    private boolean Success;
-    private String ErrorMessage;
+    private T data;
+    private boolean success;
+    private String errorMessage;
+    private int errorCode;
 
-    public T getData() {
-        return Data;
+    public MainResponse(String errorMessage, int errorCode) {
+        this.errorMessage = errorMessage;
+        this.errorCode= errorCode;
+        this.success=false;
+        this.data=null;
     }
 
-    public void setData(T data) {
-        Data = data;
-    }
-
-    public MainResponse(String errorMessage) {
-        ErrorMessage = errorMessage;
-        Success=false;
-        Data=null;
-    }
-
-    public String getErrorMessage() {
-        return ErrorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        ErrorMessage = errorMessage;
-    }
-
-    public MainResponse() {
-        ErrorMessage = null;
-        Success=true;
-        Data=null;
-    }
-
-    public boolean isSuccess() {
-        return Success;
-    }
-
-    public void setSuccess(boolean success) {
-        Success = success;
-    }
-
-    public MainResponse(T data, boolean success) {
-        Data = data;
-        Success = success;
+    public MainResponse(T data) {
+        this.data = data;
+        this.success = true;
     }
 }

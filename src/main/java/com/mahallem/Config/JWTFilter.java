@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.Filter;
 
@@ -53,6 +54,12 @@ public class JWTFilter implements Filter {
         } else {
             String requestURI = httpServletRequest.getRequestURI();
             String token = httpServletRequest.getHeader("Authorization");
+            if(token!=null){
+                token = token.replace("Bearer ", "");
+            }
+            else {
+                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+            }
             boolean isTokenValid = checkTokenValidation(token);
             if (!isTokenValid) {
                 httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
@@ -77,7 +84,7 @@ public class JWTFilter implements Filter {
 
     private boolean checkTokenValidation(String token) throws IOException {
 
-        return token != null && jwtUtil.isTokenValid(token);
+        return jwtUtil.isTokenValid(token);
     }
 
     private boolean isSwaggerRequest(HttpServletRequest httpServletRequest) {
@@ -90,7 +97,7 @@ public class JWTFilter implements Filter {
                 "/configuration/security",
                 "/swagger-ui.html",
                 "/v2/api-docs",
-                "/webjars/**");
+                "/api/v1/webjars/");
         String requestURI = httpServletRequest.getRequestURI();
         for (String s : swagger) {
             if(requestURI.contains(s)){
