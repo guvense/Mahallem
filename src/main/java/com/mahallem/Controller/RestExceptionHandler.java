@@ -1,6 +1,9 @@
 package com.mahallem.Controller;
 
 import com.mahallem.Exception.BaseException;
+import com.mahallem.Util.RestMessage;
+import org.springframework.context.MessageSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mahallem.Exception.ExceptionCode;
 import org.slf4j.Logger;
@@ -14,21 +17,26 @@ import java.util.Locale;
 
 @ControllerAdvice
 public class RestExceptionHandler {
-
+    private final MessageSource messageSource;
     Logger logger= LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    public RestExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<String> handleIllegalArgument(BaseException ex, Locale locale) {
-
+        String errorMessage = messageSource.getMessage(ex.getMessage(), ex.getArgs(), locale);
         logger.error(ex.getMessage());
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+        return new ResponseEntity<>(new RestMessage(errorMessage), HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleExceptions(Exception ex, Locale locale) {
-
+        String errorMessage = messageSource.getMessage(ex.getMessage(), ex.getArgs(), locale);
         logger.error(ex.getMessage());
         String a= Integer.toString(ExceptionCode.UNEXPECTED_ERROR);
-        return new ResponseEntity<>(a, HttpStatus.OK);
+        return new ResponseEntity<>(new RestMessage(errorMessage), HttpStatus.OK);
     }
 }
