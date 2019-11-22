@@ -4,7 +4,7 @@ import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Response.AuthResponse;
 
 
-public interface AuthService {
+public interface IAuthService {
 
     AuthResponse registerUser(AuthRequest authRequest);
 

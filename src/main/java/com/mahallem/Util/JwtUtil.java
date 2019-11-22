@@ -7,8 +7,11 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.bson.types.ObjectId;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
@@ -16,7 +19,7 @@ import java.util.Date;
 @Service
 public  class JwtUtil {
 
-    public static final String TOKEN_SECRET = "s4T2zOIWHMM1sxq";
+    private static final String TOKEN_SECRET = "s4T2zOIWHMM1sxq";
 
     public String createToken(ObjectId userId) {
         try {
@@ -59,4 +62,11 @@ public  class JwtUtil {
         String userId = this.getUserIdFromToken(token);
         return userId != null;
     }
+
+    public static String getObjectIdFromRequest(HttpServletRequest httpServletRequest){
+
+        return (String) httpServletRequest.getAttribute("UserId");
+    }
+
+
 }

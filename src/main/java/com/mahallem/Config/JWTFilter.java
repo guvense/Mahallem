@@ -4,7 +4,11 @@ package com.mahallem.Config;
 import com.mahallem.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -54,10 +58,9 @@ public class JWTFilter implements Filter {
         } else {
             String requestURI = httpServletRequest.getRequestURI();
             String token = httpServletRequest.getHeader("Authorization");
-            if(token!=null){
+            if (token != null) {
                 token = token.replace("Bearer ", "");
-            }
-            else {
+            } else {
                 httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
             boolean isTokenValid = checkTokenValidation(token);
@@ -66,6 +69,7 @@ public class JWTFilter implements Filter {
             } else {
                 String userIdFromToken = jwtUtil.getUserIdFromToken(token);
                 httpServletRequest.setAttribute("UserId", userIdFromToken);
+                SecurityContextHolder.getContext().setAuthentication(getAuth(userIdFromToken,httpServletRequest));
                 filterChain.doFilter(servletRequest, servletResponse);
             }
 
@@ -80,6 +84,12 @@ public class JWTFilter implements Filter {
         }
         return requestURI.contains(LOGIN_URI) || requestURI.contains(REGISTER_URI);
 
+    }
+
+    private UsernamePasswordAuthenticationToken getAuth(String objectId, HttpServletRequest httpServletRequest) {
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(objectId, null);
+        auth.setDetails(new WebAuthenticationDetails(httpServletRequest));
+        return auth;
     }
 
     private boolean checkTokenValidation(String token) throws IOException {
@@ -100,7 +110,7 @@ public class JWTFilter implements Filter {
                 "/api/v1/webjars/");
         String requestURI = httpServletRequest.getRequestURI();
         for (String s : swagger) {
-            if(requestURI.contains(s)){
+            if (requestURI.contains(s)) {
                 return true;
             }
         }
