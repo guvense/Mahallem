@@ -9,5 +9,4 @@ public class BaseException extends RuntimeException {
         super(String.valueOf(code));
     }
 
-
 }
