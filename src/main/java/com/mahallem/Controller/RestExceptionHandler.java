@@ -1,6 +1,9 @@
 package com.mahallem.Controller;
 
 import com.mahallem.Exception.BaseException;
+import com.mahallem.Util.RestMessage;
+import org.springframework.context.MessageSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mahallem.Exception.BaseValidationException;
 import com.mahallem.Exception.ExceptionCode;
@@ -18,14 +21,20 @@ import java.util.Locale;
 
 @ControllerAdvice
 public class RestExceptionHandler {
+    private final MessageSource messageSource;
+    Logger logger= LoggerFactory.getLogger(getClass());
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    public RestExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<String> handleIllegalArgument(BaseException ex, Locale locale) {
-
+        String errorMessage = messageSource.getMessage(ex.getMessage(), ex.getArgs(), locale);
         logger.error(ex.getMessage());
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+        return new ResponseEntity<>(new RestMessage(errorMessage), HttpStatus.OK);
     }
     @ExceptionHandler(BaseValidationException.class)
     public ResponseEntity<String>  validationException(BaseValidationException ex, Locale locale) {
@@ -35,12 +44,11 @@ public class RestExceptionHandler {
     }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleExceptions(Exception ex, Locale locale) {
-
-        Class<? extends Exception> aClass = ex.getClass();
-        String al = ex.getMessage();
+        String errorMessage = messageSource.getMessage(ex.getMessage(), ex.getArgs(), locale);
         logger.error(ex.getMessage());
-        String a = Integer.toString(ExceptionCode.UNEXPECTED_ERROR);
-        return new ResponseEntity<>(a, HttpStatus.OK);
+        String a= Integer.toString(ExceptionCode.UNEXPECTED_ERROR);
+        return new ResponseEntity<>(new RestMessage(errorMessage), HttpStatus.OK);
+
     }
 
 
