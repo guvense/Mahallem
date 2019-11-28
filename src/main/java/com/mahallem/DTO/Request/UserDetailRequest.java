@@ -1,6 +1,6 @@
-package com.mahallem.DTO.Response;
+package com.mahallem.DTO.Request;
 
-
+import com.mahallem.Customize.Annotation.Email;
 import com.mahallem.Customize.Annotation.Phone;
 import com.mahallem.Enum.Sex;
 import lombok.AllArgsConstructor;
@@ -8,22 +8,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
-    private String firstName;
-
-    private String lastName;
+@AllArgsConstructor
+public class UserDetailRequest {
 
     private Sex sex;
 
-    @Email(message = "Wrong Email Format")
+    @Email(message = "Wrong Email ")
     private String email;
 
-    @Phone
+    @Phone(message = "Wrong Phone")
     private String cellPhone;
 }

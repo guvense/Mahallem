@@ -2,11 +2,10 @@ package com.mahallem.Service.Impl;
 
 import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Response.AuthResponse;
-import com.mahallem.DTO.Response.UserResponse;
 import com.mahallem.Entity.User;
 import com.mahallem.Exception.UserOrPasswordWrongException;
 import com.mahallem.Repository.AuthRepository;
-import com.mahallem.Service.AuthService;
+import com.mahallem.Service.IAuthService;
 import com.mahallem.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl implements IAuthService {
 
     @NotNull
     private final AuthRepository authRepository;

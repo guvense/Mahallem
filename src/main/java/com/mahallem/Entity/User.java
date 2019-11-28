@@ -1,9 +1,11 @@
 package com.mahallem.Entity;
 
+import com.mahallem.Enum.Sex;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 @Getter
 @Setter
@@ -17,13 +19,15 @@ public class User extends BaseEntity{
 
     private String lastName;
 
-    private String sex;
+    private Sex sex;
 
     private String email;
 
     private String cellPhone;
 
     private String password;
+
+    private ObjectId _houseId;
 
 
 
