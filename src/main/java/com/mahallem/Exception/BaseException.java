@@ -5,8 +5,8 @@ import lombok.Getter;
 
 public class BaseException extends RuntimeException {
 
-     BaseException(int code){
-        super(String.valueOf(code));
+     BaseException(String code){
+        super(code);
     }
 
 }
