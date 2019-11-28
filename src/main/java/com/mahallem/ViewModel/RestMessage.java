@@ -1,4 +1,4 @@
-package com.mahallem.Util;
+package com.mahallem.ViewModel;
 
 import lombok.Getter;
 import java.util.List;
