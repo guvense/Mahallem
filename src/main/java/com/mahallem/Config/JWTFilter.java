@@ -60,18 +60,19 @@ public class JWTFilter implements Filter {
             String token = httpServletRequest.getHeader("Authorization");
             if (token != null) {
                 token = token.replace("Bearer ", "");
+                boolean isTokenValid = checkTokenValidation(token);
+                if (!isTokenValid) {
+                    httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                } else {
+                    String userIdFromToken = jwtUtil.getUserIdFromToken(token);
+                    httpServletRequest.setAttribute("UserId", userIdFromToken);
+                    SecurityContextHolder.getContext().setAuthentication(getAuth(userIdFromToken,httpServletRequest));
+                    filterChain.doFilter(servletRequest, servletResponse);
+                }
             } else {
                 httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             }
-            boolean isTokenValid = checkTokenValidation(token);
-            if (!isTokenValid) {
-                httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            } else {
-                String userIdFromToken = jwtUtil.getUserIdFromToken(token);
-                httpServletRequest.setAttribute("UserId", userIdFromToken);
-                SecurityContextHolder.getContext().setAuthentication(getAuth(userIdFromToken,httpServletRequest));
-                filterChain.doFilter(servletRequest, servletResponse);
-            }
+
 
         }
     }
