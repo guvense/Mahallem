@@ -144,6 +144,7 @@ Fix typo in introduction to user guide
 ## Authors
 * **Guven SECKIN** [profile](https://github.com/guvense)
 * **Gokhan YILMAZ** [profile](https://github.com/GokhanYilmaz44)
+* **Sercan KAL** [profile](https://github.com/srcnkl)
 
 See also the list of [contributors](https://github.com/guvense/Mahallem-Backend/graphs/contributors) who participated in this project.
 
