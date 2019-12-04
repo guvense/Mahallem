@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.mahallem.Exception.BaseValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.validation.ConstraintViolationException;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class RestExceptionHandler {
@@ -31,9 +34,6 @@ public class RestExceptionHandler {
     public ResponseEntity<String> handleIllegalArgument(BaseException ex, Locale locale) {
 
         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
-        LOGGER.info(errorMessage);
-
-
         return new ResponseEntity<>(errorMessage, HttpStatus.OK);
     }
 
@@ -41,21 +41,24 @@ public class RestExceptionHandler {
     public ResponseEntity<String> validationException(BaseValidationException ex, Locale locale) {
 
         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
-        LOGGER.info(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(BindException.class)
+    public ResponseEntity<String> validationException(BindException ex, Locale locale) {
+        String errorMessage = ex.getFieldErrors().stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining(","));
+
+        return new ResponseEntity<>(errorMessage, HttpStatus.OK);
+
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleExceptions(Exception ex, Locale locale) {
 
-        String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
-        LOGGER.info(errorMessage);
-        return new ResponseEntity<>(errorMessage, HttpStatus.OK);
+        return new ResponseEntity<>("Undefined Exception", HttpStatus.OK);
 
-    }
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, Locale locale) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }
