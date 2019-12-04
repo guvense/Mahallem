@@ -29,7 +29,7 @@ public class RestExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<String> handleIllegalArgument(BaseException ex, Locale locale) {
 
-        String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
+         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
         return new ResponseEntity<>(errorMessage, HttpStatus.OK);
     }
 
