@@ -32,6 +32,8 @@ public class RestExceptionHandler {
 
         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
         LOGGER.info(errorMessage);
+
+
         return new ResponseEntity<>(errorMessage, HttpStatus.OK);
     }
 
