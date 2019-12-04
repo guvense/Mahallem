@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 
 @Getter
 @Setter
@@ -22,4 +25,7 @@ public class UserDetailRequest {
 
     @Phone(message = "Wrong Phone")
     private String cellPhone;
+
+    @Min(value = 18, message = "Age should not be less than 18")
+    private Integer age;
 }
