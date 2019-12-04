@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.util.Locale;
 
 @ControllerAdvice
@@ -29,7 +30,10 @@ public class RestExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<String> handleIllegalArgument(BaseException ex, Locale locale) {
 
-         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
+        String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
+        LOGGER.info(errorMessage);
+
+
         return new ResponseEntity<>(errorMessage, HttpStatus.OK);
     }
 
@@ -37,6 +41,7 @@ public class RestExceptionHandler {
     public ResponseEntity<String> validationException(BaseValidationException ex, Locale locale) {
 
         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
+        LOGGER.info(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.OK);
     }
 
@@ -44,9 +49,13 @@ public class RestExceptionHandler {
     public ResponseEntity<String> handleExceptions(Exception ex, Locale locale) {
 
         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
+        LOGGER.info(errorMessage);
         return new ResponseEntity<>(errorMessage, HttpStatus.OK);
 
     }
-
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, Locale locale) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
 }

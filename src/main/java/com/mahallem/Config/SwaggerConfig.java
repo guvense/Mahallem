@@ -1,6 +1,7 @@
 package com.mahallem.Config;
 
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,8 +38,11 @@ public class SwaggerConfig {
     @Bean
     public Docket api(ServletContext servletContext) {
         return new Docket(DocumentationType.SWAGGER_2)
-               .securitySchemes(Arrays.asList(apiKey()))
-                .securityContexts(Collections.singletonList(securityContext()));
+                .securitySchemes(Collections.singletonList(apiKey()))
+                .securityContexts(Collections.singletonList(securityContext()))
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+                .build();
     }
 
     private SecurityContext securityContext() {
