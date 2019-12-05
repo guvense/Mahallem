@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @RestController
@@ -20,7 +21,7 @@ public class AuthController {
     private final IAuthService authService;
 
     @PostMapping("register")
-    public ResponseEntity<AuthResponse> register(AuthRequest authRequest) {
+    public ResponseEntity<AuthResponse> register(@Valid AuthRequest authRequest) {
 
         return new ResponseEntity<>(authService.registerUser(authRequest), HttpStatus.OK);
 
