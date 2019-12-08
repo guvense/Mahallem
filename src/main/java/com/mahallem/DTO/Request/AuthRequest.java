@@ -15,16 +15,17 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class AuthRequest {
 
-    @NotBlank(message = "User name can not be blank")
+
+    @NotBlank(message = "{username.not.blank}")
     private String userName;
 
-    @NotBlank(message = "First name can not be blank")
+    @NotBlank(message = "{first.name.not.blank}")
     private String firstName;
 
-    @NotBlank(message = "Last name can not be blank")
+    @NotBlank(message = "{last.name.not.blank}")
     private String lastName;
 
-    @NotBlank(message = "Password name can not be blank")
+    @NotBlank(message = "{password.not.blank}")
     private String password;
 
 }
