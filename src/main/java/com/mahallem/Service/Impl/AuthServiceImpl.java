@@ -4,7 +4,7 @@ import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Response.AuthResponse;
 import com.mahallem.Entity.User;
 import com.mahallem.Exception.UserOrPasswordWrongException;
-import com.mahallem.Repository.AuthRepository;
+import com.mahallem.Repository.UserRepository;
 import com.mahallem.Service.IAuthService;
 import com.mahallem.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 public class AuthServiceImpl implements IAuthService {
 
     @NotNull
-    private final AuthRepository authRepository;
+    private final UserRepository userRepository;
     
     @NotNull
     private final ModelMapper modelMapper;
@@ -36,7 +36,7 @@ public class AuthServiceImpl implements IAuthService {
         final User user = modelMapper.map(authRequest, User.class);
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        User savedUser = authRepository.save(user);
+        User savedUser = userRepository.save(user);
 
         AuthResponse authResponse = modelMapper.map(savedUser, AuthResponse.class);
         authResponse.setToken(jwtUtil.createToken(savedUser.get_id()));
@@ -45,7 +45,7 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public AuthResponse loginUser(String userName, String password) {
-        User user=authRepository.findByUserName(userName);
+        User user= userRepository.findByUserName(userName);
 
         if(user!=null && bCryptPasswordEncoder.matches(password,user.getPassword())){
             AuthResponse authResponse = modelMapper.map(user, AuthResponse.class);
