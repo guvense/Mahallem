@@ -4,6 +4,7 @@ import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Response.AuthResponse;
 import com.mahallem.Entity.User;
 import com.mahallem.Exception.UserOrPasswordWrongException;
+import com.mahallem.Exception.UsernameExistException;
 import com.mahallem.Repository.AuthRepository;
 import com.mahallem.Service.IAuthService;
 import com.mahallem.Util.JwtUtil;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ public class AuthServiceImpl implements IAuthService {
 
     @NotNull
     private final AuthRepository authRepository;
-    
+
     @NotNull
     private final ModelMapper modelMapper;
 
@@ -35,6 +37,11 @@ public class AuthServiceImpl implements IAuthService {
     public AuthResponse registerUser(AuthRequest authRequest) {
         final User user = modelMapper.map(authRequest, User.class);
 
+        Optional<User> byUserName = authRepository.findByUserName(authRequest.getUserName());
+
+        if (byUserName.isPresent()) {
+            throw new UsernameExistException();
+        }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User savedUser = authRepository.save(user);
 
@@ -45,14 +52,14 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public AuthResponse loginUser(String userName, String password) {
-        User user=authRepository.findByUserName(userName);
+        Optional<User> opUser = authRepository.findByUserName(userName);
+        final User user = opUser.orElseThrow(UserOrPasswordWrongException::new);
 
-        if(user!=null && bCryptPasswordEncoder.matches(password,user.getPassword())){
+        if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
             AuthResponse authResponse = modelMapper.map(user, AuthResponse.class);
             authResponse.setToken(jwtUtil.createToken(user.get_id()));
             return authResponse;
-        }
-        else{
+        } else {
             throw new UserOrPasswordWrongException();
         }
 
