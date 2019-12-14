@@ -1,10 +1,7 @@
 package com.mahallem.Controller;
 
-import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Request.UserDetailRequest;
-import com.mahallem.DTO.Response.AuthResponse;
 import com.mahallem.DTO.Response.UserResponse;
-import com.mahallem.Exception.UserNotFoundException;
 import com.mahallem.Service.IUserService;
 import com.mahallem.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -22,10 +19,19 @@ public class UserController {
 
     private final IUserService userService;
 
-    @PostMapping("add-user-detail")
+    @PutMapping("add-user-detail")
     public ResponseEntity<UserResponse> addUserDetail(@Valid UserDetailRequest userDetailRequest, HttpServletRequest httpServletRequest) {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+
         return new ResponseEntity<>(userService.setUserDetailInformation(userId, userDetailRequest), HttpStatus.OK);
+
+    }
+
+    @GetMapping
+    public ResponseEntity<UserResponse> userInfo(HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+
+        return new ResponseEntity<>(userService.userInfo(userId), HttpStatus.OK);
 
     }
 
