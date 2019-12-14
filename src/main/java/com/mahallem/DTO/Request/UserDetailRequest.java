@@ -18,16 +18,16 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserDetailRequest {
 
-    @NotNull(message = "Sex is not be null")
+    @NotNull(message = "{sex.notnull}")
     private Sex sex;
 
-    @Email(message = "Wrong Email ")
+    @Email
     private String email;
 
-    @Phone(message = "Wrong Phone")
+    @Phone
     private String cellPhone;
 
-    @NotNull(message = "Age can not be null")
-    @Min(value = 18, message = "Age should not be less than 18")
+    @NotNull(message = "{age.notnull}")
+    @Min(value = 18, message = "{age.should.be.greater}")
     private Integer age;
 }
