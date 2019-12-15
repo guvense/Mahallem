@@ -6,7 +6,7 @@ import com.mahallem.DTO.Response.HouseResponse;
 
 public interface IHouseService {
 
-    HouseResponse saveHouse(HouseRequest houseRequest);
+    HouseResponse saveHouse(String userId, HouseRequest houseRequest);
 
-    HouseResponse getHouse(String name);
+    HouseResponse getHouse(String id);
 }

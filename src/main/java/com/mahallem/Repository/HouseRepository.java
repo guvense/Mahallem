@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface HouseRepository extends MongoRepository<House, ObjectId> {
 
-    Optional<House> findBy_id(ObjectId id);
+    Optional<House> findBy_id(String id);
 
-    House findByName(String name);
 }
