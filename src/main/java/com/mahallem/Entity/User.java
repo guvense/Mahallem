@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -30,6 +32,8 @@ public class User extends BaseEntity{
     private String password;
 
     private ObjectId _houseId;
+
+    private List<ObjectId> _animalIds;
 
 
 
