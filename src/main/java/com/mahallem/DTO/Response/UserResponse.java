@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 import javax.validation.constraints.Email;
 
@@ -17,13 +18,15 @@ import javax.validation.constraints.Email;
 public class UserResponse {
     private String firstName;
 
+    private String userName;
+
     private String lastName;
 
     private Sex sex;
 
-    @Email(message = "Wrong Email Format")
     private String email;
 
-    @Phone
     private String cellPhone;
+
+    private ObjectId _houseId;
 }

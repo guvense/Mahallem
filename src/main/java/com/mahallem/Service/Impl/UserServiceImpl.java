@@ -4,7 +4,7 @@ import com.mahallem.DTO.Request.UserDetailRequest;
 import com.mahallem.DTO.Response.UserResponse;
 import com.mahallem.Entity.User;
 import com.mahallem.Exception.UserNotFoundException;
-import com.mahallem.Repository.AuthRepository;
+import com.mahallem.Repository.UserRepository;
 import com.mahallem.Service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
 
-    private final AuthRepository  authRepository;
+    private final UserRepository userRepository;
 
     @NotNull
     private final ModelMapper modelMapper;
@@ -25,15 +25,24 @@ public class UserServiceImpl implements IUserService {
     @Override
     public UserResponse setUserDetailInformation(String userId, UserDetailRequest userDetailRequest) {
 
-        Optional<User> userOp = authRepository.findBy_id(new ObjectId(userId));
+        Optional<User> userOp = userRepository.findBy_id(new ObjectId(userId));
         User user = userOp.orElseThrow(UserNotFoundException::new);
 
         user.setCellPhone(userDetailRequest.getCellPhone());
         user.setEmail(userDetailRequest.getEmail());
         user.setSex(userDetailRequest.getSex());
-        User save = authRepository.save(user);
+        User save = userRepository.save(user);
 
         return modelMapper.map(save,UserResponse.class);
+
+    }
+
+    @Override
+    public UserResponse userInfo(String userId) {
+
+        Optional<User> opUser = userRepository.findBy_id(new ObjectId(userId));
+        User user = opUser.orElseThrow(UserNotFoundException::new);
+        return modelMapper.map(user, UserResponse.class);
 
     }
 }

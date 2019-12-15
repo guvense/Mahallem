@@ -7,4 +7,5 @@ public final class ExceptionCode {
     public static final String PHONE_VALIDATION_FAILED = "Exception.phoneValidationFailed";
     public static final String EMAIL_VALIDATION_FAILED="Exception.emailValidationFailed";
     public static final String HOUSE_NOT_FOUND = "Exception.houseNotFound";
+    public static final String USERNAME_EXIST="Exception.userNameExist";
 }

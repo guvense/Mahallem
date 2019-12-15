@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Email {
 
-    String message() default "Wrong Email Format";
+    String message() default "{wrong.phone.format}";
 
     Class<?>[] groups() default {};
 
