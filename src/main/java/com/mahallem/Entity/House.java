@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,4 +21,6 @@ public class House extends BaseEntity{
     private GeoLocation geoLocation;
 
     private String houseStatus;
+
+    private List<ObjectId> _animalIds;
 }
