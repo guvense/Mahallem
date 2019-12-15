@@ -12,6 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class HouseResponse {
 
+    private String _id;
+
     private String name;
 
     private long grade;
