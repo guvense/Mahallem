@@ -33,8 +33,4 @@ public class User extends BaseEntity{
 
     private ObjectId _houseId;
 
-    private List<ObjectId> _animalIds;
-
-
-
 }
