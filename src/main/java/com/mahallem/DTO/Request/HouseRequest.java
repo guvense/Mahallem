@@ -20,7 +20,7 @@ public class HouseRequest {
     @NotNull(message = "House grade cannot be null")
     private long grade;
 
-    private GeoLocation geoLocation;
+    private GeoLocationRequest geoLocation;
 
     @NotNull(message = "House status cannot be null")
     private String houseStatus;

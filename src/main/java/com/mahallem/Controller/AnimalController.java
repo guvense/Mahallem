@@ -18,6 +18,6 @@ public class AnimalController {
 
     @GetMapping()
     public void getAnimal(HttpServletRequest httpServletRequest){
-        animalService.get();
+
     }
 }

@@ -8,10 +8,5 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AnimalService {
 
-    public void get(){
-        Animal animal = new Animal();
-        animal.setSex("male");
-        animal.setAge("3");
-        animal.setType("Golden");
-    }
+
 }
