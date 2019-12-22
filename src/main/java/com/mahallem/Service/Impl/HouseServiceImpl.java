@@ -1,16 +1,16 @@
 package com.mahallem.Service.Impl;
 
+import com.mahallem.DTO.Request.AnimalRequest;
 import com.mahallem.DTO.Request.HouseRequest;
 import com.mahallem.DTO.Response.HouseResponse;
-import com.mahallem.Entity.GeoLocation;
+import com.mahallem.Entity.Animal;
 import com.mahallem.Entity.House;
-import com.mahallem.Entity.User;
 import com.mahallem.Exception.HouseNotFoundException;
-import com.mahallem.Exception.UserNotFoundException;
 import com.mahallem.Repository.HouseRepository;
+import com.mahallem.Repository.UserRepository;
+import com.mahallem.Service.IAnimalService;
 import com.mahallem.Service.IHouseService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,6 @@ public class HouseServiceImpl implements IHouseService {
     public HouseResponse getHouse(String id) {
         Optional<House> houseOptional = houseRepository.findBy_id(id);
         House house = houseOptional.orElseThrow(HouseNotFoundException::new);
-
         HouseResponse houseResponse = modelMapper.map(house, HouseResponse.class);
 
         return houseResponse;
