@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -14,7 +15,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
 public class User extends BaseEntity{
 
     private String userName;
@@ -31,6 +31,8 @@ public class User extends BaseEntity{
 
     private String password;
 
-    private ObjectId _houseId;
+    private ObjectId houseId;
+
+    private Integer age;
 
 }

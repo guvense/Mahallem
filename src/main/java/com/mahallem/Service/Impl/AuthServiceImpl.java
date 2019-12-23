@@ -6,7 +6,7 @@ import com.mahallem.Entity.User;
 import com.mahallem.Exception.UserOrPasswordWrongException;
 import com.mahallem.Exception.UsernameExistException;
 import com.mahallem.Repository.UserRepository;
-import com.mahallem.Service.IAuthService;
+import com.mahallem.Service.AuthService;
 import com.mahallem.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements IAuthService {
+public class AuthServiceImpl implements AuthService {
 
     @NotNull
     private final UserRepository userRepository;
