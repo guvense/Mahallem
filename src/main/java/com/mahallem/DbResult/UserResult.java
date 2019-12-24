@@ -1,7 +1,6 @@
-package com.mahallem.DTO.Response;
+package com.mahallem.DbResult;
 
-
-import com.mahallem.Customize.Annotation.Phone;
+import com.mahallem.Entity.House;
 import com.mahallem.Enum.Sex;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,16 +8,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 
-import javax.validation.constraints.Email;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
-    private String firstName;
+public class UserResult {
 
     private String userName;
+
+    private String firstName;
 
     private String lastName;
 
@@ -28,9 +26,11 @@ public class UserResponse {
 
     private String cellPhone;
 
-    private String houseId;
+    private String password;
 
-    private HouseResponse houseResponse;
+    private ObjectId houseId;
 
     private Integer age;
+
+    private House house;
 }

@@ -9,4 +9,5 @@ public final class ExceptionCode {
     public static final String HOUSE_NOT_FOUND = "Exception.houseNotFound";
     public static final String USERNAME_EXIST="Exception.userNameExist";
     public static final String ANIMAL_NOT_FOUND="Exception.animalNotFound";
+    public static final String USER_UPDATE_FAILED="Exception.userUpdatedFailed";
 }

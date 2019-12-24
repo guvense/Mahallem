@@ -1,15 +1,12 @@
 package com.mahallem.Service.Impl;
 
-import com.mahallem.DTO.Request.AnimalRequest;
 import com.mahallem.DTO.Request.HouseRequest;
 import com.mahallem.DTO.Response.HouseResponse;
-import com.mahallem.Entity.Animal;
 import com.mahallem.Entity.House;
 import com.mahallem.Exception.HouseNotFoundException;
 import com.mahallem.Repository.HouseRepository;
-import com.mahallem.Repository.UserRepository;
-import com.mahallem.Service.IAnimalService;
-import com.mahallem.Service.IHouseService;
+import com.mahallem.Service.HouseService;
+import com.mahallem.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class HouseServiceImpl implements IHouseService {
+public class HouseServiceImpl implements HouseService {
 
     @NotNull
     private final ModelMapper modelMapper;
@@ -27,24 +24,26 @@ public class HouseServiceImpl implements IHouseService {
     @NotNull
     private final HouseRepository houseRepository;
 
+    private final UserService userService;
+
     @Override
     public HouseResponse saveHouse(String userId, HouseRequest houseRequest) {
+
         final House house = modelMapper.map(houseRequest, House.class);
-
         House savedHouse = houseRepository.save(house);
-        savedHouse.get_id();
+        userService.addHouseIdToUser(userId, savedHouse.get_id().toString());
 
-        HouseResponse houseResponse = modelMapper.map(savedHouse, HouseResponse.class);
+        return modelMapper.map(savedHouse, HouseResponse.class);
 
-        return houseResponse;
     }
 
     @Override
     public HouseResponse getHouse(String id) {
+
         Optional<House> houseOptional = houseRepository.findBy_id(id);
         House house = houseOptional.orElseThrow(HouseNotFoundException::new);
-        HouseResponse houseResponse = modelMapper.map(house, HouseResponse.class);
 
-        return houseResponse;
+        return modelMapper.map(house, HouseResponse.class);
+
     }
 }

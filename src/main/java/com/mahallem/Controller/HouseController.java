@@ -2,7 +2,7 @@ package com.mahallem.Controller;
 
 import com.mahallem.DTO.Request.HouseRequest;
 import com.mahallem.DTO.Response.HouseResponse;
-import com.mahallem.Service.IHouseService;
+import com.mahallem.Service.HouseService;
 import com.mahallem.Util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ import javax.validation.constraints.NotNull;
 public class HouseController {
 
     @NotNull
-    private final IHouseService houseService;
+    private final HouseService houseService;
 
     @PostMapping("add-house")
     public ResponseEntity<HouseResponse> addHouse(@Valid HouseRequest houseRequest, HttpServletRequest httpServletRequest) {

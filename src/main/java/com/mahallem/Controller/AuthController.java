@@ -2,7 +2,7 @@ package com.mahallem.Controller;
 
 import com.mahallem.DTO.Request.AuthRequest;
 import com.mahallem.DTO.Response.AuthResponse;
-import com.mahallem.Service.IAuthService;
+import com.mahallem.Service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class AuthController {
 
 
     @NotNull
-    private final IAuthService authService;
+    private final AuthService authService;
 
     @PostMapping("register")
     public ResponseEntity<AuthResponse> register(@Valid AuthRequest authRequest) {
