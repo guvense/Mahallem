@@ -18,4 +18,6 @@ public class AnimalResponse {
     private int age;
 
     private AnimalSex sex;
+
+    private String houseId;
 }

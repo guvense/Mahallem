@@ -35,4 +35,7 @@ public class User extends BaseEntity{
 
     private Integer age;
 
+    private House house;
+
+    private List<Animal> animals;
 }

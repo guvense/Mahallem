@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 @Getter
 @Setter
@@ -18,6 +19,8 @@ public class Animal extends BaseEntity{
     private int age;
 
     private AnimalSex sex;
+
+    private ObjectId houseId;
 
 
 }
