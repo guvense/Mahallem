@@ -17,7 +17,7 @@ public interface UserRepository {
 
     void updateUserDetailInfo(String userId, UserDetailRequest userDetailRequest);
 
-    void addHouseIdToUser(String userId, String houseId);
+    void addHouseIdToUser(String userId, ObjectId houseId);
 
     Optional<User> getUserInfo(String id);
 

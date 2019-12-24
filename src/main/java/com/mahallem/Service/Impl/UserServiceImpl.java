@@ -9,9 +9,14 @@ import com.mahallem.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.print.attribute.standard.Destination;
 import javax.validation.constraints.NotNull;
+import javax.xml.transform.Source;
 import java.util.Optional;
 
 @Service
@@ -45,7 +50,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addHouseIdToUser(String userId, String houseId) {
+    public UserResponse getUser(String userId) {
+        Optional<User> userOp = userRepository.findBy_id(new ObjectId(userId));
+        User user = userOp.orElseThrow(UserNotFoundException::new);
+        return modelMapper.map(user, UserResponse.class);
+    }
+
+    @Override
+    public void addHouseIdToUser(String userId, ObjectId houseId) {
 
         userRepository.addHouseIdToUser(userId,houseId);
     }

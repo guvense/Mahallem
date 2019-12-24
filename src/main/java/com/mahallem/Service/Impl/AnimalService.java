@@ -13,6 +13,7 @@ import com.mahallem.Service.HouseService;
 import com.mahallem.Service.UserService;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -46,10 +47,11 @@ public class AnimalService implements com.mahallem.Service.AnimalService {
 
 
     @Override
-    public AnimalResponse saveAnimal(String id, AnimalRequest animalRequest) {
+    public AnimalResponse saveAnimal(String userId, AnimalRequest animalRequest) {
         final Animal animal = modelMapper.map(animalRequest, Animal.class);
+        String houseId = userService.getUser(userId).getHouseId();
+        animal.setHouseId(new ObjectId(houseId));
         Animal savedAnimal = animalRepository.save(animal);
-        boolean b = updateAnimalList(id, animal);
         return modelMapper.map(savedAnimal, AnimalResponse.class);
     }
 
@@ -62,7 +64,7 @@ public class AnimalService implements com.mahallem.Service.AnimalService {
     }
 
     private boolean updateAnimalList(String id, Animal animal) {
-        UserResponse userResponse = userService.userInfo(id);
+        UserResponse userResponse = userService.getUser(id);
         HouseResponse houseResponse = houseService.getHouse(userResponse.getHouseId().toString());
         House house = modelMapper.map(houseResponse, House.class);
         UpdateResult updateResult = mongoTemplate.updateFirst(

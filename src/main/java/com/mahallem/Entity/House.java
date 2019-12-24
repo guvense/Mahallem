@@ -23,5 +23,4 @@ public class House extends BaseEntity{
 
     private String houseStatus;
 
-    private List<ObjectId> _animalIds;
 }

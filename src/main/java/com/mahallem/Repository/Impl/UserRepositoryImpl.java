@@ -4,12 +4,14 @@ import com.mahallem.DTO.Request.UserDetailRequest;
 import com.mahallem.Entity.User;
 import com.mahallem.Exception.UserUpdateException;
 import com.mahallem.Repository.UserRepository;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -58,7 +60,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void addHouseIdToUser(String userId, String houseId) {
+    public void addHouseIdToUser(String userId, ObjectId houseId) {
         UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(userId)),
                 new Update()
                         .set("houseId", houseId), User.class);
@@ -72,8 +74,10 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> getUserInfo(String id) {
         AggregationOperation matchOperation = Aggregation.match(Criteria.where("_id").is(new ObjectId(id)));
 
-        Aggregation aggregation = Aggregation.newAggregation(matchOperation,
-                lookUpUserToHouse());
+        Aggregation aggregation = Aggregation.newAggregation(
+                matchOperation,
+                lookUpUserToHouse(),
+                lookUpHouseToAnimal());
         User user1 = mongoTemplate.aggregate(aggregation, "user", User.class).getUniqueMappedResult();
         Optional<User> user = Optional.ofNullable(user1);
     return user;
@@ -89,4 +93,14 @@ public class UserRepositoryImpl implements UserRepository {
                 .as("house");
 
     }
+
+    private LookupOperation lookUpHouseToAnimal() {
+        return LookupOperation.newLookup()
+                .from("animal")
+                .localField("houseId")
+                .foreignField("houseId")
+                .as("animals");
+    }
+
+
 }

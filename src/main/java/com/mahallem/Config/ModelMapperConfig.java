@@ -1,6 +1,9 @@
 package com.mahallem.Config;
 
+import com.mahallem.DTO.Response.UserResponse;
+import com.mahallem.Entity.User;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -14,7 +17,13 @@ public class ModelMapperConfig {
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+
+        // This is mapper config please write your mapping rules here
+        ModelMapper modelMapper = new ModelMapper();
+        TypeMap<User, UserResponse> typeMap =
+                modelMapper.createTypeMap(User.class, UserResponse.class);
+        typeMap.addMapping(User::getHouse, UserResponse::setHouseResponse);
+        return modelMapper;
     }
 
     @Bean
