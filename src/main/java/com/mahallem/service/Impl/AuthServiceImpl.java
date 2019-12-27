@@ -8,6 +8,7 @@ import com.mahallem.exception.UsernameExistException;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
+import com.mahallem.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,6 +33,8 @@ public class AuthServiceImpl implements AuthService {
     @NotNull
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @NotNull
+    private final RedisUtil<User> stringRedisUtil;
 
     @Override
     public AuthResponse registerUser(AuthRequest authRequest) {
@@ -58,6 +61,7 @@ public class AuthServiceImpl implements AuthService {
         if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
             AuthResponse authResponse = modelMapper.map(user, AuthResponse.class);
             authResponse.setToken(jwtUtil.createToken(user.get_id()));
+            stringRedisUtil.putValue("user"+user.getHouseId(),user);
             return authResponse;
         } else {
             throw new UserOrPasswordWrongException();
