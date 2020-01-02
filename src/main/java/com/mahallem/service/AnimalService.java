@@ -5,5 +5,6 @@ import com.mahallem.dto.Response.AnimalResponse;
 
 public interface AnimalService {
     AnimalResponse saveAnimal(String id, AnimalRequest animalRequest);
+
     AnimalResponse getAnimal(String id);
 }
