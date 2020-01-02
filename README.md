@@ -1,7 +1,7 @@
 # Mahallem-Backend
 # Mahallem
 Mahallem - React.js / Java(Spring Framework) / Rest 
-
+[![Build Status](https://travis-ci.com/guvense/Mahallem-Backend.svg?branch=master)](https://travis-ci.com/guvense/Mahallem-Backend)
 ![React](https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-128.png)    ![Java](https://cdn2.iconfinder.com/data/icons/well-known-1/1024/Java-128.png)
 
 ## Getting Started
