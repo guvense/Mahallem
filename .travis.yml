@@ -10,7 +10,7 @@ addons:
   sonarcloud:
     organization: guvense
     token:
-      secure: "$SONAR_TOKEN"
+      secure: $SONAR_TOKEN
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
