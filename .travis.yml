@@ -12,7 +12,7 @@ addons:
     token:
       secure: $SONAR_TOKEN
 after_success:
-- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin  
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
   fi`
 - export IMAGE_NAME=guvense/mahallem
