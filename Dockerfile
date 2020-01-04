@@ -1,5 +1,5 @@
 
-FROM openjdk:7
+FROM openjdk:11
 VOLUME /tmp
 ADD target/mahallem-0.0.1-SNAPSHOT.jar app.jar
 RUN sh -c 'touch /app.jar'
