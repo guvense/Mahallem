@@ -7,11 +7,7 @@ import com.mahallem.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -31,8 +27,8 @@ public class HouseController {
         return new ResponseEntity<>(houseService.saveHouse(userId, houseRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping("detail-house")
-    public ResponseEntity<HouseResponse> detailHouse(@RequestParam String id) {
+    @GetMapping("detail-house/{id}")
+    public ResponseEntity<HouseResponse> detailHouse(@PathVariable String id) {
         return new ResponseEntity<>(houseService.getHouse(id), HttpStatus.OK);
     }
 }
