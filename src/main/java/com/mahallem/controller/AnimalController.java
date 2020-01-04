@@ -20,13 +20,13 @@ public class AnimalController {
     private final AnimalService animalService;
 
 
-    @GetMapping("animal-detail")
-    public ResponseEntity<AnimalResponse> getAnimal(@RequestParam String id){
+    @GetMapping("detail/{id}")
+    public ResponseEntity<AnimalResponse> getAnimal(@PathVariable String id){
         return new ResponseEntity<>(animalService.getAnimal(id), HttpStatus.OK);
     }
 
 
-    @PostMapping("add-animal")
+    @PostMapping
     public ResponseEntity<AnimalResponse> setAnimalInformation(@Valid AnimalRequest animalRequest, HttpServletRequest httpServletRequest){
         String id= JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return new ResponseEntity<>(animalService.saveAnimal(id,animalRequest),HttpStatus.CREATED);
