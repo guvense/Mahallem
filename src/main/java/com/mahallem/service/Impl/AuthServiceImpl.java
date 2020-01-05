@@ -3,9 +3,10 @@ package com.mahallem.service.Impl;
 import com.mahallem.dto.Request.AuthRequest;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.entity.User;
+import com.mahallem.eventSender.ClientInfo;
+import com.mahallem.eventMessage.DummyObject;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
-import com.mahallem.eventBusses.Channel;
 import com.mahallem.eventBusses.EventBus;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AuthService;
@@ -45,8 +46,12 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse registerUser(AuthRequest authRequest) {
         final User user = modelMapper.map(authRequest, User.class);
 
+        ClientInfo clientInfo = new ClientInfo();
+        clientInfo.setAdmin(true);
+        clientInfo.setId("sdladk");
+        DummyObject dummyObject = new DummyObject(clientInfo,"selma");
+        eventBus.post(dummyObject);
 
-        eventBus.post(user,Channel.A);
         Optional<User> byUserName = userRepository.findByUserName(authRequest.getUserName());
 
         if (byUserName.isPresent()) {

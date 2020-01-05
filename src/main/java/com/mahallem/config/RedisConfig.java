@@ -2,6 +2,7 @@ package com.mahallem.config;
 
 import com.mahallem.eventBusses.EventBus;
 import com.mahallem.eventBusses.EventBusImpl;
+import com.mahallem.eventSender.EventValue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,8 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.SerializationException;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
@@ -34,16 +37,15 @@ public class RedisConfig {
         return factory;
     }
     @Bean
-    public RedisTemplate<String,Object> redisTemplate() {
-        final RedisTemplate<String,Object> redisTemplate = new RedisTemplate<String,Object>();
+    public RedisTemplate<String,String> redisTemplate() {
+        final RedisTemplate<String,String> redisTemplate = new RedisTemplate<String,String>();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new GenericToStringSerializer<>(Object.class));
         redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+        redisTemplate.setValueSerializer(new StringRedisSerializer());
         redisTemplate.setConnectionFactory(jedisConnectionFactory());
         return redisTemplate;
     }
-
 
     @Bean
     EventBus getEventBus(){
