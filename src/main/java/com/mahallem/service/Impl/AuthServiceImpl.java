@@ -5,6 +5,8 @@ import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.entity.User;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
+import com.mahallem.eventBusses.Channel;
+import com.mahallem.eventBusses.EventBus;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
@@ -36,10 +38,15 @@ public class AuthServiceImpl implements AuthService {
     @NotNull
     private final RedisUtil<User> stringRedisUtil;
 
+    private final EventBus eventBus;
+
+
     @Override
     public AuthResponse registerUser(AuthRequest authRequest) {
         final User user = modelMapper.map(authRequest, User.class);
 
+
+        eventBus.post(user,Channel.A);
         Optional<User> byUserName = userRepository.findByUserName(authRequest.getUserName());
 
         if (byUserName.isPresent()) {
