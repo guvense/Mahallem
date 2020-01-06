@@ -1,6 +1,6 @@
 
 # Mahallem
-Mahallem - React.js / Java(Spring Framework) / Rest 
+##With Mahallem you can share task in your house. Besides communicate with your neighbors.
 
 [![Build Status](https://travis-ci.com/guvense/Mahallem-Backend.svg?branch=master)](https://travis-ci.com/guvense/Mahallem-Backend)
 
@@ -10,33 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You need to install Java 1.8, Node.js and NPM, Maven, MongoDb
-
-```
-Installation on Mac:
-
-brew update  
-brew install node
-
-The default Node.js will be installed under the /usr/local/Cellar/node directory on your system.
-To check node.js version:
-
-node -v
-
-To check the installed version of NPM installed with Node.js.
-
-npm -v
-
-If you don't have any java version on your machine visit the below site and perform the installation step.
---> https://java.com/en/download/help/download_options.xml
-
-You need to install maven. Follow the steps according to your OS
---> https://www.baeldung.com/install-maven-on-windows-linux-mac
-
-Finally, you need to install mongodb from below link.
---> https://docs.mongodb.com/manual/installation/
-```
-
+You need to install Java SDK 11 , Node.js and NPM, Maven, MongoDb, Redis
 
 
 ### Getting the project
@@ -89,6 +63,7 @@ Fix typo in introduction to user guide
 * **Guven SECKIN** [profile](https://github.com/guvense)
 * **Gokhan YILMAZ** [profile](https://github.com/GokhanYilmaz44)
 * **Sercan KAL** [profile](https://github.com/srcnkl)
+* **Gokhan BIRINCI [profile](https://github.com/gokhanbirincii)
 
 See also the list of [contributors](https://github.com/guvense/Mahallem-Backend/graphs/contributors) who participated in this project.
 
