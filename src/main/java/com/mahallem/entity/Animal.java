@@ -16,11 +16,10 @@ public class Animal extends BaseEntity{
 
     private AnimalType type;
 
-    private int age;
-
     private AnimalSex sex;
 
     private ObjectId houseId;
 
+    private String birthDate;
 
 }

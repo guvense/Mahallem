@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,9 +18,10 @@ public class AnimalRequest {
     @NotNull(message = "Animal type cannot be null")
     private AnimalType type;
 
-    @NotNull(message = "Animal age cannot be null")
-    private int age;
-
     @NotNull(message = "Animal sex cannot be null")
     private AnimalSex sex;
+
+    @NotNull(message = "Animal birthdate cannot be null")
+    private String birthDate;
+
 }

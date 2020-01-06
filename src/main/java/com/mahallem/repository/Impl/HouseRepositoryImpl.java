@@ -23,14 +23,12 @@ public class HouseRepositoryImpl implements HouseRepository {
 
     @Override
     public Optional<House> getHouse(String id) {
-
         House house = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(id)), House.class);
         return Optional.ofNullable(house);
     }
 
     @Override
     public House save(House house) {
-
         return mongoTemplate.save(house);
     }
 
