@@ -63,7 +63,7 @@ Fix typo in introduction to user guide
 * **Guven SECKIN** [profile](https://github.com/guvense)
 * **Gokhan YILMAZ** [profile](https://github.com/GokhanYilmaz44)
 * **Sercan KAL** [profile](https://github.com/srcnkl)
-* **Gokhan BIRINCI [profile](https://github.com/gokhanbirincii)
+* **Gokhan BIRINCI** [profile](https://github.com/gokhanbirincii)
 
 See also the list of [contributors](https://github.com/guvense/Mahallem-Backend/graphs/contributors) who participated in this project.
 
