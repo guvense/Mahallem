@@ -17,11 +17,15 @@ public class ClientInfo implements Serializable {
 
     private static final long serialVersionUID = 7040254474373784730L;
 
-    public String id;
+    private String id;
 
-    public Date onlineAt;
+    private Date onlineAt;
 
-    public boolean isAdmin;
+    private boolean isAdmin;
 
-    public UserResponse userResponse;
+    private UserResponse userResponse;
+
+    private String userName;
+
+
 }

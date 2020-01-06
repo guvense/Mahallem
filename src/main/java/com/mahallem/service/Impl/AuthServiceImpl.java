@@ -49,7 +49,8 @@ public class AuthServiceImpl implements AuthService {
         ClientInfo clientInfo = new ClientInfo();
         clientInfo.setAdmin(true);
         clientInfo.setId("sdladk");
-        DummyObject dummyObject = new DummyObject(clientInfo,"selma");
+        clientInfo.setUserName("Güven");
+        DummyObject dummyObject = new DummyObject(clientInfo,"Hello");
         eventBus.post(dummyObject);
 
         Optional<User> byUserName = userRepository.findByUserName(authRequest.getUserName());
