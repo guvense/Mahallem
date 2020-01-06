@@ -1,5 +1,7 @@
 
-# Mahallem
+
+# Mahallem  ![alt text](icon.png)
+
 ## With Mahallem you can share task in your house. Besides communicate with your neighbors.
 
 [![Build Status](https://travis-ci.com/guvense/Mahallem-Backend.svg?branch=master)](https://travis-ci.com/guvense/Mahallem-Backend)
