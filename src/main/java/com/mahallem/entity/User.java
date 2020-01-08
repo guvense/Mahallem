@@ -17,6 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 public class User extends BaseEntity implements Serializable {
 
+    private static final long serialVersionUID = 3504972142712457030L;
+
     private String userName;
 
     private String firstName;
