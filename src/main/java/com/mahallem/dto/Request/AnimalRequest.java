@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -22,6 +24,8 @@ public class AnimalRequest {
     private AnimalSex sex;
 
     @NotNull(message = "Animal birthdate cannot be null")
-    private String birthDate;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date birthDate;
+
 
 }
