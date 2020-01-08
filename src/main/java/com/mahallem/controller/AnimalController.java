@@ -19,16 +19,22 @@ public class AnimalController {
 
     private final AnimalService animalService;
 
-
-    @GetMapping("detail/{id}")
-    public ResponseEntity<AnimalResponse> getAnimal(@PathVariable String id){
+    @GetMapping
+    public ResponseEntity<AnimalResponse> getAnimal(HttpServletRequest httpServletRequest){
+        String id= JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return new ResponseEntity<>(animalService.getAnimal(id), HttpStatus.OK);
     }
-
 
     @PostMapping
     public ResponseEntity<AnimalResponse> setAnimalInformation(@Valid AnimalRequest animalRequest, HttpServletRequest httpServletRequest){
         String id= JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return new ResponseEntity<>(animalService.saveAnimal(id,animalRequest),HttpStatus.CREATED);
     }
+
+    @DeleteMapping
+    public ResponseEntity<AnimalResponse> deleteAnimal(String animalId, HttpServletRequest httpServletRequest){
+        String id= JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return new ResponseEntity<>(animalService.deleteAnimal(animalId),HttpStatus.OK);
+    }
+
 }

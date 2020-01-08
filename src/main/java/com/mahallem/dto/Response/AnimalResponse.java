@@ -19,5 +19,4 @@ public class AnimalResponse {
 
     private AnimalSex sex;
 
-    private String houseId;
 }
