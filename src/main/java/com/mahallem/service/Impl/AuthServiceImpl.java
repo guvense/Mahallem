@@ -13,6 +13,7 @@ import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
 import com.mahallem.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

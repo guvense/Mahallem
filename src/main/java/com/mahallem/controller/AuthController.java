@@ -3,11 +3,13 @@ package com.mahallem.controller;
 import com.mahallem.dto.Request.AuthRequest;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.service.AuthService;
+import com.mahallem.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 

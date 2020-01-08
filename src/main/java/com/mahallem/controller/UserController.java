@@ -1,6 +1,7 @@
 package com.mahallem.controller;
 
 import com.mahallem.dto.Request.UserDetailRequest;
+import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.service.UserService;
 import com.mahallem.util.JwtUtil;
