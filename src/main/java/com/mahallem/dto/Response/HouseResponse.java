@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class HouseResponse {
 
-    private String _id;
+    private String id;
 
     private String name;
 

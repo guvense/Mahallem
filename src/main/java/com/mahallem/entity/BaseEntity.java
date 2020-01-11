@@ -12,7 +12,7 @@ import java.util.Date;
 class BaseEntity {
 
     @Id
-    private ObjectId _id;
+    private ObjectId id;
 
     private Date createDate;
 

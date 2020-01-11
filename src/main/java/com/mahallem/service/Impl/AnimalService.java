@@ -49,7 +49,7 @@ public class AnimalService implements com.mahallem.service.AnimalService {
     @Override
     public AnimalResponse saveAnimal(String userId, AnimalRequest animalRequest) {
         final Animal animal = modelMapper.map(animalRequest, Animal.class);
-        String houseId = userService.getUser(userId).getHouseId();
+        String houseId = userService.getUser(userId).getHouseResponse().getId();
         animal.setHouseId(new ObjectId(houseId));
         Animal savedAnimal = animalRepository.save(animal);
         return modelMapper.map(savedAnimal, AnimalResponse.class);
@@ -57,7 +57,7 @@ public class AnimalService implements com.mahallem.service.AnimalService {
 
     @Override
     public AnimalResponse getAnimal(String id) {
-        Optional<Animal> optionalAnimal = animalRepository.findBy_id(id);
+        Optional<Animal> optionalAnimal = animalRepository.findById(id);
         Animal animal = optionalAnimal.orElseThrow(AnimalNotFoundException::new);
         return modelMapper.map(animal, AnimalResponse.class);
         
@@ -65,11 +65,11 @@ public class AnimalService implements com.mahallem.service.AnimalService {
 
     private boolean updateAnimalList(String id, Animal animal) {
         UserResponse userResponse = userService.getUser(id);
-        HouseResponse houseResponse = houseService.getHouse(userResponse.getHouseId().toString());
+        HouseResponse houseResponse = houseService.getHouse(userResponse.getHouseResponse().getId());
         House house = modelMapper.map(houseResponse, House.class);
         UpdateResult updateResult = mongoTemplate.updateFirst(
                 Query.query(Criteria.where("house").
-                is(house.get_id())), new Update().push("_animalIds", animal.get_id()), House.class);
+                is(house.getId())), new Update().push("_animalIds", animal.getId()), House.class);
         
         return updateResult.wasAcknowledged();
     }

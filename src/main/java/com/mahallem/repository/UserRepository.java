@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserRepository {
 
-    Optional<User> findBy_id(ObjectId id);
+    Optional<User> findById(ObjectId id);
 
     Optional<User> findByUserName(String username);
 

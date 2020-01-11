@@ -32,7 +32,7 @@ public class HouseServiceImpl implements HouseService {
 
         final House house = modelMapper.map(houseRequest, House.class);
         House savedHouse = houseRepository.save(house);
-        userService.addHouseIdToUser(userId, savedHouse.get_id());
+        userService.addHouseIdToUser(userId, savedHouse.getId());
 
         return modelMapper.map(savedHouse, HouseResponse.class);
 

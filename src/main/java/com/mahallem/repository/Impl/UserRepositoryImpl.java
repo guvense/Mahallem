@@ -33,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<User> findBy_id(ObjectId id) {
+    public Optional<User> findById(ObjectId id) {
         return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("_id").is(id)), User.class));
 
     }
