@@ -1,5 +1,5 @@
 const baseUrl = process.env.URL || 'http://localhost'
-const apiUrl = 'http://mobile.api:80/api'
+const apiUrl = 'http://localhost'
 
 module.exports = {
     url: baseUrl,

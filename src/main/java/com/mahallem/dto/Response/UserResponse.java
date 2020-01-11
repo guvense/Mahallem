@@ -1,6 +1,8 @@
 package com.mahallem.dto.Response;
 
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.mahallem.constants.Sex;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,9 +16,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserResponse implements Serializable {
 
     private static final long serialVersionUID = 2110166895723582302L;
+
+    private String _id;
 
     private String firstName;
 

@@ -47,20 +47,29 @@ export class Server {
     private listen() {
         this.ioServer.use(async (socket, next) => {
 
+            console.log("Socket in");
+            console.log(`${config.get('apiUrl')}/user`);
+            
+            
             //  tslint:disable-next-line
             let token = socket.handshake.headers['Authorization']
             if (!token) {
                 token = socket.handshake.query.authorization
             }
             try {
-                const response = await request.get(`${config.get('apiUrl')}/user/own-profile`, {
+                const response = await request.get(`${config.get('apiUrl')}:8081/api/v1/user`, {
                     headers: {
                         Authorization: token,
                     },
                 })
                 const result: ResultModel = JSON.parse(response)
-                if (result.success && result.data) {
+                console.log(result);
+                
+                if (result) {
+                    
                      const user: User = _.assign(new User(), _.pick(result.data, _.keys(new User())))
+                     console.log(user);
+                     
                      socket.request.user = user
                      if (this.app.getClientInfo(user.id)) {
                          console.log('User Exist---->>', user.id)
