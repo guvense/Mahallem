@@ -2,7 +2,8 @@ package com.mahallem.eventBusses;
 
 public enum Channel {
     A,
-    B
+    B,
+    MESSAGE_CONTENT
 
 
 

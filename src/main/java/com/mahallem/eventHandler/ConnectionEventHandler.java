@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mahallem.eventBusses.Channel;
 import com.mahallem.eventBusses.EventBus;
 import com.mahallem.eventBusses.SubAbs;
-import com.mahallem.eventMessage.DummyObject;
+import com.mahallem.eventSender.eventSenderMessage.DummyObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

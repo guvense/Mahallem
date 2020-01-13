@@ -2,6 +2,7 @@ package com.mahallem.eventSender;
 
 import com.google.gson.Gson;
 import com.mahallem.eventBusses.Channel;
+import com.mahallem.util.GsonUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +20,7 @@ public abstract class EventValue  {
 
     @Override
     public String toString() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+
+        return GsonUtil.toJson(this);
     }
 }
