@@ -8,19 +8,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Animal extends BaseEntity{
+public class Animal extends BaseEntity {
 
     private AnimalType type;
-
-    private int age;
 
     private AnimalSex sex;
 
     private ObjectId houseId;
 
+    private Date birthDate;
 
 }
