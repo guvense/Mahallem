@@ -62,12 +62,14 @@ export class Server {
                         Authorization: token,
                     },
                 })
-                const result: ResultModel = JSON.parse(response)
+                console.log(response);
+                
+                const result: any = JSON.parse(response)
                 console.log(result);
                 
                 if (result) {
                     
-                     const user: User = _.assign(new User(), _.pick(result.data, _.keys(new User())))
+                     const user: User = _.assign(new User(), _.pick(result, _.keys(new User())))
                      console.log(user);
                      
                      socket.request.user = user

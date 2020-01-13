@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     public UserResponse setUserDetailInformation(String userId, UserDetailRequest userDetailRequest) {
 
         userRepository.updateUserDetailInfo(userId, userDetailRequest);
-        Optional<User> userOp = userRepository.findBy_id(new ObjectId(userId));
+        Optional<User> userOp = userRepository.findById(new ObjectId(userId));
         User user = userOp.orElseThrow(UserNotFoundException::new);
         return modelMapper.map(user, UserResponse.class);
 
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse getUser(String userId) {
-        Optional<User> userOp = userRepository.findBy_id(new ObjectId(userId));
+        Optional<User> userOp = userRepository.getUserInfo(userId);
         User user = userOp.orElseThrow(UserNotFoundException::new);
         return modelMapper.map(user, UserResponse.class);
     }
@@ -62,6 +62,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getHouseId(String userId) {
 
-        return getUser(userId).getHouseId();
+        return getUser(userId).getHouseResponse().getId();
     }
 }

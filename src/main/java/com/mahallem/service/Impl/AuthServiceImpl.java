@@ -63,7 +63,7 @@ public class AuthServiceImpl implements AuthService {
         User savedUser = userRepository.save(user);
 
         AuthResponse authResponse = modelMapper.map(savedUser, AuthResponse.class);
-        authResponse.setToken(jwtUtil.createToken(savedUser.get_id()));
+        authResponse.setToken(jwtUtil.createToken(savedUser.getId()));
         return authResponse;
     }
 
@@ -74,7 +74,7 @@ public class AuthServiceImpl implements AuthService {
 
         if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
             AuthResponse authResponse = modelMapper.map(user, AuthResponse.class);
-            authResponse.setToken(jwtUtil.createToken(user.get_id()));
+            authResponse.setToken(jwtUtil.createToken(user.getId()));
             stringRedisUtil.putValue("user"+user.getHouseId(),user);
             return authResponse;
         } else {

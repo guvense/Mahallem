@@ -15,7 +15,7 @@ public class AuthResponse {
 
     private String lastName;
 
-    private String _id;
+    private String id;
 
     private String token;
 }
