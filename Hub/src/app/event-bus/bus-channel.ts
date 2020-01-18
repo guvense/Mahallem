@@ -1,4 +1,6 @@
 export enum BusChannel {
         A ="A",
-        B= "B"
+        B= "B",
+        MESSAGE_CONTENT = "MESSAGE_CONTENT"
+
 }

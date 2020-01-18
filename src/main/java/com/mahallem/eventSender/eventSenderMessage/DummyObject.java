@@ -1,4 +1,4 @@
-package com.mahallem.eventMessage;
+package com.mahallem.eventSender.eventSenderMessage;
 
 
 import com.mahallem.eventBusses.Channel;

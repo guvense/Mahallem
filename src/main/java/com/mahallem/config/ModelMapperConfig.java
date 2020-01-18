@@ -1,7 +1,11 @@
 package com.mahallem.config;
 
+import com.google.gson.Gson;
 import com.mahallem.dto.Response.UserResponse;
+import com.mahallem.entity.Message;
 import com.mahallem.entity.User;
+import com.mahallem.eventHandler.EventHandlerMessage.EventMessageModel;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +23,15 @@ public class ModelMapperConfig {
         TypeMap<User, UserResponse> typeMap =
                 modelMapper.createTypeMap(User.class, UserResponse.class);
         typeMap.addMapping(User::getHouse, UserResponse::setHouseResponse);
+
+        TypeMap<EventMessageModel, Message> typeMap1 = modelMapper.createTypeMap(EventMessageModel.class, Message.class);
+        //Todo: check mapper bug
+        typeMap1.addMappings(mapper -> {
+            mapper.map(EventMessageModel::getToUserId, Message::setToUserId);
+            mapper.map(EventMessageModel::getFromUserId, Message::setFromUserId);
+
+        });
+
         return modelMapper;
     }
 
@@ -26,7 +39,6 @@ public class ModelMapperConfig {
     public BCryptPasswordEncoder by() {
         return new BCryptPasswordEncoder();
     }
-
 
 
 }
