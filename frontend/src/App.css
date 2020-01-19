@@ -1,0 +1,122 @@
+body {
+    color: darkslategray;
+}
+
+.popup-modal-content {
+    width     : 300px !important;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.popup-title {
+    height          : 40px;
+    position        : absolute;
+    width           : 100%;
+    left            : 0px;
+    background-color: whitesmoke;
+    top             : 0px;
+    text-align      : center;
+    padding-top     : 5px;
+    color           : black;
+}
+
+.popup-content {
+    margin-top : 40px;
+    padding-top: 10px;
+    width      : 100%;
+    text-align : center;
+}
+
+.popup-modal {
+    height: 70px;
+}
+
+.left-margin {
+    margin-left: 10px;
+}
+
+.toast-wrapper {
+    position: fixed;
+    top     : 80px;
+    right   : 30px;
+    z-index: 100 !important;
+}
+
+.toast {
+    opacity: 0.95 !important;
+    width: 250px;
+}
+
+.toast-header {
+    color: dodgerblue !important;
+}
+
+.card-bottom-list {
+    max-height: 303px;
+}
+
+.bg-login-image {
+    background: url("./assets/login.png") !important;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.bg-gradient-primary-green {
+    background-image: linear-gradient(180deg,#0e1e24 10%, #00c6b6 100%);
+    background-size: cover;
+}
+
+.icon-green {
+    color: seagreen;
+}
+
+.bg-custom-dark {
+    background-color: #0e1e24;
+}
+
+.dark-breadcrumb {
+    background-color: #0e1e24 !important;
+    margin-top: 15px !important;
+}
+
+li a {
+    color: cadetblue;
+}
+
+.cadet {
+    color: cadetblue;
+}
+
+.text-green {
+    color: cadetblue !important;
+    font-family: sans-serif !important;
+}
+
+.toggle-area {
+    display:none;
+}
+
+.collapsed {
+    display:block;
+}
+
+.toggle-button {
+    background-color: #0e1e24 !important;
+    border-color: #0e1e24 !important;
+    width: 40px;
+    color: seagreen !important;
+}
+
+
+@media (max-width: 380px) {
+    .collapsed {
+        display:none !important;
+    }
+
+    .toggle-area {
+        position: fixed;
+        bottom: 2%;
+        left:2%;
+        z-index: 200 !important;
+        display: block;
+    }
+}
