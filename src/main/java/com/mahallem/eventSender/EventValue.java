@@ -1,11 +1,13 @@
 package com.mahallem.eventSender;
 
-import com.google.gson.Gson;
+
 import com.mahallem.eventBusses.Channel;
 import com.mahallem.util.GsonUtil;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
 public abstract class EventValue  {
 
     @Setter
