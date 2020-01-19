@@ -1,8 +1,7 @@
 package com.mahallem.config;
 
-import com.mahallem.eventBusses.EventBus;
-import com.mahallem.eventBusses.EventBusImpl;
-import com.mahallem.eventSender.EventValue;
+import com.mahallem.eventbusses.EventBus;
+import com.mahallem.eventbusses.EventBusImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +14,6 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.SerializationException;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration

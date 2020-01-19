@@ -1,6 +1,6 @@
 package com.mahallem.entity;
 
-import com.mahallem.constants.MessageStatus;
+import com.mahallem.constants.MessageState;
 import com.mahallem.constants.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class Message extends BaseEntity {
 
     private MessageType messageType;
 
-    private MessageStatus messageStatus = MessageStatus.Receive;
+    private MessageState messageState;
 
 
 
