@@ -1,10 +1,10 @@
-package com.mahallem.eventHandler;
+package com.mahallem.eventhandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mahallem.eventBusses.Channel;
-import com.mahallem.eventBusses.EventBus;
-import com.mahallem.eventBusses.SubAbs;
-import com.mahallem.eventSender.eventSenderMessage.DummyObject;
+import com.mahallem.eventbusses.Channel;
+import com.mahallem.eventbusses.EventBus;
+import com.mahallem.eventbusses.SubAbs;
+import com.mahallem.eventsender.eventsendermessage.DummyObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

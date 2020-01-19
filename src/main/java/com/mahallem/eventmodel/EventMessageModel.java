@@ -1,4 +1,4 @@
-package com.mahallem.eventModel;
+package com.mahallem.eventmodel;
 
 import com.mahallem.constants.MessageState;
 import com.mahallem.constants.MessageType;

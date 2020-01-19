@@ -1,4 +1,4 @@
-package com.mahallem.eventBusses;
+package com.mahallem.eventbusses;
 
 import java.io.IOException;
 

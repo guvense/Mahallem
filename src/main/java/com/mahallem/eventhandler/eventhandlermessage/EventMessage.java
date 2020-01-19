@@ -1,7 +1,7 @@
-package com.mahallem.eventHandler.EventHandlerMessage;
+package com.mahallem.eventhandler.eventhandlermessage;
 
-import com.mahallem.eventModel.EventMessageModel;
-import com.mahallem.eventSender.ClientInfo;
+import com.mahallem.eventmodel.EventMessageModel;
+import com.mahallem.eventsender.ClientInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
-package com.mahallem.eventBusses;
+package com.mahallem.eventbusses;
 
-import com.mahallem.eventSender.EventValue;
+import com.mahallem.eventsender.EventValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;

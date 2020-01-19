@@ -1,19 +1,18 @@
-package com.mahallem.eventHandler;
+package com.mahallem.eventhandler;
 
 import com.mahallem.constants.MessageState;
-import com.mahallem.eventHandler.EventHandlerMessage.EventMessage;
+import com.mahallem.eventhandler.eventhandlermessage.EventMessage;
 import com.mahallem.entity.Message;
-import com.mahallem.eventBusses.Channel;
-import com.mahallem.eventBusses.EventBus;
-import com.mahallem.eventBusses.SubAbs;
-import com.mahallem.eventSender.eventSenderMessage.MessageValue;
+import com.mahallem.eventbusses.Channel;
+import com.mahallem.eventbusses.EventBus;
+import com.mahallem.eventbusses.SubAbs;
+import com.mahallem.eventsender.eventsendermessage.MessageValue;
 import com.mahallem.service.MessageService;
 import com.mahallem.util.GsonUtil;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import com.mahallem.eventModel.EventMessageModel;
+import com.mahallem.eventmodel.EventMessageModel;
 
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;

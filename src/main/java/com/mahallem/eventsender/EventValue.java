@@ -1,7 +1,7 @@
-package com.mahallem.eventSender;
+package com.mahallem.eventsender;
 
 
-import com.mahallem.eventBusses.Channel;
+import com.mahallem.eventbusses.Channel;
 import com.mahallem.util.GsonUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

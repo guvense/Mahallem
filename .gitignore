@@ -6,8 +6,8 @@ target/
 mvnw
 mvnw.cmd
 /.mvn/*
-Hub/node_modules/*
-Hub/dist/*
+hub/node_modules/*
+hub/dist/*
 ### STS ###
 .apt_generated
 .classpath

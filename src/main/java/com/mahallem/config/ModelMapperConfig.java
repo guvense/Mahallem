@@ -3,7 +3,7 @@ package com.mahallem.config;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Message;
 import com.mahallem.entity.User;
-import com.mahallem.eventModel.EventMessageModel;
+import com.mahallem.eventmodel.EventMessageModel;
 import org.bson.types.ObjectId;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;

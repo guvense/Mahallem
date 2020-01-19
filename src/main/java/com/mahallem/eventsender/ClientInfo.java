@@ -1,4 +1,4 @@
-package com.mahallem.eventSender;
+package com.mahallem.eventsender;
 
 import com.mahallem.dto.Response.UserResponse;
 import lombok.AllArgsConstructor;

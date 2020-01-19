@@ -1,9 +1,9 @@
-package com.mahallem.eventSender.eventSenderMessage;
+package com.mahallem.eventsender.eventsendermessage;
 
-import com.mahallem.eventBusses.Channel;
-import com.mahallem.eventModel.EventMessageModel;
-import com.mahallem.eventSender.ClientInfo;
-import com.mahallem.eventSender.EventValue;
+import com.mahallem.eventbusses.Channel;
+import com.mahallem.eventmodel.EventMessageModel;
+import com.mahallem.eventsender.ClientInfo;
+import com.mahallem.eventsender.EventValue;
 import lombok.Getter;
 import lombok.Setter;
 
