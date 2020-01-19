@@ -7,11 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class EventMessageModel {
+public class EventMessageModel implements Serializable {
+
+    private static final long serialVersionUID = 1890743140891106603L;
 
     private String fromUserId;
 

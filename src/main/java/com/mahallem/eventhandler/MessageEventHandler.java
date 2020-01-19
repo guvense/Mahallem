@@ -45,7 +45,7 @@ public class MessageEventHandler extends SubAbs {
 
         EventMessageModel a = eventMessage.getContent();
         Message mess = modelMapper.map(a, Message.class);
-        mess.setMessageState(MessageState.Receive);
+        mess.setMessageState(MessageState.RECEIVE);
         Message messageR = messageService.addMessage(mess);
 
         EventMessageModel map = modelMapper.map(messageR, EventMessageModel.class);

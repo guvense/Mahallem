@@ -28,7 +28,7 @@ public class ConnectionEventHandler extends SubAbs {
 
     @Override
     public void publish(String json) throws IOException {
-        DummyObject dummyObject = objectMapper.readValue(json, DummyObject.class);
+//        DummyObject dummyObject = objectMapper.readValue(json, DummyObject.class);
 
     }
 }
