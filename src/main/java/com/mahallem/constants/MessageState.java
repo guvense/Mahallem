@@ -1,6 +1,6 @@
 package com.mahallem.constants;
 
-public enum MessageStatus {
+public enum MessageState {
 
     Receive, // (√)
     Sent, // (√ √)

@@ -17,21 +17,21 @@ export default class MessageContent extends Message {
 
     var messageContent: MessageEventModel;
 
-    if (this.content.messageType == MessageFieldType.Text) {
+    if (this.content.messageType == MessageFieldType.TEXT) {
         messageContent = {
         fromUserId: this.client.user.id,
         toUserId: this.content.toUserId,
-        content: this.content.messageContent
+        content: this.content.messageContent,
+        messageType: MessageFieldType[MessageFieldType.TEXT]
       };
-    } else if (this.content.messageType == MessageFieldType.Image) {
+    } else if (this.content.messageType == MessageFieldType.IMAGE) {
         messageContent = {
         fromUserId:  this.client.user.id,
         toUserId: this.content.toUserId,
-        image: this.content.image
+        image: this.content.image,
+        messageType: MessageFieldType[MessageFieldType.IMAGE]
       };
     }
-
-    console.log("gelen -> "+ messageContent.fromUserId + messageContent.toUserId+ messageContent.content);
 
     this.app.sendBus(new MessageEventSender(toClient, messageContent));
   }

@@ -10,7 +10,7 @@ export default class MessageEventSender extends BusMessage {
     public content: MessageEventModel
 
     constructor(client: ClientInfo, content: MessageEventModel) {
-        super(client, BusChannel[BusChannel.MESSAGE_CONTENT])
+        super(client, BusChannel[BusChannel.MESSAGE_CONTENT_HUB_TO_REST])
         this.content = content
 
     }

@@ -1,5 +1,6 @@
 package com.mahallem.eventHandler.EventHandlerMessage;
 
+import com.mahallem.eventModel.EventMessageModel;
 import com.mahallem.eventSender.ClientInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

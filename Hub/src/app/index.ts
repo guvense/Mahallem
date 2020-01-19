@@ -10,6 +10,7 @@ import Message from './message/message'
 import BusMessage from './bus-message/bus-message'
 import EventHandler from './event-handler/event-handler'
 import Dummy from './event-handler/dummy'
+import MessageHandler from './event-handler/message-handler'
 
 export default class App implements IApp {
 
@@ -39,6 +40,7 @@ export default class App implements IApp {
 
     private registerSubscibers() {
         this.handlers.push(new Dummy(this))
+        this.handlers.push(new MessageHandler(this))
         //  ...
 
         let a : string [] = []

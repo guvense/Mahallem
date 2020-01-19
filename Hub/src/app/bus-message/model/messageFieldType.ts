@@ -1,4 +1,4 @@
 export enum MessageFieldType {
-    Text,
-    Image
+    TEXT,
+    IMAGE
 }

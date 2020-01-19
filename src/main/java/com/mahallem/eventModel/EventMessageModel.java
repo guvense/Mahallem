@@ -1,6 +1,6 @@
-package com.mahallem.eventHandler.EventHandlerMessage;
+package com.mahallem.eventModel;
 
-import com.mahallem.constants.MessageStatus;
+import com.mahallem.constants.MessageState;
 import com.mahallem.constants.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +21,7 @@ public class EventMessageModel {
 
     private MessageType messageType;
 
-    private MessageStatus messageStatus;
+    private MessageState messageState;
+
+    private String messageId;
 }

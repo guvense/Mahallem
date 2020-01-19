@@ -8,7 +8,7 @@ export default class MessageEventModel {
     public toUserId?: string
     public content?: string
     public image?: string
-    public messageType?: MessageFieldType
+    public messageType?: string
     public clientId?: string
     public messageState?: MessageState
     public messageId?: string
