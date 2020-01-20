@@ -8,6 +8,8 @@ mvnw.cmd
 /.mvn/*
 hub/node_modules/*
 hub/dist/*
+frontend/node_modules/*
+frontend/package-lock.json
 ### STS ###
 .apt_generated
 .classpath

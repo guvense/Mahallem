@@ -3,7 +3,7 @@ import TopCard from "../../common/components/TopCard";
 import { IUser } from "../../store/models/user.interface";
 import { useDispatch, useSelector } from "react-redux";
 import { IStateType } from "../../store/models/root.interface";
-import { addAdmin, removeAdmin } from "../../store/actions/users.action";
+import { addAdmin, removeAdmin, setUserFav } from "../../store/actions/users.action";
 import { updateCurrentPath } from "../../store/actions/root.actions";
 
 const Users: React.FC = () => {
@@ -13,6 +13,7 @@ const Users: React.FC = () => {
   
   const users: IUser[] = useSelector((state: IStateType) => state.users.users);
   const admins: IUser[] = useSelector((state: IStateType) => state.users.admins);
+  const favs: IUser[] = useSelector((state: IStateType) => state.users.favs);
 
   function setUserAdmin(user: IUser): void {
     dispatch(addAdmin(user));
@@ -20,6 +21,10 @@ const Users: React.FC = () => {
 
   function setUserNotAdmin(admin: IUser): void {
     dispatch(removeAdmin(admin)); 
+  }
+
+  function setUserFavs(user: IUser): void {
+    dispatch(setUserFav(user))
   }
 
   const userElements: JSX.Element[] = users.map(user => {
@@ -31,6 +36,20 @@ const Users: React.FC = () => {
         <td>{user.lastName}</td>
         <td>{user.email}</td>
         <td><button className="btn btn-success" onClick={() => setUserAdmin(user)}>Set admin</button> </td>
+        <td><button className="btn btn-success" onClick={() => setUserFavs(user)}>Fav user</button> </td>
+        
+      </tr>);
+  });
+
+  const userFavElements: JSX.Element[] = favs.map(user => {
+    return (
+      <tr className={`table-row`}
+        key={`user_${user.id}`}>
+        <th scope="row">{user.id}</th>
+        <td>{user.firstName}</td>
+        <td>{user.lastName}</td>
+        <td>{user.email}</td>
+        <td><button className="btn btn-success" onClick={() => setUserFavs(user)}>Fav user</button> </td>
       </tr>);
   });
 
@@ -54,6 +73,8 @@ const Users: React.FC = () => {
       <div className="row">
         <TopCard title="ADMINS" text={admins.length.toString()} icon="user-tie" class="primary" />
         <TopCard title="USER" text={users.length.toString()} icon="user" class="danger" />
+        <TopCard title="FAV" text={favs.length.toString()} icon="user" class="secondary" />
+
       </div>
 
       <div className="row">
@@ -78,6 +99,36 @@ const Users: React.FC = () => {
                   </thead>
                   <tbody>
                     {adminElements}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-xl-12 col-lg-12">
+          <div className="card shadow mb-4">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-green">Fav List</h6>
+              <div className="header-buttons">
+              </div>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive portlet">
+                <table className="table">
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First name</th>
+                      <th scope="col">Last name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Admin</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {userFavElements}
                   </tbody>
                 </table>
               </div>

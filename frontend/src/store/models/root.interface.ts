@@ -43,4 +43,5 @@ export interface INotificationState {
 export interface IUserState {
     users: IUser[];
     admins: IUser[];
+    favs: IUser[];
 }
