@@ -5,7 +5,7 @@ target/
 !**/src/test/**
 mvnw
 mvnw.cmd
-.mvn/*
+.mvn
 hub/node_modules/*
 hub/dist/*
 frontend/node_modules/*
