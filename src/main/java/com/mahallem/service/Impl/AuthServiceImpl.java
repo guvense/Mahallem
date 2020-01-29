@@ -39,19 +39,10 @@ public class AuthServiceImpl implements AuthService {
     @NotNull
     private final RedisUtil<User> stringRedisUtil;
 
-    private final EventBus eventBus;
-
 
     @Override
     public AuthResponse registerUser(AuthRequest authRequest) {
         final User user = modelMapper.map(authRequest, User.class);
-
-        ClientInfo clientInfo = new ClientInfo();
-        clientInfo.setAdmin(true);
-        clientInfo.setId("sdladk");
-        clientInfo.setUserName("Güven");
-        DummyObject dummyObject = new DummyObject(clientInfo,"Hello");
-        eventBus.post(dummyObject);
 
         Optional<User> byUserName = userRepository.findByUserName(authRequest.getUserName());
 
@@ -74,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
         if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
             AuthResponse authResponse = modelMapper.map(user, AuthResponse.class);
             authResponse.setToken(jwtUtil.createToken(user.getId()));
-            stringRedisUtil.putValue("user"+user.getHouseId(),user);
+            stringRedisUtil.putValue("user"+ user.getHouseId(),user);
             return authResponse;
         } else {
             throw new UserOrPasswordWrongException();
