@@ -11,7 +11,9 @@ import com.mahallem.util.JwtUtil;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.runner.RunWith;
 import org.mockito.AdditionalAnswers;
 import org.mockito.InjectMocks;
@@ -43,13 +45,13 @@ public class AuthServiceTest {
     private UserRepositoryImpl userRepository;
 
     @Spy
-    private  ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Spy
-    private  JwtUtil jwtUtil;
+    private JwtUtil jwtUtil;
 
     @Mock
-    private  BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @InjectMocks
     private AuthServiceImpl authService;
