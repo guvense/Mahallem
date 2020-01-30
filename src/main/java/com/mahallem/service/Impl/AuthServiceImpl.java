@@ -39,19 +39,10 @@ public class AuthServiceImpl implements AuthService {
     @NotNull
     private final RedisUtil<User> stringRedisUtil;
 
-    private final EventBus eventBus;
-
 
     @Override
     public AuthResponse registerUser(AuthRequest authRequest) {
         final User user = modelMapper.map(authRequest, User.class);
-
-        ClientInfo clientInfo = new ClientInfo();
-        clientInfo.setAdmin(true);
-        clientInfo.setId("sdladk");
-        clientInfo.setUserName("Güven");
-        DummyObject dummyObject = new DummyObject(clientInfo,"Hello");
-        eventBus.post(dummyObject);
 
         Optional<User> byUserName = userRepository.findByUserName(authRequest.getUserName());
 
