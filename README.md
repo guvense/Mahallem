@@ -64,7 +64,10 @@ Fix typo in introduction to user guide
 ```
 * Use the body to explain what and why vs. how
 
-
+### Unit Test method name convention 
+  MethodName_StateUnderTest_ExpectedBehavior
+  Your branch name should be unit-test/mah-<Issue Id>
+ 
 ## Authors
 * **Guven SECKIN** [profile](https://github.com/guvense)
 * **Gokhan YILMAZ** [profile](https://github.com/GokhanYilmaz44)
