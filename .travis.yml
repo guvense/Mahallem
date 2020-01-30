@@ -15,10 +15,14 @@ after_success:
 - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin  
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
   fi`
-- export IMAGE_NAME=guvense/mahallem
+- export IMAGE_NAME=guvense/mahallem_api
 - docker build -t $IMAGE_NAME:$COMMIT .
 - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME
+- export IMAGE_NAME_HUB=guvense/mahallem_hub
+- docker build -t $IMAGE_NAME_HUB:$COMMIT hub/
+- docker tag $IMAGE_NAME_HUB:$COMMIT $IMAGE_NAME_HUB:$TAG
+- docker push $IMAGE_NAME_HUB
 env:
   global:
   - secure: SGn1PdFM430RMXKhxUumkacFjhyxs2YXOLLbWbjk5tL8xAro7alrZ8ql1hLbeD9j+AGrPphj0dnnn7TmkE4+OCKvJK3C3HmBh8An+kEbF255bdNu6kTkc7bW1dow1Rs7DiOhf4Qvg+RVawfg7nkiwvtqfUP5WvAgT4V4IcuKskQmWQqKr01Ndm0ibR+Is98NPfxvXeMOQr1atjuRqy1aTvhmNCi89aFECeu9m9mcJalf/wFexZHezV9s1AXuPG2xCZCPxSXLlN8zMP9IpH+S2LNOOXOC9GChCOA4y0rLhrgGmPmu0XzJLst1blJoTaYwP4T4sytaQlc5Q45VnyY6/unzErhPbLZk9Rnpk/IwOTrRtx1RUr0fkPlY2Ig/szDGP3ChqtwQ9/RX972pEal6Ab8ZfU/BqYDYVM5xRPvx1zyApSNSRBV1hQUr1nyWGpTt5PyDeXRyiaT22sexaXJ6OgFU2EiHQ+Zp9trBV865uCnW0eLVqX9ocdHJFUAmMo0ckkofxRizrZ/j79C3G1aulWw+w4G3ukF7RR/B+pYoyz0FO5rHWPP0k0r9VqtOLhmwivXROBed28/GuEyvftbWJGQ/59F9fIwVQ9ygFNJsY4rZA2bt0eYFRKsCWZA8ycQ5RKFYukYN772Tp4ZTQNwv41K0/os3QI+1IwgbLWcSShc=
