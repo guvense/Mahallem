@@ -18,15 +18,6 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-	<mirrors>
-		<mirror>
-			<id>central-proxy</id>
-			<name>Local proxy of central repo</name>
-			<url>http://<hostname>/central</url>
-			<mirrorOf>central</mirrorOf>
-		</mirror>
-	</mirrors>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
