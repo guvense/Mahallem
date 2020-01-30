@@ -8,7 +8,7 @@ EXPOSE 3000
 # EXPOSE 5050
 # EXPOSE 80
 
-COPY hub/src ./
+COPY src/ ./
 RUN npm install --no-audit
 
 RUN gulp build
