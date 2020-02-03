@@ -66,14 +66,14 @@ public class AnimalServiceImpl implements AnimalService {
         return modelMapper.map(deletedAnimal, AnimalResponse.class);
     }
 
-    private int calculateAge(Date birthDate) {
+    public int calculateAge(Date birthDate) {
         LocalDate now = LocalDate.now();
         LocalDate localDateBirthDate = convertDatetToLocalDate(birthDate);
         Period diff = Period.between(localDateBirthDate, now);
         return diff.getYears();
     }
 
-    private LocalDate convertDatetToLocalDate(Date birthDate) {
+    public LocalDate convertDatetToLocalDate(Date birthDate) {
         Instant instant = birthDate.toInstant();
         ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
         return zdt.toLocalDate();

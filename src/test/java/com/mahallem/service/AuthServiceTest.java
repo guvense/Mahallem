@@ -25,7 +25,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -78,21 +77,17 @@ public class AuthServiceTest {
 
     @Test(expected = UsernameExistException.class)
     public void register_UserNameExist_ExceptionThrown() {
-
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.of(u));
-        AuthResponse authResponse = authService.registerUser(authRequest);
-        assertNotNull(authResponse.getToken());
-
+        authService.registerUser(authRequest);
     }
+
 
     @Test
     public void register_RegisterUser_CreateUserWithAllProperties() {
-
         when(userRepository.save(any())).thenAnswer((Answer) invocationOnMock -> {
             User user = invocationOnMock.getArgument(0);
             user.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
             return user;
-
         });
 
 
@@ -110,21 +105,31 @@ public class AuthServiceTest {
     public void loginUser_UserNameWrong_ExceptionThrown() {
 
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.empty());
-        AuthResponse authResponse = authService.loginUser(u.getUserName(),password);
-        assertNull(authResponse.getToken());
+        authService.loginUser(u.getUserName(),password);
     }
 
 
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_PasswordWrong_ExceptionThrown() {
         when(bCryptPasswordEncoder.matches(any(), any())).thenReturn(false);
-        AuthResponse authResponse = authService.loginUser(u.getUserName(),password);
-        assertNull(authResponse.getToken());
+        authService.loginUser(u.getUserName(),password);
     }
 
 
     @Test
     public void loginUser_LoginUser_LoginIsSuccessfully() {
+
+        when(userRepository.findByUserName(anyString())).thenAnswer((Answer) invocationOnMock -> {
+            String userName = invocationOnMock.getArgument(0);
+            User user = new User();
+            user.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
+            user.setUserName(userName);
+            user.setFirstName("test");
+            user.setLastName("test");
+            return Optional.of(user);
+
+        });
+
         AuthResponse authResponse = authService.loginUser(u.getUserName(),password);
         assertNotNull(authResponse.getToken());
         assertNotNull(authResponse.getFirstName());
