@@ -63,7 +63,7 @@ public class AuthServiceTest {
         u = new User();
         u.setUserName("test");
 
-        this.password="12345";
+        this.password = "12345";
 
         this.authRequest = AuthResource.authRequest;
 
@@ -90,7 +90,6 @@ public class AuthServiceTest {
             return user;
         });
 
-
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.empty());
         AuthResponse authResponse = authService.registerUser(authRequest);
         assertNotNull(authResponse.getToken());
@@ -103,22 +102,20 @@ public class AuthServiceTest {
 
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_UserNameWrong_ExceptionThrown() {
-
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.empty());
-        authService.loginUser(u.getUserName(),password);
+        authService.loginUser(u.getUserName(), password);
     }
 
 
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_PasswordWrong_ExceptionThrown() {
         when(bCryptPasswordEncoder.matches(any(), any())).thenReturn(false);
-        authService.loginUser(u.getUserName(),password);
+        authService.loginUser(u.getUserName(), password);
     }
 
 
     @Test
     public void loginUser_LoginUser_LoginIsSuccessfully() {
-
         when(userRepository.findByUserName(anyString())).thenAnswer((Answer) invocationOnMock -> {
             String userName = invocationOnMock.getArgument(0);
             User user = new User();
@@ -130,7 +127,7 @@ public class AuthServiceTest {
 
         });
 
-        AuthResponse authResponse = authService.loginUser(u.getUserName(),password);
+        AuthResponse authResponse = authService.loginUser(u.getUserName(), password);
         assertNotNull(authResponse.getToken());
         assertNotNull(authResponse.getFirstName());
         assertNotNull(authResponse.getLastName());
