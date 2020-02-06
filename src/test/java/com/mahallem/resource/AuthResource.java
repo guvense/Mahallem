@@ -10,4 +10,5 @@ public class AuthResource {
                                                        .password("test")
                                                        .userName("test")
                                                        .build();
+
 }

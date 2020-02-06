@@ -2,10 +2,7 @@ package com.mahallem.entity;
 
 import com.mahallem.constants.AnimalSex;
 import com.mahallem.constants.AnimalType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -14,6 +11,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Animal extends BaseEntity {
 
     private AnimalType type;

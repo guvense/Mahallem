@@ -25,7 +25,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -78,22 +77,19 @@ public class AuthServiceTest {
 
     @Test(expected = UsernameExistException.class)
     public void register_UserNameExist_ExceptionThrown() {
-
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.of(u));
         authService.registerUser(authRequest);
 
     }
 
+
     @Test
     public void register_RegisterUser_CreateUserWithAllProperties() {
-
         when(userRepository.save(any())).thenAnswer((Answer) invocationOnMock -> {
             User user = invocationOnMock.getArgument(0);
             user.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
             return user;
-
         });
-
 
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.empty());
         AuthResponse authResponse = authService.registerUser(authRequest);
@@ -107,7 +103,6 @@ public class AuthServiceTest {
 
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_UserNameWrong_ExceptionThrown() {
-
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.empty());
         authService.loginUser(u.getUserName(), password);
     }
@@ -116,8 +111,9 @@ public class AuthServiceTest {
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_PasswordWrong_ExceptionThrown() {
         when(bCryptPasswordEncoder.matches(any(), any())).thenReturn(false);
-        AuthResponse authResponse = authService.loginUser(u.getUserName(), password);
-        assertNull(authResponse.getToken());
+
+        authService.loginUser(u.getUserName(), password);
+
     }
 
 
