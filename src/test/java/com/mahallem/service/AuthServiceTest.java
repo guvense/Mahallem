@@ -79,6 +79,7 @@ public class AuthServiceTest {
     public void register_UserNameExist_ExceptionThrown() {
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.of(u));
         authService.registerUser(authRequest);
+
     }
 
 
@@ -110,12 +111,15 @@ public class AuthServiceTest {
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_PasswordWrong_ExceptionThrown() {
         when(bCryptPasswordEncoder.matches(any(), any())).thenReturn(false);
+
         authService.loginUser(u.getUserName(), password);
+
     }
 
 
     @Test
     public void loginUser_LoginUser_LoginIsSuccessfully() {
+
         when(userRepository.findByUserName(anyString())).thenAnswer((Answer) invocationOnMock -> {
             String userName = invocationOnMock.getArgument(0);
             User user = new User();
