@@ -49,10 +49,13 @@ public class HouseServiceTest {
 
     private House house;
 
+    private HouseResponse houseResponse;
+
     @Before
     public void init() {
         houseRequest = HouseResource.houseRequest;
         house = HouseResource.house;
+        houseResponse = HouseResource.houseResponse;
 
         when(houseRepository.save(any())).thenAnswer((Answer) invocationOnMock -> {
             House house = invocationOnMock.getArgument(0);
@@ -88,7 +91,7 @@ public class HouseServiceTest {
 
         when(houseRepository.getHouse(any())).thenReturn(Optional.empty());
 
-        HouseResponse house = houseService.getHouse("5e1a436310c40031d8a7b6d9");
+        houseService.getHouse("5e1a436310c40031d8a7b6d9");
 
 
     }
@@ -103,6 +106,23 @@ public class HouseServiceTest {
         assertNotNull(houseResponse.getGrade());
         assertNotNull(houseResponse.getName());
         assertNotNull(houseResponse.getHouseStatus());
+
+    }
+
+    @Test
+    public void a() {
+
+        when(houseRepository.getHouseWithProperties(any())).thenReturn(houseResponse);
+
+        HouseResponse houseWithProperties = houseService.getHouseWithProperties("5e1a436310c40031d8a7b6d9");
+        assertNotNull(houseWithProperties.getHouseStatus());
+        assertNotNull(houseWithProperties.getName());
+        assertNotNull(houseWithProperties.getGeoLocation());
+        assertNotNull(houseWithProperties.getProperties());
+        assertNotNull(houseWithProperties.getGrade());
+
+
+
 
     }
 }
