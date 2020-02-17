@@ -9,7 +9,6 @@
 ## With Mahallem you can share task in your house. Besides communicate with your neighbors.
 
 [![Build Status](https://travis-ci.com/guvense/Mahallem.svg?branch=master)](https://travis-ci.com/guvense/Mahallem)
-
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=guvense_Mahallem-Backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=guvense_Mahallem-Backend)
 
 ## Getting Started
