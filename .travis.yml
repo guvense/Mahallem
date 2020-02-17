@@ -1,7 +1,7 @@
 language: java
 jdk: oraclejdk11
 script:
-- ./mvnw clean install -B
+- mvn clean install -B
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=guvense_Mahallem-Backend
 sudo: required
 services:
