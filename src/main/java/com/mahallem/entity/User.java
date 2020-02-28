@@ -2,11 +2,11 @@ package com.mahallem.entity;
 
 import com.mahallem.constants.Sex;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
-import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 3504972142712457030L;

@@ -2,6 +2,7 @@ package com.mahallem.dto.Response;
 
 import com.mahallem.entity.GeoLocation;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class HouseResponse {
 
     private String id;

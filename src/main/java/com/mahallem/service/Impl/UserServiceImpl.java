@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getHouseId(String userId) {
-
+        UserResponse userResponse=getUser(userId);
         return getUser(userId).getHouseResponse().getId();
     }
 }
