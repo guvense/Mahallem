@@ -2,6 +2,7 @@ package com.mahallem.dto.Response;
 
 import com.mahallem.entity.GeoLocation;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,15 +13,16 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class HouseResponse {
 
     private String id;
 
     private String name;
 
-    private long grade;
+    private Double grade;
 
-    private GeoLocation geoLocation;
+    private GeoLocationResponse geoLocation;
 
     private String houseStatus;
 
