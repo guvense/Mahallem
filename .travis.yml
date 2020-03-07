@@ -1,5 +1,7 @@
 language: java
 jdk: oraclejdk11
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
 - mvn clean install -B
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=guvense_Mahallem-Backend
@@ -9,9 +11,9 @@ services:
 addons:
   sonarcloud:
     organization: guvense
-    token:
-      secure: $SONAR_TOKEN
+    token: $SONAR_TOKEN
 after_success:
+- bash <(curl -s https://codecov.io/bash)
 - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin  
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
   fi`
@@ -25,7 +27,4 @@ after_success:
 - docker push $IMAGE_NAME_HUB
 env:
   global:
-  - secure: SGn1PdFM430RMXKhxUumkacFjhyxs2YXOLLbWbjk5tL8xAro7alrZ8ql1hLbeD9j+AGrPphj0dnnn7TmkE4+OCKvJK3C3HmBh8An+kEbF255bdNu6kTkc7bW1dow1Rs7DiOhf4Qvg+RVawfg7nkiwvtqfUP5WvAgT4V4IcuKskQmWQqKr01Ndm0ibR+Is98NPfxvXeMOQr1atjuRqy1aTvhmNCi89aFECeu9m9mcJalf/wFexZHezV9s1AXuPG2xCZCPxSXLlN8zMP9IpH+S2LNOOXOC9GChCOA4y0rLhrgGmPmu0XzJLst1blJoTaYwP4T4sytaQlc5Q45VnyY6/unzErhPbLZk9Rnpk/IwOTrRtx1RUr0fkPlY2Ig/szDGP3ChqtwQ9/RX972pEal6Ab8ZfU/BqYDYVM5xRPvx1zyApSNSRBV1hQUr1nyWGpTt5PyDeXRyiaT22sexaXJ6OgFU2EiHQ+Zp9trBV865uCnW0eLVqX9ocdHJFUAmMo0ckkofxRizrZ/j79C3G1aulWw+w4G3ukF7RR/B+pYoyz0FO5rHWPP0k0r9VqtOLhmwivXROBed28/GuEyvftbWJGQ/59F9fIwVQ9ygFNJsY4rZA2bt0eYFRKsCWZA8ycQ5RKFYukYN772Tp4ZTQNwv41K0/os3QI+1IwgbLWcSShc=
-  - secure: ednqAeyHoJJ7LHLg+uH/U66jXFN+IKLn1I2rgz3NEqOzDnKxIYkmeOfJfjCe6E50P5jqM69oYAAG3F8XCNLWX9rFCFePvMaz1ZLp1JEMS/rzGz3ZYs50FzQnkbjWjic2qkhL6PtN3SofGc/TXhNB2OkddOOtbUPvpGmcMnBotM/zCBegjXPzTygXSKpausX+/Iwqd6JKpzeb4ZwXQ1xq/NNqIoK0ZztxJ7z3xoLL/nSVUW2agVktziIYJgXZ9eB/Pp1OqTp4/SvspyBmOgxdq97bMDKDnnARJU9A5tPSc0mYQJ6fCxyg7+c+DmNn/HhUBVhIg/mClWqg2/mRNygHpFykqhkLH7NnsAyGJQmL5onBn4AeprQptawRVF9/Z5xQ2Np9MirhEC6spYdxD+ilaU8pbr6E/0t0tFkVt9TbmjCltdeKUJqp3vm78CoAMRL0bkhdbrdz0EHorVLsaxaVnOF400jfLkF0I2yuJO47qxRnqie13iB1HhMIoxmPhHVffoEDQ0unXbolnmHX8JTMkhhkEaa7LfyitvULVBWKQkCcaES8Vuw3hjy4ueT9D/sZByiZ1icvgoO0gIe9OG7QtfzSa7BGSdB3ktlUzcXh48tJE7L/NfUtKb5JvmZN4KGIjKnBvn2XUt6rE/MI0C/ClSHxdIS4enfCKp0yohPujzw=
-  - secure: BhijRC37qjWeQaGQ2RQxCS7rTvXOH5WRKnYKS0t9Cr78cbu7GPh6IG3lOaTycfaUpazCruJ3d+R/YlM8NJAs7Bge3MK78p7SPOVEItWsXraHQpv0ad28kJBMm6pcWYOVjqCZg6Kw2C6YtTWHOsiVDNODA7EI3LYb1zIRihwHhX+en4fYev6+6jpz2AU1pc29HoSxvTNe9Dg043dtlnQoO1lJOQqk1YW2cxdWH4hA9jFTYxJ00YH9FxKdyzu3m4ImlqF+fbxxI64ZdN6XtD6zR+i4oNumR08DZMk6kSxvUjdctH838vt8sObQfki6LuXDtxxbwbKsdRZpC+8QyWeoZb+12QxfjNd59Li/Jsp9Tqv4RJrFWjB46hknv5ux3ann7cmjk6S+eTCirnaJmfR/IZVseqVMFlJDn9GEbQ+aJRGKIvga6u4x//9YHQ3lE3R19JXD/hvSifWXe3tV3kr898FbPrQ+lNM0uhlLz19aLYMl6RqgtuW/lTqT3+4uT/FtYavTNrWMiYvFFzHv++qK6qiYTBvXPsuPIoMS5f0MGituXZUew1Tp+q6vkknVqg7CU2zfFV7WvAezvuR4BQ9wgQB7jI7tENLEARJjBtfnJJ/FKrj+NHZP2ZcDRckei+Wb8G7eIYBW+NxL/cSgnU6dPyvN9SFTgA8ndoMm6Z/rid0=
   - COMMIT=${TRAVIS_COMMIT::7}
