@@ -26,46 +26,6 @@ You need to install Java SDK 11 , Node.js and NPM, Maven, MongoDb, Redis
 git clone https://github.com/guvense/Mahallem-Backend.git
 ```
 
-
-#### The seven rules of a great Git commit message
-
-* Separate subject from body with a blank line
-```
-Example:
-Fix typo in introduction to user guide
-```
-* Limit the subject line to 50 characters
-```
-shoot for 50 characters, but consider 72 the hard limit.
-```
-* Capitalize the subject line
-```
-Example:
-Accelerate to 88 miles per hour
-```
-* Do not end the subject line with a period
-```
-Use this:
-Open the pod bay doors
-
-Instead of 
-Open the pod bay doors.
-```
-* Use the imperative mood in the subject line
-```
-Imperative mood just means “spoken or written as if giving a command or instruction”.
-For a few example:
- - Remove the unused variables
- - Fix typo in introduction to user guide
- - Update getting started documentation
-```
-* Wrap the body at 72 characters
-```
-Example:
-Fix typo in introduction to user guide
-```
-* Use the body to explain what and why vs. how
-
 ### Unit Test method name convention 
   MethodName_StateUnderTest_ExpectedBehavior
   Your branch name should be unit-test/mah-<Issue Id>
