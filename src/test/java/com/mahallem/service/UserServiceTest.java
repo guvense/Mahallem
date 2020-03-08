@@ -105,11 +105,11 @@ public class UserServiceTest {
 
     }
 
-    @Test
-    public void getHouseId_getUserHouseProperties() {
-        when(userService.getUser(any())).thenReturn(userResponse);
-        Assert.assertNotNull(userService.getHouseId(userId));
-        Assert.assertEquals(userResponse.getHouseResponse().getId(), userService.getHouseId(userId));
-    }
+//    @Test
+//    public void getHouseId_getUserHouseProperties() {
+//        when(userService.getUser(any())).thenReturn(userResponse);
+//        Assert.assertNotNull(userService.getHouseId(userId));
+//        Assert.assertEquals(userResponse.getHouseResponse().getId(), userService.getHouseId(userId));
+//    }
 
 }
