@@ -1,5 +1,6 @@
 package com.mahallem.resource;
 
+
 import com.mahallem.constants.HousePropertyType;
 import com.mahallem.dto.Request.GeoLocationRequest;
 import com.mahallem.dto.Request.HouseRequest;

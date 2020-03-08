@@ -1,9 +1,10 @@
 package com.mahallem.dto.Request;
 
+import com.mahallem.constants.Sex;
 import com.mahallem.customize.Annotation.Email;
 import com.mahallem.customize.Annotation.Phone;
-import com.mahallem.constants.Sex;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserDetailRequest {
 
     @NotNull(message = "{sex.notnull}")
