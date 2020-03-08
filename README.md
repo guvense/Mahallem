@@ -12,7 +12,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=guvense_Mahallem-Backend&metric=alert_status)](https://sonarcloud.io/dashboard?id=guvense_Mahallem-Backend)
 [![codecov](https://codecov.io/gh/guvense/Mahallem/branch/master/graph/badge.svg)](https://codecov.io/gh/guvense/Mahallem)
 ![GitHub](https://img.shields.io/github/license/guvense/mahallem)
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/guvense/mahallem_api)
+![Docker Build Status](https://img.shields.io/docker/build/guvense/mahallem_api)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
