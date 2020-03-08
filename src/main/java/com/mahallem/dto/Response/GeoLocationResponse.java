@@ -1,4 +1,4 @@
-package com.mahallem.dto.Request;
+package com.mahallem.dto.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Builder
-public class GeoLocationRequest {
+public class GeoLocationResponse {
 
     @NotNull
     private double latitude;

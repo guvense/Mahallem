@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class HousePropertyResponse {
 
     private HousePropertyType propertyType;

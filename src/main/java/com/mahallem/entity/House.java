@@ -15,7 +15,7 @@ public class House extends BaseEntity{
 
     private String name;
 
-    private long grade;
+    private Double grade;
 
     private GeoLocation geoLocation;
 

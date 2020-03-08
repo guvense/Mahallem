@@ -20,9 +20,9 @@ public class HouseResponse {
 
     private String name;
 
-    private long grade;
+    private Double grade;
 
-    private GeoLocation geoLocation;
+    private GeoLocationResponse geoLocation;
 
     private String houseStatus;
 
