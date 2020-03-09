@@ -18,7 +18,21 @@
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.language>java</sonar.language>
-		<sonar.exclusions>**/entity/**,**/dto/**,**/config/** </sonar.exclusions>
+		<sonar.exclusions>
+			**/entity/**,
+			**/dto/**,
+			**/viewmodel/**,
+            **/config/**,
+            **/constants/**,
+            **/controller/**,
+            **/eventbusses/**,
+            **/eventhandler/**,
+            **/eventsender/**,
+            **/util/**,
+			**/repository/**,
+
+
+        </sonar.exclusions>
 		<sonar.projectVersion>${project.version}</sonar.projectVersion>
 		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
@@ -54,8 +68,20 @@
 					<output>file</output>
 					<append>true</append>
 					<excludes>
-						<exclude>**/model/*</exclude>
-						<exclude>**/exception/*</exclude>
+						<exclude>**/entity/*</exclude>
+						<exclude>**/exception/**</exclude>
+                        <exclude>**/constants/**</exclude>
+                        <exclude>**/controller/**</exclude>
+                        <exclude>**/dto/**</exclude>
+                        <exclude>**/eventbusses/**</exclude>
+                        <exclude>**/eventhandler/**</exclude>
+                        <exclude>**/eventsender/**</exclude>
+                        <exclude>**/util/**</exclude>
+						<exclude>**/viewmodel/**</exclude>
+						<exclude>**/repository/**</exclude>
+						<exclude>**/customize/**</exclude>
+						<exclude>**/config/**</exclude>
+
 					</excludes>
 				</configuration>
 			</plugin>
