@@ -8,11 +8,13 @@ import com.mahallem.eventsender.eventsendermessage.DummyObject;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
 import com.mahallem.eventbusses.EventBus;
+import com.mahallem.mapper.AuthMapper;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
 import com.mahallem.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -36,14 +38,10 @@ public class AuthServiceImpl implements AuthService {
     @NotNull
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @NotNull
-    private final RedisUtil<User> stringRedisUtil;
-
 
     @Override
     public AuthResponse registerUser(AuthRequest authRequest) {
-        final User user = modelMapper.map(authRequest, User.class);
-
+        final User user = AuthMapper.map.authRequestToUser(authRequest);
         Optional<User> byUserName = userRepository.findByUserName(authRequest.getUserName());
 
         if (byUserName.isPresent()) {
@@ -52,18 +50,19 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
 
-        AuthResponse authResponse = modelMapper.map(savedUser, AuthResponse.class);
+        AuthResponse authResponse = AuthMapper.map.userToAuthResponse(savedUser);
         authResponse.setToken(jwtUtil.createToken(savedUser.getId()));
         return authResponse;
     }
 
     @Override
     public AuthResponse loginUser(String userName, String password) {
-        Optional<User> opUser = userRepository.findByUserName(userName);
-        final User user = opUser.orElseThrow(UserOrPasswordWrongException::new);
+        final User user = userRepository.findByUserName(userName)
+                                        .orElseThrow(UserOrPasswordWrongException::new);
 
         if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
-            AuthResponse authResponse = modelMapper.map(user, AuthResponse.class);
+
+            AuthResponse authResponse = AuthMapper.map.userToAuthResponse(user);
             authResponse.setToken(jwtUtil.createToken(user.getId()));
             return authResponse;
         } else {

@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AnimalServiceImpl implements AnimalService {
+public class AnimalServicImpl implements AnimalService {
 
     @NotNull
     private final ModelMapper modelMapper;
