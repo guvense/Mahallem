@@ -12,7 +12,7 @@ import org.mapstruct.factory.Mappers;
 public abstract class AuthMapper {
 
 
-   public static AuthMapper map = Mappers.getMapper(AuthMapper.class);
+   public static final AuthMapper map = Mappers.getMapper(AuthMapper.class);
 
     public abstract User authRequestToUser(AuthRequest authRequest);
 
