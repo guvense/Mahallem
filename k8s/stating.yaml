@@ -1,0 +1,153 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - containerPort: 6379
+              name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  ports:
+    - port: 6379
+  selector:
+    app: redis
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo
+          ports:
+            - containerPort: 27017
+              name: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  ports:
+    - port: 27017
+  selector:
+    app: mongodb
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mobileapi
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: mahallem_api
+    spec:
+      containers:
+        - name: mahallem_api
+          image: guvense/mahallem
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 250m
+            limits:
+              cpu: 500m
+          env:
+            - name: MONGO
+              value: "mongodb"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Staging"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mobileapi
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+  selector:
+    app: mobileapi
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: hub
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/secure-backends: "true"
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: hub
+    spec:
+      containers:
+        - name: hub
+          image: guvense/mahallem_hub
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5050
+          resources:
+            requests:
+              cpu: 250m
+            limits:
+              cpu: 500m
+          env:
+            - name: NODE_ENV
+              value: "staging"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hub
+spec:
+  type: LoadBalancer
+  ports:
+    - name: socketio
+      port: 80
+      protocol: TCP
+      targetPort: 5050
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 5050
+
+  selector:
+    app: hub
