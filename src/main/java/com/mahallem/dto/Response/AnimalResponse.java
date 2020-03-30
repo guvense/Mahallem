@@ -15,8 +15,10 @@ public class AnimalResponse {
 
     private AnimalType type;
 
-    private int age;
+    private Integer age;
 
     private AnimalSex sex;
+
+    private String id;
 
 }

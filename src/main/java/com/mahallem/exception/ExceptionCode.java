@@ -11,5 +11,7 @@ public final class ExceptionCode {
     public static final String ANIMAL_NOT_FOUND="Exception.animalNotFound";
     public static final String USER_UPDATE_FAILED="Exception.userUpdatedFailed";
     public static final String HOUSE_PROPERTY_EXIST="Exception.housePropertyExist";
+    public static final String HOUSE_ID_NULL_ANIMAL="Exception.houseIDNullAnimal";
+
 
 }
