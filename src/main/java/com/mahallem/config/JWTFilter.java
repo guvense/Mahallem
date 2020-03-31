@@ -31,6 +31,8 @@ public class JWTFilter implements Filter {
 
     private final static String REGISTER_URI = "/register";
 
+    private final static String APP_INFO_URI = "/app-info";
+
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -77,7 +79,7 @@ public class JWTFilter implements Filter {
         if (isSwaggerRequest(httpServletRequest)) {
             return true;
         }
-        return requestURI.contains(LOGIN_URI) || requestURI.contains(REGISTER_URI);
+        return requestURI.contains(LOGIN_URI) || requestURI.contains(REGISTER_URI) || requestURI.contains(APP_INFO_URI);
 
     }
 
