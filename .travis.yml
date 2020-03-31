@@ -3,7 +3,7 @@ jdk: oraclejdk11
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-- ./generate_cert.sh
+- sh script/generate_cert.sh
 - mvn clean install -B
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=guvense_Mahallem-Backend
 sudo: required
