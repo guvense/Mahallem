@@ -18,7 +18,6 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -38,9 +37,6 @@ public class AuthServiceTest {
 
     @Mock
     private UserRepositoryImpl userRepository;
-
-    @Spy
-    private ModelMapper modelMapper;
 
     @Spy
     private JwtUtil jwtUtil;

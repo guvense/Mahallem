@@ -4,6 +4,6 @@ import com.mahallem.eventsender.EventValue;
 
 public interface EventBus {
 
-    void addSubscribe(SubAbs subAbs);
+    void addSubscribe(Subscriber subAbs);
     void post(EventValue eventValue);
 }

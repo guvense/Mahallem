@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class EventBusImpl implements MessageListener, EventBus {
 
-    private Queue<SubAbs> channelQueue = new ConcurrentLinkedQueue<>();
+    private Queue<Subscriber> channelQueue = new ConcurrentLinkedQueue<>();
 
     private  RedisTemplate<String, String> redisTemplate;
 
@@ -58,7 +58,7 @@ public class EventBusImpl implements MessageListener, EventBus {
     }
 
     @Override
-    public void addSubscribe(SubAbs subAbs) {
+    public void addSubscribe(Subscriber subAbs) {
 
         channelQueue.add(subAbs);
         redisMessageListenerContainer.
