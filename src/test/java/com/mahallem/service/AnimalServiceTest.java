@@ -6,6 +6,7 @@ import com.mahallem.entity.Animal;
 import com.mahallem.entity.User;
 import com.mahallem.exception.AnimalNotFoundException;
 import com.mahallem.exception.UserNotFoundException;
+import com.mahallem.mapper.AnimalMapper;
 import com.mahallem.repository.Impl.AnimalRepositoryImpl;
 import com.mahallem.repository.Impl.UserRepositoryImpl;
 import com.mahallem.resource.AnimalResource;
@@ -18,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 
@@ -45,9 +47,6 @@ public class AnimalServiceTest {
     @InjectMocks
     private AnimalServicImpl animalService;
 
-    @Spy
-    private ModelMapper modelMapper;
-
     private AnimalRequest animalRequest;
 
     private Animal animal;
@@ -56,9 +55,14 @@ public class AnimalServiceTest {
 
     private ObjectId houseId;
 
-
     @Before
     public void init() {
+
+        when(animalRepository.save(any())).thenAnswer((Answer) invocationOnMock -> {
+            Animal animal = invocationOnMock.getArgument(0);
+            animal.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
+            return animal;
+        });
 
         this.houseId = new ObjectId("5e1a436310c40031d8a7b6d9");
 
@@ -68,10 +72,11 @@ public class AnimalServiceTest {
 
         this.animalRequest = AnimalResource.animalRequest;
 
-        animal = modelMapper.map(animalRequest, Animal.class);
+        animal = AnimalMapper.map.animalRequestToAnimal(animalRequest);
         animal.setHouseId(houseId);
 
         when(userRepository.getUserInfo(anyString())).thenReturn(Optional.of(user));
+        animal.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
         when(animalRepository.getAnimalByHouseId(any())).thenReturn(Optional.of(animal));
 
     }
@@ -84,7 +89,6 @@ public class AnimalServiceTest {
 
     @Test
     public void saveAnimal_saveAnimalWithAllProperties() {
-        when(animalRepository.save(any())).thenReturn(animal);
         AnimalResponse animalResponse = animalService.saveAnimal(user.getUserName(), animalRequest);
         assertNotNull(animalResponse.getAge());
         assertNotNull(animalResponse.getSex());

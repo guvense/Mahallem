@@ -30,7 +30,7 @@
             **/eventsender/**,
             **/util/**,
 			**/repository/**,
-
+			**/exception/**,
 
         </sonar.exclusions>
 		<sonar.projectVersion>${project.version}</sonar.projectVersion>
@@ -81,7 +81,6 @@
 						<exclude>**/repository/**</exclude>
 						<exclude>**/customize/**</exclude>
 						<exclude>**/config/**</exclude>
-
 					</excludes>
 				</configuration>
 			</plugin>
