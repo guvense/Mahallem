@@ -4,6 +4,8 @@ services:
        image: "redis:alpine"
        ports:
          - "6379:6379"
+       volumes:
+               - redis_data:/data      
    mongodb:
        image: mongo:latest
        ports:
@@ -26,6 +28,8 @@ volumes:
      mongo_data: 
         driver: local
      els_data:
+        driver: local
+     redis_data:
         driver: local      
 
 
