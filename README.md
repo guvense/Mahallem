@@ -29,7 +29,7 @@ git clone https://github.com/guvense/Mahallem-Backend.git
 
 ### Local development environment
 A docker-compose file was prepared in order to setup 3th party application.
-
+In root directory,
 ```
 docker-compose up -d
 ```
