@@ -27,6 +27,13 @@ You need to install Java SDK 11 , Node.js and NPM, Maven, MongoDb, Redis
 git clone https://github.com/guvense/Mahallem-Backend.git
 ```
 
+### Local development environment
+A docker-compose file was prepared in order to setup 3th party application.
+
+```
+docker-compose up -d
+```
+
 ### Unit Test method name convention 
   MethodName_StateUnderTest_ExpectedBehavior
   Your branch name should be unit-test/mah-<Issue Id>
