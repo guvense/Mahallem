@@ -8,5 +8,5 @@ public interface AnimalService {
 
     AnimalResponse getAnimal(String id);
 
-    AnimalResponse deleteAnimal(String id);
+    AnimalResponse deleteAnimal(String id, String userId);
 }

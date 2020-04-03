@@ -61,7 +61,9 @@ public class AnimalServicImpl implements AnimalService {
     }
 
     @Override
-    public AnimalResponse deleteAnimal(String animalId) {
+    public AnimalResponse deleteAnimal(String animalId, String userId) {
+
+        // todo check use has animal
         Animal deletedAnimal = animalRepository.delete(new ObjectId(animalId));
 
         return AnimalMapper.map.animalToAnimalResponse(deletedAnimal);

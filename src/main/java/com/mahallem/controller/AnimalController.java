@@ -4,6 +4,8 @@ import com.mahallem.dto.Request.AnimalRequest;
 import com.mahallem.dto.Response.AnimalResponse;
 import com.mahallem.service.AnimalService;
 import com.mahallem.util.JwtUtil;
+import com.mahallem.util.ResponseUtil;
+import com.mahallem.viewmodel.MainResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +22,24 @@ public class AnimalController {
     private final AnimalService animalService;
 
     @GetMapping
-    public ResponseEntity<AnimalResponse> getAnimal(HttpServletRequest httpServletRequest){
-        String id= JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return new ResponseEntity<>(animalService.getAnimal(id), HttpStatus.OK);
+    public ResponseEntity<MainResponse<AnimalResponse>> getAnimal(HttpServletRequest httpServletRequest) {
+
+        String id = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(animalService.getAnimal(id));
+
     }
 
     @PostMapping
-    public ResponseEntity<AnimalResponse> setAnimalInformation(@Valid AnimalRequest animalRequest, HttpServletRequest httpServletRequest){
-        String id= JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return new ResponseEntity<>(animalService.saveAnimal(id,animalRequest),HttpStatus.CREATED);
+    public ResponseEntity<MainResponse<AnimalResponse>> setAnimalInformation(@Valid AnimalRequest animalRequest, HttpServletRequest httpServletRequest) {
+        String id = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        AnimalResponse animalResponse = animalService.saveAnimal(id, animalRequest);
+        return ResponseUtil.data(animalResponse);
     }
-
+    
     @DeleteMapping
-    public ResponseEntity<AnimalResponse> deleteAnimal(String animalId, HttpServletRequest httpServletRequest){
-        String id= JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return new ResponseEntity<>(animalService.deleteAnimal(animalId),HttpStatus.OK);
+    public ResponseEntity<MainResponse<AnimalResponse>> deleteAnimal(String animalId, HttpServletRequest httpServletRequest) {
+        String id = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(animalService.deleteAnimal(animalId, id));
     }
 
 }

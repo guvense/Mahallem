@@ -1,6 +1,10 @@
 package com.mahallem.controller;
 
 import com.mahallem.exception.BaseException;
+import com.mahallem.exception.ExceptionCode;
+import com.mahallem.util.ResponseUtil;
+import com.mahallem.viewmodel.ErrorResponse;
+import com.mahallem.viewmodel.MainResponse;
 import org.springframework.context.MessageSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,33 +33,35 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(BaseException.class)
-    public ResponseEntity<String> handleIllegalArgument(BaseException ex, Locale locale) {
+    public ResponseEntity<MainResponse<ErrorResponse>> handleIllegalArgument(BaseException ex, Locale locale) {
 
         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
-        return new ResponseEntity<>(errorMessage, HttpStatus.OK);
+        return ResponseUtil.error(errorMessage, ex.getMessage());
     }
 
     @ExceptionHandler(BaseValidationException.class)
-    public ResponseEntity<String> validationException(BaseValidationException ex, Locale locale) {
+    public ResponseEntity<MainResponse<ErrorResponse>> validationException(BaseValidationException ex, Locale locale) {
 
         String errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
-        return new ResponseEntity<>(errorMessage, HttpStatus.OK);
+        return ResponseUtil.error(errorMessage, ex.getMessage());
+
     }
 
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<String> validationException(BindException ex, Locale locale) {
+    public ResponseEntity<MainResponse<ErrorResponse>> validationException(BindException ex, Locale locale) {
         String errorMessage = ex.getFieldErrors().stream()
-                .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                .collect(Collectors.joining(","));
+                                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                                .collect(Collectors.joining(","));
 
-        return new ResponseEntity<>(errorMessage, HttpStatus.OK);
+        return ResponseUtil.error(errorMessage, ex.getMessage());
 
     }
 
+    //TODO: ex.getMessage will be deleted
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleExceptions(Exception ex, Locale locale) {
+    public ResponseEntity<MainResponse<ErrorResponse>> handleExceptions(Exception ex, Locale locale) {
 
-        return new ResponseEntity<>("Undefined Exception", HttpStatus.OK);
+        return ResponseUtil.error(ExceptionCode.UNEXPECTED_ERROR, ex.getMessage());
 
     }
 
