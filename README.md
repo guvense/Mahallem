@@ -28,7 +28,7 @@ git clone https://github.com/guvense/Mahallem-Backend.git
 ```
 
 ### Local development environment
-A docker-compose file was prepared in order to setup 3th party application.
+A docker-compose file was prepared in order to setup 3th party applications. Redis, Mongodb and Elasticsearch.
 In root directory,
 ```
 docker-compose up -d
