@@ -17,10 +17,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 
 import java.text.SimpleDateFormat;

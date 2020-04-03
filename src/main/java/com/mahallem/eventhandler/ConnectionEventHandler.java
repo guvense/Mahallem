@@ -3,8 +3,7 @@ package com.mahallem.eventhandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mahallem.eventbusses.Channel;
 import com.mahallem.eventbusses.EventBus;
-import com.mahallem.eventbusses.SubAbs;
-import com.mahallem.eventsender.eventsendermessage.DummyObject;
+import com.mahallem.eventbusses.Subscriber;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,7 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class ConnectionEventHandler extends SubAbs {
+public class ConnectionEventHandler extends Subscriber {
 
     private final ObjectMapper objectMapper;
 

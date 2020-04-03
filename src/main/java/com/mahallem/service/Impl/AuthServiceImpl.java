@@ -3,19 +3,13 @@ package com.mahallem.service.Impl;
 import com.mahallem.dto.Request.AuthRequest;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.entity.User;
-import com.mahallem.eventsender.ClientInfo;
-import com.mahallem.eventsender.eventsendermessage.DummyObject;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
-import com.mahallem.eventbusses.EventBus;
 import com.mahallem.mapper.AuthMapper;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
-import com.mahallem.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.factory.Mappers;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +22,6 @@ public class AuthServiceImpl implements AuthService {
 
     @NotNull
     private final UserRepository userRepository;
-
-    @NotNull
-    private final ModelMapper modelMapper;
 
     @NotNull
     private final JwtUtil jwtUtil;

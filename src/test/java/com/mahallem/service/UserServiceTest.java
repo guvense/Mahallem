@@ -7,6 +7,7 @@ import com.mahallem.exception.UserNotFoundException;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.resource.UserResource;
 import com.mahallem.service.Impl.UserServiceImpl;
+import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 
 import java.util.Optional;
@@ -29,9 +29,6 @@ import static org.mockito.Mockito.when;
 public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
-
-    @Spy
-    private ModelMapper modelMapper;
 
     @InjectMocks
     private UserServiceImpl userService;

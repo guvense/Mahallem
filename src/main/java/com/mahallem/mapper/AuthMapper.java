@@ -3,6 +3,7 @@ package com.mahallem.mapper;
 import com.mahallem.dto.Request.AuthRequest;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.entity.User;
+import com.mahallem.mapper.customize.ObjectIdMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
