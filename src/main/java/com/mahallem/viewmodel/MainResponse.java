@@ -5,22 +5,27 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MainResponse <T>  {
+public class MainResponse<T> {
     private T data;
+    private ErrorResponse errorMessage;
     private boolean success;
-    private String errorMessage;
-    private int errorCode;
 
 
-    public MainResponse(String errorMessage, int errorCode) {
-        this.errorMessage = errorMessage;
-        this.errorCode= errorCode;
-        this.success=false;
-        this.data=null;
+
+    private MainResponse(String errMessage, String errorCode) {
+        this.errorMessage = new ErrorResponse(errMessage,errorCode);
     }
 
-    public MainResponse(T data) {
+    private MainResponse(T data) {
         this.data = data;
         this.success = true;
+    }
+
+    public static <T> MainResponse<ErrorResponse> errorResponse(String errorMessage, String errorCode) {
+        return new MainResponse<>(errorMessage, errorCode);
+    }
+
+    public static <T> MainResponse<T> response(T data) {
+        return new MainResponse<>(data);
     }
 }

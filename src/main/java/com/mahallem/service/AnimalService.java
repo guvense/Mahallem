@@ -12,5 +12,5 @@ public interface AnimalService {
 
     Page<AnimalResponse> getAnimals(String id, Pageable pageable);
 
-    AnimalResponse deleteAnimal(String id);
+    AnimalResponse deleteAnimal(String id, String userId);
 }

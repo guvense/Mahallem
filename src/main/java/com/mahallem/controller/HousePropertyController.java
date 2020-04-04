@@ -5,6 +5,8 @@ import com.mahallem.dto.Response.HouseResponse;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.service.HousePropertyService;
 import com.mahallem.util.JwtUtil;
+import com.mahallem.util.ResponseUtil;
+import com.mahallem.viewmodel.MainResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +25,11 @@ public class HousePropertyController {
     private final HousePropertyService housePropertyService;
 
     @PostMapping("add-property")
-    public ResponseEntity<HouseResponse> addPropertyToHouse(@Valid HousePropertyRequest housePropertyRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<MainResponse<HouseResponse>> addPropertyToHouse(@Valid HousePropertyRequest housePropertyRequest, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-
-        return new ResponseEntity<>(housePropertyService.addPropertyToUserHouse(housePropertyRequest,userId), HttpStatus.OK);
+        HouseResponse houseResponse = housePropertyService.addPropertyToUserHouse(housePropertyRequest, userId);
+        return ResponseUtil.data(houseResponse,HttpStatus.CREATED);
     }
 
 }
