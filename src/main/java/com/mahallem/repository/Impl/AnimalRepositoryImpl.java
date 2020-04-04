@@ -5,12 +5,16 @@ import com.mahallem.entity.Animal;
 import com.mahallem.repository.AnimalRepository;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -21,9 +25,9 @@ public class AnimalRepositoryImpl implements AnimalRepository {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public Optional<Animal> getAnimal(String animalId) {
-        Animal animal = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(animalId)), Animal.class);
-        return Optional.ofNullable(animal);
+    public List<Animal> getAnimals(ObjectId houseId, Pageable pageable) {
+        return mongoTemplate.find(Query.query(Criteria.where("houseId").is(houseId)).with(pageable), Animal.class);
+
     }
 
     @Override

@@ -2,11 +2,13 @@ package com.mahallem.repository;
 
 import com.mahallem.entity.Animal;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AnimalRepository {
-    Optional<Animal> getAnimal(String animalId);
+    List<Animal> getAnimals(ObjectId houseId, Pageable pageable);
 
     Optional<Animal> getAnimalByHouseId(ObjectId animalHouseid);
 

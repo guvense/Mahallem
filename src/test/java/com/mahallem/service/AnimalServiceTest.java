@@ -12,6 +12,7 @@ import com.mahallem.repository.Impl.UserRepositoryImpl;
 import com.mahallem.resource.AnimalResource;
 import com.mahallem.service.Impl.AnimalServicImpl;
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.EAN;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +21,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
@@ -75,7 +80,7 @@ public class AnimalServiceTest {
 
         when(userRepository.getUserInfo(anyString())).thenReturn(Optional.of(user));
         animal.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
-        when(animalRepository.getAnimalByHouseId(any())).thenReturn(Optional.of(animal));
+        when(animalRepository.getAnimals(any(),any())).thenReturn(Collections.singletonList(animal));
 
     }
 
@@ -96,35 +101,16 @@ public class AnimalServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void getAnimal_getUserInfo_ExceptionThrown() {
         when(userRepository.getUserInfo(anyString())).thenReturn(Optional.empty());
-        animalService.getAnimal(user.getUserName());
+        animalService.getAnimals(user.getUserName(), Pageable.unpaged());
     }
 
-    @Test(expected = AnimalNotFoundException.class)
-    public void getAnimal_getAnimalWithAllProperties_ExceptionThrown() {
-        when(animalRepository.getAnimalByHouseId(any())).thenReturn(Optional.empty());
-        animalService.getAnimal(user.getUserName());
-    }
 
     @Test
     public void getAnimal_getAnimalWithAllProperties() {
-        AnimalResponse animalResponse = animalService.getAnimal(user.getUserName());
-        assertNotNull(animalResponse.getAge());
-        assertNotNull(animalResponse.getSex());
-        assertNotNull(animalResponse.getType());
+        Page<AnimalResponse> animalResponse = animalService.getAnimals(user.getUserName(), Pageable.unpaged());
+        assertEquals(1,animalResponse.getContent().size());
     }
 
-    @Test
-    public void calculateAge() {
-        try {
-            String valuee = "03/02/2010";
-            Date currentDate = new SimpleDateFormat("dd/MM/yyyy").parse(valuee);
-            int result = animalService.calculateAge(currentDate);
-            assertEquals(10, result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
 }
