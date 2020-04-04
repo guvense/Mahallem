@@ -80,7 +80,6 @@ public class AnimalServiceTest {
 
         when(userRepository.getUserInfo(anyString())).thenReturn(Optional.of(user));
         animal.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
-        when(animalRepository.getAnimalByHouseId(any())).thenReturn(Optional.of(animal));
         when(animalRepository.getAnimals(any(),any())).thenReturn(Collections.singletonList(animal));
 
     }
