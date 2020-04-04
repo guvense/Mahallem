@@ -17,6 +17,10 @@ services:
        image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
        environment:
                - discovery.type=single-node
+               - ES_JAVA_OPTS= -Xms512m -Xmx512m
+               - bootstrap.memory_lock=true
+               - transport.publish_port=9300
+               - network.publish_host=localhost
        ports:
           - "9200:9200"
           - "9300:9300"
