@@ -1,9 +1,12 @@
 package com.mahallem.controller;
 
 import com.mahallem.dto.Request.AuthRequest;
+import com.mahallem.dto.Response.AnimalResponse;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
+import com.mahallem.util.ResponseUtil;
+import com.mahallem.viewmodel.MainResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,18 +26,17 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("register")
-    public ResponseEntity<AuthResponse> register(@Valid AuthRequest authRequest) {
+    public ResponseEntity<MainResponse<AuthResponse>> register(@Valid AuthRequest authRequest) {
 
-        return new ResponseEntity<>(authService.registerUser(authRequest), HttpStatus.CREATED);
+        return ResponseUtil.data(authService.registerUser(authRequest), HttpStatus.CREATED);
 
     }
 
     @GetMapping("login")
-    public ResponseEntity<AuthResponse> login(
+    public ResponseEntity<MainResponse<AuthResponse>> login(
             @RequestParam(name = "username") String userName,
             @RequestParam String password) {
 
-        return new ResponseEntity<>(authService.loginUser(userName, password), HttpStatus.OK);
-
+        return ResponseUtil.data(authService.loginUser(userName, password));
     }
 }
