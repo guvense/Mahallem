@@ -25,9 +25,6 @@ public class EsUserServiceImpl {
 
     private RegisteredUser saveRegisteredUser(User user) {
         RegisteredUser toElastic = RegisteredUserMapper.map.userToRegisteredUser(user);
-
-        if(true)
-        throw  new UserNotFoundException();
         return esUserRepository.save(toElastic);
     }
 
