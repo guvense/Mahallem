@@ -33,6 +33,7 @@ In root directory,
 ```
 docker-compose up -d
 ```
+http://localhost:8081/api/v1/swagger-ui.html#/
 
 ### Unit Test method name convention 
   MethodName_StateUnderTest_ExpectedBehavior
