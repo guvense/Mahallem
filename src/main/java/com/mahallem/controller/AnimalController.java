@@ -29,7 +29,7 @@ public class AnimalController {
     @ApiPageable
     public ResponseEntity<Page<AnimalResponse>> getAnimal(Pageable pageable, HttpServletRequest httpServletRequest){
         String userId= JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return new ResponseEntity<>(animalService.getAnimals(userId,pageable), HttpStatus.OK);
+        return ResponseUtil.data(animalService.getAnimals(userId,pageable));
     }
 
     @PostMapping
