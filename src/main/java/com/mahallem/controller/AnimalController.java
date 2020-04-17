@@ -33,7 +33,7 @@ public class AnimalController {
     }
 
     @PostMapping
-    public ResponseEntity<MainResponse<AnimalResponse>> setAnimalInformation(@Valid AnimalRequest animalRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<MainResponse<AnimalResponse>> setAnimalInformation(@Valid @RequestBody AnimalRequest animalRequest, HttpServletRequest httpServletRequest) {
         String id = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         AnimalResponse animalResponse = animalService.saveAnimal(id, animalRequest);
         return ResponseUtil.data(animalResponse);
