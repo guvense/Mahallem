@@ -2,6 +2,7 @@ package com.mahallem.service;
 
 import com.mahallem.dto.Request.AuthRequest;
 import com.mahallem.dto.Response.AuthResponse;
+import com.mahallem.elasticsearch.service.EsUserServiceImpl;
 import com.mahallem.entity.User;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
@@ -27,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 
 
 // MethodName_StateUnderTest_ExpectedBehavior
@@ -44,8 +47,12 @@ public class AuthServiceTest {
     @Mock
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Mock
+    private EsUserServiceImpl esUserServiceImpl;
+
     @InjectMocks
     private AuthServiceImpl authService;
+
 
     private AuthRequest authRequest;
 
@@ -67,6 +74,8 @@ public class AuthServiceTest {
         when(bCryptPasswordEncoder.encode(anyString())).thenReturn("12345");
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.of(u));
         when(bCryptPasswordEncoder.matches(any(), any())).thenReturn(true);
+        doNothing().when(esUserServiceImpl).addRegisterRecord(any());
+
 
     }
 
