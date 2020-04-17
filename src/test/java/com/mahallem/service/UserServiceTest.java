@@ -7,22 +7,22 @@ import com.mahallem.exception.UserNotFoundException;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.resource.UserResource;
 import com.mahallem.service.Impl.UserServiceImpl;
-import org.bson.types.ObjectId;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
+
 
 @RestClientTest(UserServiceTest.class)
 @RunWith(MockitoJUnitRunner.class)
@@ -39,11 +39,8 @@ public class UserServiceTest {
 
     private User user;
 
-    private UserResponse userResponse;
-
     @Before
     public void init() {
-        userResponse = UserResource.userResponse;
         userDetailRequest = UserResource.userDetailRequest;
         userId = "5e1a436310c40031d8a7b6d9";
         user = UserResource.user;
@@ -61,26 +58,26 @@ public class UserServiceTest {
     @Test
     public void setUserDetailInformation_withAllProperties() {
         UserResponse userResponse = userService.setUserDetailInformation(userId, userDetailRequest);
-        Assert.assertNotNull(userResponse.getUserName());
-        Assert.assertNotNull(userResponse.getFirstName());
-        Assert.assertNotNull(userResponse.getLastName());
+        assertNotNull(userResponse.getUserName());
+        assertNotNull(userResponse.getFirstName());
+        assertNotNull(userResponse.getLastName());
     }
 
     @Test(expected = UserNotFoundException.class)
     public void userInfo_userNotFoundException() {
         when(userRepository.getUserInfo(any())).thenReturn(Optional.empty());
-        userService.userInfo(userId);
+        userService.userInfo(any());
     }
 
     @Test
     public void userInfo_getUserWithProperties() {
         UserResponse userResponse = userService.userInfo(userId);
-        Assert.assertNotNull(userResponse.getUserName());
-        Assert.assertEquals(user.getUserName(), userResponse.getUserName());
-        Assert.assertNotNull(userResponse.getFirstName());
-        Assert.assertEquals(user.getFirstName(), userResponse.getFirstName());
-        Assert.assertNotNull(userResponse.getLastName());
-        Assert.assertEquals(user.getLastName(), userResponse.getLastName());
+        assertNotNull(userResponse.getUserName());
+        assertEquals(user.getUserName(), userResponse.getUserName());
+        assertNotNull(userResponse.getFirstName());
+        assertEquals(user.getFirstName(), userResponse.getFirstName());
+        assertNotNull(userResponse.getLastName());
+        assertEquals(user.getLastName(), userResponse.getLastName());
 
     }
 
@@ -93,12 +90,12 @@ public class UserServiceTest {
     @Test
     public void getUser_getUserWithProperties() {
         UserResponse userResponse = userService.getUser(userId);
-        Assert.assertNotNull(userResponse.getUserName());
-        Assert.assertEquals(user.getUserName(), userResponse.getUserName());
-        Assert.assertNotNull(userResponse.getFirstName());
-        Assert.assertEquals(user.getFirstName(), userResponse.getFirstName());
-        Assert.assertNotNull(userResponse.getLastName());
-        Assert.assertEquals(user.getLastName(), userResponse.getLastName());
+        assertNotNull(userResponse.getUserName());
+        assertEquals(user.getUserName(), userResponse.getUserName());
+        assertNotNull(userResponse.getFirstName());
+        assertEquals(user.getFirstName(), userResponse.getFirstName());
+        assertNotNull(userResponse.getLastName());
+        assertEquals(user.getLastName(), userResponse.getLastName());
 
     }
 

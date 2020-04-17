@@ -25,28 +25,21 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public HouseResponse saveHouse(String userId, HouseRequest houseRequest) {
-
         final House house = HouseMapper.map.houseRequestToHouse(houseRequest);
         House savedHouse = houseRepository.save(house);
         userService.addHouseIdToUser(userId, savedHouse.getId());
-
         return HouseMapper.map.houseToHouseResponse(savedHouse);
-
     }
 
     @Override
     public HouseResponse getHouse(String id) {
-
         House house = houseRepository.getHouse(id)
-                                     .orElseThrow(HouseNotFoundException::new);
-
+                .orElseThrow(HouseNotFoundException::new);
         return HouseMapper.map.houseToHouseResponse(house);
-
     }
 
     @Override
     public HouseResponse getHouseWithProperties(String id) {
-
         return houseRepository.getHouseWithProperties(new ObjectId(id));
     }
 }
