@@ -13,9 +13,9 @@ import java.util.function.Supplier;
 public class AsyncUtil {
 
 
-    public static <T> CompletableFuture<Void> invoke(Supplier<T> supplier, Consumer<String> dataChannel,Consumer<String> errorChannel ) {
+    public <T> void invoke(Supplier<T> supplier, Consumer<String> dataChannel,Consumer<String> errorChannel ) {
 
-        return CompletableFuture.supplyAsync(supplier)
+          CompletableFuture.supplyAsync(supplier)
                                 .thenApply(Object::toString)
                                 .handleAsync((s,th) -> {
                                     errorChannel.accept(th.getMessage());

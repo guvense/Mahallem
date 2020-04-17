@@ -31,6 +31,8 @@
             **/util/**,
             **/repository/**,
             **/exception/**,
+            **/mapper/**,
+            **/model/**,
 
         </sonar.exclusions>
         <sonar.projectVersion>${project.version}</sonar.projectVersion>
@@ -82,6 +84,8 @@
                         <exclude>**/repository/**</exclude>
                         <exclude>**/customize/**</exclude>
                         <exclude>**/config/**</exclude>
+                        <exclude>**/mapper/**</exclude>
+                        <exclude>**/model/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
