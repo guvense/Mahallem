@@ -36,7 +36,6 @@ public class UserController {
     public ResponseEntity<MainResponse<UserResponse>> userInfo(HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-
         return ResponseUtil.data(userService.userInfo(userId));
 
     }

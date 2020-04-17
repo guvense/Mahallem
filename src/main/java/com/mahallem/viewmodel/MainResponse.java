@@ -2,14 +2,16 @@ package com.mahallem.viewmodel;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @Getter
 @Setter
 public class MainResponse<T> {
+
     private T data;
     private ErrorResponse errorMessage;
     private boolean success;
-
 
 
     private MainResponse(String errMessage, String errorCode) {
@@ -21,11 +23,15 @@ public class MainResponse<T> {
         this.success = true;
     }
 
-    public static <T> MainResponse<ErrorResponse> errorResponse(String errorMessage, String errorCode) {
-        return new MainResponse<>(errorMessage, errorCode);
+    public static <T> ResponseEntity<MainResponse<ErrorResponse>> errorResponse(String errorMessage, String errorCode) {
+
+        MainResponse<ErrorResponse> objectMainResponse = new MainResponse<>(errorMessage, errorCode);
+        return new ResponseEntity<>(objectMainResponse, HttpStatus.OK);
     }
 
-    public static <T> MainResponse<T> response(T data) {
-        return new MainResponse<>(data);
+    public static <T> ResponseEntity<MainResponse<T>> response(T data) {
+
+        MainResponse<T> response = new MainResponse<>(data);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }
