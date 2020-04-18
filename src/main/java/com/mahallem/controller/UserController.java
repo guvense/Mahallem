@@ -23,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("add-user-detail")
-    public ResponseEntity<MainResponse<UserResponse>> addUserDetail(@Valid UserDetailRequest userDetailRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<MainResponse<UserResponse>> addUserDetail(@Valid @RequestBody UserDetailRequest userDetailRequest, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         UserResponse userResponse = userService.setUserDetailInformation(userId, userDetailRequest);

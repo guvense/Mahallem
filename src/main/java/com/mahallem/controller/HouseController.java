@@ -24,7 +24,7 @@ public class HouseController {
     private final HouseService houseService;
 
     @PostMapping("add-house")
-    public ResponseEntity<MainResponse<HouseResponse>> addHouse(@Valid HouseRequest houseRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<MainResponse<HouseResponse>> addHouse(@Valid @RequestBody HouseRequest houseRequest, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         HouseResponse houseResponse = houseService.saveHouse(userId, houseRequest);

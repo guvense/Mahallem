@@ -1,5 +1,7 @@
 package com.mahallem.util;
 
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@Component
 public class AsyncUtil {
 
 
