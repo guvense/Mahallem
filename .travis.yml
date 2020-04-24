@@ -29,9 +29,8 @@ after_success:
 deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY
-  app: mahallem
-  on:
-    repo: guvense/mahallem_api
+  script:
+    - docker push registry.heroku.com/mahalem/web
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
