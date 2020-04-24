@@ -26,18 +26,11 @@ after_success:
 - docker build -t $IMAGE_NAME_HUB:$COMMIT -f DockerfileHub .
 - docker tag $IMAGE_NAME_HUB:$COMMIT $IMAGE_NAME_HUB:$TAG
 - docker push $IMAGE_NAME_HUB
-deploy:
-  provider: heroku
-  api_key: $HEROKU_API_KEY
-  script:
-    - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-    - heroku login
-    - heroku container:login
-    - docker tag $IMAGE_NAME registry.heroku.com/mahallem/web
-    - docker push registry.heroku.com/mahallem/web
-
-  on:
-    branch: master
+- wget -qO- https://toolbelt.heroku.com/install.sh | sh
+- heroku auth:token
+- heroku container:login
+- docker tag $IMAGE_NAME registry.heroku.com/mahallem/web
+- docker push registry.heroku.com/mahallem/web
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
