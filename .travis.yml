@@ -30,7 +30,12 @@ deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY
   script:
+    - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+    - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
     - docker push registry.heroku.com/mahalem/web
+    - heroku container:release web --app mahallem
+  on:
+    branch: master
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
