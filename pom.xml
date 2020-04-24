@@ -49,9 +49,14 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>2.0.11</version>
                 <configuration>
-                    <appName>mahallem</appName>
+                    <appName>heroku-jar-deploy</appName>
+                    <includeTarget>false</includeTarget>
+                    <includes>
+                        <include>${basedir}/${full-artifact-name}</include>
+                    </includes>
+                    <jdkVersion>1.11</jdkVersion>
                     <processTypes>
-                        <web>java $JAVA_OPTS -jar -Dserver.port=8081 ${full-artifact-name}</web>
+                        <web>java -jar ${full-artifact-name}</web>
                     </processTypes>
                 </configuration>
             </plugin>
