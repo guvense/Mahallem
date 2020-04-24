@@ -6,6 +6,7 @@ script:
 - sh script/generate_cert.sh
 - mvn clean install -B
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=guvense_Mahallem-Backend
+- mvn heroku:deploy
 sudo: required
 services:
 - docker
