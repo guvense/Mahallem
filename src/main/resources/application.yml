@@ -1,0 +1,18 @@
+server:
+  servlet:
+    context-path: /api/v1
+  port: 8081
+app:
+  version: 1.0.0
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  messages:
+    always-use-message-format: false
+    basename: messages
+    encoding: UTF-8
+    fallback-to-system-locale: true
+    use-code-as-default-message: false
+  jackson:
+    property-naming-strategy: SNAKE_CASE
