@@ -31,8 +31,7 @@ deploy:
   api_key: $HEROKU_API_KEY
   app: mahallem
   on:
-    tags: true
-    repo: guvense/$IMAGE_NAME
+    repo: guvense/mahallem_api
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
