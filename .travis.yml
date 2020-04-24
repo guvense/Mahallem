@@ -31,6 +31,7 @@ after_success:
 - heroku container:login
 - docker tag $IMAGE_NAME registry.heroku.com/mahallem/web
 - docker push registry.heroku.com/mahallem/web
+- heroku container:release web
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
