@@ -32,7 +32,7 @@ deploy:
   app: mahallem
   on:
     tags: true
-    repo: $IMAGE_NAME
+    repo: guvense/$IMAGE_NAME
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
