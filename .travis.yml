@@ -6,7 +6,6 @@ script:
 - sh script/generate_cert.sh
 - mvn clean install -B
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=guvense_Mahallem-Backend
-- mvn heroku:deploy
 sudo: required
 services:
 - docker
@@ -27,6 +26,13 @@ after_success:
 - docker build -t $IMAGE_NAME_HUB:$COMMIT -f DockerfileHub .
 - docker tag $IMAGE_NAME_HUB:$COMMIT $IMAGE_NAME_HUB:$TAG
 - docker push $IMAGE_NAME_HUB
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: mahallem
+  on:
+    tags: true
+    repo: $IMAGE_NAME
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
