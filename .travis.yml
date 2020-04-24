@@ -32,7 +32,8 @@ deploy:
   script:
     - wget -qO- https://toolbelt.heroku.com/install.sh | sh
     - heroku container:login
-    - docker push $IMAGE_NAME
+    - heroku container:push $IMAGE_NAME --app mahallem
+    - heroku container:release $IMAGE_NAME
 
   on:
     branch: master
