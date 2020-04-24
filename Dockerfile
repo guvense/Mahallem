@@ -2,6 +2,8 @@
 FROM openjdk:11
 VOLUME /tmp
 ADD target/mahallem-0.0.1-SNAPSHOT.jar app.jar
+COPY script/generate_cert.sh .
+RUN sh generate_cert.sh
 RUN sh -c 'touch /app.jar'
 ENV JAVA_OPTS="-Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n"
 EXPOSE 8080 8787
