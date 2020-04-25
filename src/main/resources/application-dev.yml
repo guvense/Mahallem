@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://user:${MONGODB_PASS}@ds213645.mlab.com:13645/heroku_048b24zs
+      uri: mongodb://user:${mongodb_pass}@ds213645.mlab.com:13645/heroku_048b24zs
 
     elasticsearch:
       cluster-name: docker-cluster
@@ -9,6 +9,6 @@ spring:
   redis:
     host: ec2-34-254-83-127.eu-west-1.compute.amazonaws.com
     port: 8869
-    password: ${REDIS_PASS}
+    password: ${redis_pass}
 server:
   port: 8081
