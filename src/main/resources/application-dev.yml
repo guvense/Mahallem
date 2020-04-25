@@ -7,5 +7,8 @@ spring:
       cluster-name: docker-cluster
       cluster-nodes: localhost:9300
   redis:
-    url: redis://h:${REDIS_PASS}@ec2-34-254-83-127.eu-west-1.compute.amazonaws.com:8869
-
+    host: ec2-34-254-83-127.eu-west-1.compute.amazonaws.com
+    port: 8869
+    password: ${REDIS_PASS}
+server:
+  port: 8081
