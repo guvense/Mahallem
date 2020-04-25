@@ -1,12 +1,12 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://user:G100545460@ds213645.mlab.com:13645/heroku_048b24zs
+      uri: mongodb://user:${MONGODB_PASS}@ds213645.mlab.com:13645/heroku_048b24zs
 
     elasticsearch:
       cluster-name: docker-cluster
       cluster-nodes: localhost:9300
   redis:
-    url: redis://h:p2d05a8f43f2f211754304a17a7e975061091fda6d9a961b1dedb173437962b3a@ec2-34-254-83-127.eu-west-1.compute.amazonaws.com:8869
+    url: redis://h:${REDIS_PASS}@ec2-34-254-83-127.eu-west-1.compute.amazonaws.com:8869
 server:
-  port: 80
+  port: 8081
