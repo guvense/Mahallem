@@ -40,11 +40,27 @@
         </sonar.exclusions>
         <sonar.projectVersion>${project.version}</sonar.projectVersion>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <elasticsearch.version>7.3.0</elasticsearch.version>
+        <elasticsearch.version>6.3.1</elasticsearch.version>
     </properties>
     <build>
 
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.mahallem.MahallemApplication</mainClass>
+                    <layout>ZIP</layout>
+                    <requiresUnpack>
+                        <dependency>
+                            <groupId>org.springframework.data</groupId>
+                            <artifactId>spring-data-elasticsearch</artifactId>
+                            <version>3.2.6.RELEASE</version>
+                        </dependency>
+                    </requiresUnpack>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
