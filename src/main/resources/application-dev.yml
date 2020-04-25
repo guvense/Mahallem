@@ -8,5 +8,4 @@ spring:
       cluster-nodes: localhost:9300
   redis:
     url: redis://h:${REDIS_PASS}@ec2-34-254-83-127.eu-west-1.compute.amazonaws.com:8869
-server:
-  port: 8081
+
