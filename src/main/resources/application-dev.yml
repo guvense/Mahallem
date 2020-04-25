@@ -10,5 +10,3 @@ spring:
     host: ec2-34-254-83-127.eu-west-1.compute.amazonaws.com
     port: 8869
     password: ${redis_pass}
-server:
-  port: 8081
