@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -20,21 +19,18 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @EnableRedisRepositories
-@Profile("dev")
-public class RedisConfig {
+@Profile("local")
+public class RedisLocalConfig {
+
     @Value("${spring.redis.host:localhost}")
     private String redisHost;
 
     @Value("${spring.redis.port:6379}")
     private int redisPort;
 
-    @Value("${spring.redis.password: }")
-    private String redisPass;
-
     @Bean
     protected JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(redisHost, redisPort);
-        configuration.setPassword(RedisPassword.of(redisPass));
         JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder().usePooling().build();
         JedisConnectionFactory factory = new JedisConnectionFactory(configuration,jedisClientConfiguration);
         factory.afterPropertiesSet();
@@ -68,6 +64,5 @@ public class RedisConfig {
         container.setConnectionFactory(jedisConnectionFactory());
         return container;
     }
-
 
 }

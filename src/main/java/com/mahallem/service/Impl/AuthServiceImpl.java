@@ -11,6 +11,7 @@ import com.mahallem.mapper.AuthMapper;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
+import com.mahallem.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
