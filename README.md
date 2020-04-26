@@ -3,8 +3,11 @@
 # Mahallem 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<div style="text-align:center"><img src="M.png" /></div>
-
+![alt text](M.png?style=centerme)
+img[src$="centerme"] {
+  display:block;
+  margin: 0 auto;
+}
 ## With Mahallem you can share task in your house. Besides communicate with your neighbors.
 
 [![Build Status](https://travis-ci.com/guvense/Mahallem.svg?branch=master)](https://travis-ci.com/guvense/Mahallem)
