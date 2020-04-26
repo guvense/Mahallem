@@ -3,7 +3,7 @@
 # Mahallem 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-![alt text](M.png)
+<div style="text-align:center"><img src="M.png" /></div>
 
 ## With Mahallem you can share task in your house. Besides communicate with your neighbors.
 
