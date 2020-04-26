@@ -17,7 +17,7 @@
 [![codecov](https://codecov.io/gh/guvense/Mahallem/branch/master/graph/badge.svg)](https://codecov.io/gh/guvense/Mahallem)
 ![GitHub](https://img.shields.io/github/license/guvense/mahallem)
 ![Docker Pulls](https://img.shields.io/docker/pulls/guvense/mahallem_api)
-[![Heroku App Status](http://heroku-shields.herokuapp.com/mahallem)](https://mahallem.herokuapp.com)
+[![Heroku App Status](http://heroku-shields.herokuapp.com/mahallem)](https://mahallem.herokuapp.com/api/v1/app-info/version)
 
 ## Getting Started
 
