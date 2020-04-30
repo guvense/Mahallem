@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -35,6 +36,14 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> findById(ObjectId id) {
         return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("_id").is(id)), User.class));
 
+    }
+
+    @Override
+    public Integer countAllUsers(){
+        List<User> users = mongoTemplate.findAll(User.class);
+        System.out.println(users);
+        System.out.println(users.size());
+        return users.size();
     }
 
     @Override
