@@ -4,7 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    environment:
-      - redis_pass=${REDIS_PASS}
-      - mongodb_pass=${MONGODB_PASS}
-    image: $IMAGE_NAME
+    image: ${IMAGE_NAME}
+  mahallem_hub:
+    build:
+      context: .
+      dockerfile: DockerfileHub
+    image: ${IMAGE_NAME_HUB}

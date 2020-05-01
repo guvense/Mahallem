@@ -19,16 +19,16 @@ after_success:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
   fi`
 - export IMAGE_NAME=guvense/mahallem_api
+- export IMAGE_NAME_HUB=guvense/mahallem_hub
 - sh set_pass.sh
 - docker-compose --version
 - docker-compose build
 - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME
-- export IMAGE_NAME_HUB=guvense/mahallem_hub
-- docker build -t $IMAGE_NAME_HUB:$COMMIT -f DockerfileHub .
 - docker tag $IMAGE_NAME_HUB:$COMMIT $IMAGE_NAME_HUB:$TAG
 - docker push $IMAGE_NAME_HUB
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then sh deploy.sh; fi`
+
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
