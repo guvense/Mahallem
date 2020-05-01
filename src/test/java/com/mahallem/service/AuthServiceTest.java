@@ -54,7 +54,7 @@ public class AuthServiceTest {
 
     @Before
     public void init() {
-        user= UserResource.user;
+        user = UserResource.user;
         user.setId(new ObjectId("5e1a436310c40031d8a7b6d9"));
         authRequest = AuthResource.authRequest;
 

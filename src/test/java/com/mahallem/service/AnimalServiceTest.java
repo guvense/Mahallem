@@ -45,8 +45,6 @@ public class AnimalServiceTest {
 
     private AnimalRequest animalRequest;
 
-    private Animal animal;
-
     private Animal savedAnimal;
 
     private User user;

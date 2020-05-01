@@ -17,7 +17,6 @@ public class UserResource {
             .userName("test")
             .firstName("test")
             .lastName("test")
-            .password("1234")
             .houseId(new ObjectId("5e1a436310c40031d8a7b6d9"))
             .build();
 
