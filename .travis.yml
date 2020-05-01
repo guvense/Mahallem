@@ -19,21 +19,23 @@ after_success:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
   fi`
 - export IMAGE_NAME=guvense/mahallem_api
+- export IMAGE_NAME_HUB=guvense/mahallem_hub
 - sh set_pass.sh
 - docker-compose --version
 - docker-compose build
 - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
 - docker push $IMAGE_NAME
-- export IMAGE_NAME_HUB=guvense/mahallem_hub
-- docker build -t $IMAGE_NAME_HUB:$COMMIT -f DockerfileHub .
 - docker tag $IMAGE_NAME_HUB:$COMMIT $IMAGE_NAME_HUB:$TAG
 - docker push $IMAGE_NAME_HUB
 - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 - heroku auth:token
 - heroku container:login
 - docker tag $IMAGE_NAME registry.heroku.com/mahallem/web
+- docker tag $IMAGE_NAME_HUB registry.heroku.com/mahallem/hub
 - docker push registry.heroku.com/mahallem/web
+- docker push registry.heroku.com/mahallem/hub
 - heroku container:release web -a mahallem
+- heroku container:release hub -a mahallem
 env:
   global:
   - COMMIT=${TRAVIS_COMMIT::7}
