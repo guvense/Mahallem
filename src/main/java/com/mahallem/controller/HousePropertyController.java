@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class HousePropertyController {
     private final HousePropertyService housePropertyService;
 
     @PostMapping("add-property")
-    public ResponseEntity<MainResponse<HouseResponse>> addPropertyToHouse(@Valid HousePropertyRequest housePropertyRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<MainResponse<HouseResponse>> addPropertyToHouse(@Valid @RequestBody HousePropertyRequest housePropertyRequest, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         HouseResponse houseResponse = housePropertyService.addPropertyToUserHouse(housePropertyRequest, userId);

@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -26,7 +27,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("register")
-    public ResponseEntity<MainResponse<AuthResponse>> register(@Valid AuthRequest authRequest) {
+    public ResponseEntity<MainResponse<AuthResponse>> register(@Valid @RequestBody AuthRequest authRequest) {
 
         return ResponseUtil.data(authService.registerUser(authRequest), HttpStatus.CREATED);
 

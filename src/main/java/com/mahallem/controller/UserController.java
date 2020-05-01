@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
@@ -23,7 +24,7 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("add-user-detail")
-    public ResponseEntity<MainResponse<UserResponse>> addUserDetail(@Valid UserDetailRequest userDetailRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<MainResponse<UserResponse>> addUserDetail(@Valid @RequestBody UserDetailRequest userDetailRequest, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         UserResponse userResponse = userService.setUserDetailInformation(userId, userDetailRequest);
@@ -36,7 +37,6 @@ public class UserController {
     public ResponseEntity<MainResponse<UserResponse>> userInfo(HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-
         return ResponseUtil.data(userService.userInfo(userId));
 
     }

@@ -1,9 +1,13 @@
 
 
-# Mahallem 
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-![alt text](icon.svg)
+<p align="center"> 
+<img src="M.png">
+</p>
+
+
 
 
 ## With Mahallem you can share task in your house. Besides communicate with your neighbors.
@@ -13,6 +17,8 @@
 [![codecov](https://codecov.io/gh/guvense/Mahallem/branch/master/graph/badge.svg)](https://codecov.io/gh/guvense/Mahallem)
 ![GitHub](https://img.shields.io/github/license/guvense/mahallem)
 ![Docker Pulls](https://img.shields.io/docker/pulls/guvense/mahallem_api)
+[![Heroku App Status](http://heroku-shields.herokuapp.com/mahallem)](https://mahallem.herokuapp.com/api/v1/app-info/version)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.

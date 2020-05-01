@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://user:${mongodb_pass}@ds213645.mlab.com:13645/heroku_048b24zs
+
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: localhost:9300
+  redis:
+    host: ec2-34-254-83-127.eu-west-1.compute.amazonaws.com
+    port: 8869
+    password: ${redis_pass}
+
+server:
+  port: ${PORT}

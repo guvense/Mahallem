@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: Mahallem
+    elasticsearch:
+      cluster-name: docker-cluster
+      cluster-nodes: localhost:9300
+  redis:
+    host: localhost
+    port: 6379
+server:
+  port: 8081
