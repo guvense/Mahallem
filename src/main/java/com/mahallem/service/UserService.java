@@ -16,5 +16,5 @@ public interface UserService {
 
     String getHouseId(String userId);
 
-    Integer countAllUsers();
+    Long countAllUsers();
 }

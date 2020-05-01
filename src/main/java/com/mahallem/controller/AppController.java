@@ -32,7 +32,7 @@ public class AppController {
     }
 
     @GetMapping("active-users")
-    public Integer getActiveUser(){
+    public Long getActiveUser(){
         return userService.countAllUsers();
     }
 }

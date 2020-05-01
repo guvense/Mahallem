@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
         return getUser(userId).getHouseResponse().getId();
     }
 
-    public Integer countAllUsers(){
+    public Long countAllUsers(){
         return userRepository.countAllUsers();
     }
 }

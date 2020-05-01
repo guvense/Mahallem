@@ -1,5 +1,6 @@
 package com.mahallem.repository.Impl;
 
+import com.mahallem.constants.Status;
 import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.entity.User;
 import com.mahallem.exception.UserUpdateException;
@@ -39,11 +40,10 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Integer countAllUsers(){
-        List<User> users = mongoTemplate.findAll(User.class);
-        System.out.println(users);
-        System.out.println(users.size());
-        return users.size();
+    public Long countAllUsers(){
+        //List<User> users = mongoTemplate.findAll(User.class);
+       return mongoTemplate.count(Query.query(Criteria.where("status").is(Status.ACTIVE)), User.class);
+
     }
 
     @Override

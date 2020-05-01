@@ -21,6 +21,6 @@ public interface UserRepository {
 
     User save(User user);
 
-    Integer countAllUsers();
+    Long countAllUsers();
 
 }
