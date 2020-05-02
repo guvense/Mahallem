@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,7 +62,18 @@ public class UserServiceImpl implements UserService {
         return getUser(userId).getHouseResponse().getId();
     }
 
-    public Long countAllUsers(){
+
+    public Long countAllUsers() {
         return userRepository.countAllUsers();
     }
+
+    @Override
+    public List<UserResponse> getHomemates(String userId) {
+        User user = userRepository.getUserInfo(userId)
+                .orElseThrow(UserNotFoundException::new);
+        List<User> homemates=userRepository.findByHouseId(userId,user.getHouseId());
+        List<UserResponse> userResponseList = UserMapper.map.userListToUserResponseList(homemates);
+        return userResponseList;
+    }
 }
+

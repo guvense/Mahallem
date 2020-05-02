@@ -7,6 +7,8 @@ import com.mahallem.mapper.customize.ObjectIdMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 
 @Mapper(uses = {ObjectIdMapper.class})
 public interface UserMapper {
@@ -17,4 +19,7 @@ public interface UserMapper {
     UserResponse userToUserResponse(User user);
 
     User userRequestToUser(UserDetailRequest userDetailRequest);
+
+    List<UserResponse> userListToUserResponseList(List<User> list);
+
 }

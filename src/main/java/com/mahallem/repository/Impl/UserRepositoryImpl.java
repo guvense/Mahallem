@@ -77,6 +77,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<User> findByHouseId(String userId,ObjectId houseId) {
+        return mongoTemplate.find(Query.query(Criteria.where("houseId").is(houseId).and("_id").not().is(userId)),User.class);
+    }
+
+
+    @Override
     public Optional<User> getUserInfo(String id) {
         AggregationOperation matchOperation = Aggregation.match(Criteria.where("_id").is(new ObjectId(id)));
 
