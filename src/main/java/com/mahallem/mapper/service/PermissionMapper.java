@@ -2,6 +2,7 @@ package com.mahallem.mapper.service;
 
 
 import com.mahallem.constants.PermissionStatus;
+import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.dto.Response.PermissionResponse;
 import com.mahallem.entity.Permission;

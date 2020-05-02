@@ -5,6 +5,7 @@ import com.mahallem.constants.PermissionType;
 import com.mahallem.dto.Response.PermissionResponse;
 import com.mahallem.entity.Permission;
 import com.mahallem.repository.PermissionRepository;
+import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
@@ -37,5 +39,15 @@ public class PermissionRepositoryImpl implements PermissionRepository {
     @Override
     public List<Permission> getAllPendingPermissions(ObjectId userId, Pageable pageable) {
         return mongoTemplate.find(Query.query(Criteria.where("to_user_id").is(userId).and("status").is(PermissionStatus.PENDING)).with(pageable), Permission.class);
+    }
+
+    @Override
+    public Boolean setPermissionStatusToApprove(Permission permission) {
+        Update update = new Update().set("status", PermissionStatus.APPROVE);
+
+        UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("from_user_id").is(permission.getFromUserId())
+                                                                                  .and("to_user_id").is(permission.getToUserId())
+                                                                                  .and("type").is(permission.getPermissionType())), update, Permission.class);
+        return updateResult.wasAcknowledged();
     }
 }

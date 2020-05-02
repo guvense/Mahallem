@@ -16,4 +16,6 @@ public interface PermissionRepository {
     Permission getPermission(ObjectId fromUserId, ObjectId toUserId, PermissionType permissionType);
 
     List<Permission> getAllPendingPermissions(ObjectId userId, Pageable pageable);
+
+    Boolean setPermissionStatusToApprove(Permission permission);
 }

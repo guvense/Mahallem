@@ -14,11 +14,10 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class PermissionAnswerRequest {
 
     @NotBlank
-    private String fromUserId;
+    protected String fromUserId;
 
     @NotNull
     protected PermissionType permissionType;

@@ -1,12 +1,16 @@
 package com.mahallem.service.Impl;
 
-import com.mahallem.constants.PermissionType;
 import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.dto.Response.PermissionResponse;
+import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
+import com.mahallem.exception.PermissionProgressUpdateException;
 import com.mahallem.exception.PermissionRequestExistException;
+import com.mahallem.mapper.service.PermissionAnswerMapper;
 import com.mahallem.mapper.service.PermissionMapper;
+import com.mahallem.permission.PermissionOperation;
+import com.mahallem.permission.PermissionFactory;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.service.PermissionService;
 import com.mahallem.service.UserService;
@@ -18,7 +22,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -30,6 +33,8 @@ public class PermissionServiceImpl implements PermissionService {
     private final UserService userService;
 
     private final PermissionMapper permissionMapper;
+
+    private final PermissionFactory permissionFactory;
 
     public PermissionResponse createUserToHouseRequest(String userId, PermissionRequest permissionRequest) {
 
@@ -48,8 +53,11 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public PermissionResponse approvePermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest) {
-        return null;
+    public UserResponse approvePermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest) {
+
+        Permission permission = PermissionAnswerMapper.map.permissionAnswerRequestToPermission(permissionAnswerRequest, userId);
+        PermissionOperation permissionOperation = permissionFactory.getPermission(permission);
+        return permissionOperation.approve();
     }
 
     private void checkPermissionExist(String fromUserId, PermissionRequest permissionRequest) {

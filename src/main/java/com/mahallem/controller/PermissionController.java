@@ -4,6 +4,7 @@ import com.mahallem.customize.Annotation.ApiPageable;
 import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.dto.Response.PermissionResponse;
+import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.service.PermissionService;
 import com.mahallem.util.JwtUtil;
 import com.mahallem.util.ResponseUtil;
@@ -43,7 +44,7 @@ public class PermissionController {
     }
 
     @PostMapping("approve")
-    public ResponseEntity<MainResponse<PermissionResponse>> approvePermission(@Valid @RequestBody PermissionAnswerRequest permissionAnswerRequest, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<MainResponse<UserResponse>> approvePermission(@Valid @RequestBody PermissionAnswerRequest permissionAnswerRequest, HttpServletRequest httpServletRequest) {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return ResponseUtil.data(permissionService.approvePermissionRequest(userId,permissionAnswerRequest));
 

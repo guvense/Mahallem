@@ -37,7 +37,7 @@ public class UserResponse implements Serializable {
 
     private String cellPhone;
 
-    private HouseResponse houseResponse;
+    private HouseResponse house;
 
     private Integer age;
 

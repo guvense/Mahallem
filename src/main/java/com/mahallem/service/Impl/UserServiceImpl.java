@@ -2,10 +2,14 @@ package com.mahallem.service.Impl;
 
 import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.dto.Response.UserResponse;
+import com.mahallem.entity.Permission;
 import com.mahallem.entity.User;
+import com.mahallem.exception.PermissionProgressUpdateException;
 import com.mahallem.exception.UserNotFoundException;
 import com.mahallem.mapper.service.UserMapper;
+import com.mahallem.repository.PermissionRepository;
 import com.mahallem.repository.UserRepository;
+import com.mahallem.service.PermissionService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -20,6 +24,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    private final PermissionRepository permissionRepository;
 
     @NotNull
     final MongoTemplate mongoTemplate;
@@ -59,7 +65,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getHouseId(String userId) {
 
-        return getUser(userId).getHouseResponse().getId();
+        return getUser(userId).getHouse().getId();
     }
 
 
@@ -80,6 +86,13 @@ public class UserServiceImpl implements UserService {
     public ObjectId getUserIdFromUsername(String username) {
         User user = userRepository.getUserInfoFromUsername(username).orElseThrow(UserNotFoundException::new);
         return user.getId();
+    }
+
+    @Override
+    public void setApproveUserPermission(Permission permission) {
+        Boolean success = permissionRepository.setPermissionStatusToApprove(permission);
+        if(!success)
+            throw new PermissionProgressUpdateException();
     }
 }
 

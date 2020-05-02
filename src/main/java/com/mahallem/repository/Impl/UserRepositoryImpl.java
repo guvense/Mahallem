@@ -105,7 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         return LookupOperation.newLookup()
                 .from("house")
-                .localField("houseId")
+                .localField("house_id")
                 .foreignField("_id")
                 .as("house");
 
@@ -114,7 +114,7 @@ public class UserRepositoryImpl implements UserRepository {
     private LookupOperation lookUpHouseToAnimal() {
         return LookupOperation.newLookup()
                 .from("animal")
-                .localField("houseId")
+                .localField("house_id")
                 .foreignField("houseId")
                 .as("animals");
     }

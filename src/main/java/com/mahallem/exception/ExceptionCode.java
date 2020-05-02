@@ -26,5 +26,9 @@ public final class ExceptionCode {
 
     static final String PERMISSION_REQUEST_EXIST = "Exception.permissionRequestException";
 
+    static final String PERMISSION_OPERATION_NOT_EXIST = "Exception.permissionOperationNotExistException";
+
+    static final String PERMISSION_PROGRESS_UPDATE_FAILED = "Exception.permissionUpdateFailed";
+
 
 }
