@@ -1,7 +1,9 @@
 package com.mahallem.mapper.customize;
 
 import org.bson.types.ObjectId;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ObjectIdMapper {
 
     public String asString(ObjectId id) {

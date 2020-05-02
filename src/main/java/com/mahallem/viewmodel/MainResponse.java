@@ -18,6 +18,9 @@ public class MainResponse<T> {
         this.errorMessage = new ErrorResponse(errMessage,errorCode);
     }
 
+    private MainResponse(Boolean success) {
+        this.success = success;
+    }
     private MainResponse(T data) {
         this.data = data;
         this.success = true;
@@ -32,6 +35,12 @@ public class MainResponse<T> {
     public static <T> ResponseEntity<MainResponse<T>> response(T data) {
 
         MainResponse<T> response = new MainResponse<>(data);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    public static ResponseEntity<MainResponse> response(Boolean status) {
+
+        MainResponse<Object> response = new MainResponse<>(status);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }

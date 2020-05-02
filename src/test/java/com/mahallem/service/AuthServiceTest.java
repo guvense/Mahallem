@@ -86,30 +86,30 @@ public class AuthServiceTest {
         assertNotNull(authResponse.getToken());
         assertNotNull(authResponse.getFirstName());
         assertNotNull(authResponse.getLastName());
-        assertNotNull(authResponse.getUserName());
+        assertNotNull(authResponse.getUsername());
     }
 
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_UserNameWrong_ExceptionThrown() {
         when(userRepository.findByUserName(any())).thenReturn(Optional.empty());
-        authService.loginUser(user.getUserName(), any());
+        authService.loginUser(user.getUsername(), any());
     }
 
 
     @Test(expected = UserOrPasswordWrongException.class)
     public void loginUser_PasswordWrong_ExceptionThrown() {
         when(bCryptPasswordEncoder.matches(any(), any())).thenReturn(false);
-        authService.loginUser(user.getUserName(), any());
+        authService.loginUser(user.getUsername(), any());
     }
 
 
     @Test
     public void loginUser_LoginUser_LoginIsSuccessfully() {
-        AuthResponse authResponse = authService.loginUser(user.getUserName(), any());
+        AuthResponse authResponse = authService.loginUser(user.getUsername(), any());
         assertNotNull(authResponse.getToken());
         assertNotNull(authResponse.getFirstName());
         assertNotNull(authResponse.getLastName());
-        assertNotNull(authResponse.getUserName());
+        assertNotNull(authResponse.getUsername());
     }
 
 

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,20 +22,25 @@ public class User extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 3504972142712457030L;
 
-    private String userName;
+    private String username;
 
+    @Field("first_name")
     private String firstName;
 
+    @Field("last_name")
     private String lastName;
 
     private Sex sex;
 
     private String email;
 
+    @Field("cell_phone")
+
     private String cellPhone;
 
     private String password;
 
+    @Field("house_id")
     private ObjectId houseId;
 
     private Integer age;

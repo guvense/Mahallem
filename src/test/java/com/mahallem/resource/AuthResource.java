@@ -7,7 +7,7 @@ public class AuthResource {
     public static AuthRequest authRequest = AuthRequest.builder()
             .firstName("test")
             .lastName("test")
-            .userName("test")
+            .username("test")
             .build();
 
 }

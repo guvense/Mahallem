@@ -24,5 +24,7 @@ public final class ExceptionCode {
 
     static final String HOUSE_ID_NULL_ANIMAL = "Exception.houseIDNullAnimal";
 
+    static final String PERMISSION_REQUEST_EXIST = "Exception.permissionRequestException";
+
 
 }

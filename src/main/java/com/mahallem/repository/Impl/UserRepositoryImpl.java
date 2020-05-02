@@ -81,6 +81,11 @@ public class UserRepositoryImpl implements UserRepository {
         return mongoTemplate.find(Query.query(Criteria.where("houseId").is(houseId).and("_id").not().is(userId)),User.class);
     }
 
+    @Override
+    public Optional<User> getUserInfoFromUsername(String username) {
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("username").is(username)), User.class));
+    }
+
 
     @Override
     public Optional<User> getUserInfo(String id) {

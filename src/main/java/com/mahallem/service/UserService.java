@@ -22,4 +22,6 @@ public interface UserService {
 
     List<UserResponse> getHomemates(String userId);
 
+   ObjectId getUserIdFromUsername(String username);
+
 }

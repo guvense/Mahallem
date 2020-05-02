@@ -1,4 +1,4 @@
-package com.mahallem.mapper;
+package com.mahallem.mapper.service;
 
 import com.mahallem.dto.Request.HousePropertyRequest;
 import com.mahallem.dto.Request.HouseRequest;

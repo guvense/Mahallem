@@ -14,7 +14,7 @@ public class UserResource {
             .build();
 
     public static User user = User.builder()
-            .userName("test")
+            .username("test")
             .firstName("test")
             .lastName("test")
             .houseId(new ObjectId("5e1a436310c40031d8a7b6d9"))

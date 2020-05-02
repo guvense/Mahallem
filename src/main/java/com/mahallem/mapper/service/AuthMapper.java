@@ -1,4 +1,4 @@
-package com.mahallem.mapper;
+package com.mahallem.mapper.service;
 
 import com.mahallem.constants.Status;
 import com.mahallem.dto.Request.AuthRequest;
@@ -8,7 +8,6 @@ import com.mahallem.mapper.customize.ObjectIdMapper;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(uses = {ObjectIdMapper.class})

@@ -27,7 +27,7 @@ public class UserResponse implements Serializable {
 
     private String firstName;
 
-    private String userName;
+    private String username;
 
     private String lastName;
 

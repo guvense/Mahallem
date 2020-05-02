@@ -4,7 +4,7 @@ import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.User;
 import com.mahallem.exception.UserNotFoundException;
-import com.mahallem.mapper.UserMapper;
+import com.mahallem.mapper.service.UserMapper;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +74,12 @@ public class UserServiceImpl implements UserService {
         List<User> homemates=userRepository.findByHouseId(userId,user.getHouseId());
         List<UserResponse> userResponseList = UserMapper.map.userListToUserResponseList(homemates);
         return userResponseList;
+    }
+
+    @Override
+    public ObjectId getUserIdFromUsername(String username) {
+        User user = userRepository.getUserInfoFromUsername(username).orElseThrow(UserNotFoundException::new);
+        return user.getId();
     }
 }
 

@@ -68,12 +68,12 @@ public class AnimalServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void saveAnimal_getUserInfo_ExceptionThrown() {
         when(userRepository.getUserInfo(any())).thenReturn(Optional.empty());
-        animalService.saveAnimal(user.getUserName(), animalRequest);
+        animalService.saveAnimal(user.getUsername(), animalRequest);
     }
 
     @Test
     public void saveAnimal_saveAnimalWithAllProperties() {
-        AnimalResponse animalResponse = animalService.saveAnimal(user.getUserName(), animalRequest);
+        AnimalResponse animalResponse = animalService.saveAnimal(user.getUsername(), animalRequest);
         assertNotNull(animalResponse.getAge());
         assertNotNull(animalResponse.getSex());
         assertNotNull(animalResponse.getType());
@@ -82,13 +82,13 @@ public class AnimalServiceTest {
     @Test(expected = UserNotFoundException.class)
     public void getAnimal_getUserInfo_ExceptionThrown() {
         when(userRepository.getUserInfo(any())).thenReturn(Optional.empty());
-        animalService.getAnimals(user.getUserName(), Pageable.unpaged());
+        animalService.getAnimals(user.getUsername(), Pageable.unpaged());
     }
 
 
     @Test
     public void getAnimal_getAnimalWithAllProperties() {
-        Page<AnimalResponse> animalResponse = animalService.getAnimals(user.getUserName(), Pageable.unpaged());
+        Page<AnimalResponse> animalResponse = animalService.getAnimals(user.getUsername(), Pageable.unpaged());
         assertEquals(1, animalResponse.getContent().size());
     }
 

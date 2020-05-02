@@ -26,5 +26,6 @@ public interface UserRepository {
 
     List<User> findByHouseId(String userId,ObjectId houseId);
 
+    Optional<User> getUserInfoFromUsername(String username);
 
 }
