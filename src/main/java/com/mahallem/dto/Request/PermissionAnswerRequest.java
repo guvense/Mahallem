@@ -1,12 +1,11 @@
-package com.mahallem.dto.Response;
+package com.mahallem.dto.Request;
 
-import com.mahallem.constants.PermissionStatus;
 import com.mahallem.constants.PermissionType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.ObjectId;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,13 +14,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PermissionResponse {
+@Builder
+public class PermissionAnswerRequest {
 
+    @NotBlank
+    private String fromUserId;
+
+    @NotNull
     protected PermissionType permissionType;
 
-    protected String toUserId;
-
-    protected String fromUserId;
-
-    protected PermissionStatus permissionStatus;
 }

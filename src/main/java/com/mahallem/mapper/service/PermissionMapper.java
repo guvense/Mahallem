@@ -18,6 +18,8 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE,
         uses = {ObjectIdMapper.class, UserService.class},
         componentModel = "spring")
@@ -43,4 +45,6 @@ public abstract class PermissionMapper {
     }
 
     public abstract PermissionResponse permissionToPermissionResponse(Permission permission);
+
+    public abstract List<PermissionResponse> permissionToPermissionResponse(List<Permission> permission);
 }

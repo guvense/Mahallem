@@ -27,6 +27,6 @@ public class Permission extends BaseEntity{
     @Field("type")
     private PermissionType permissionType;
 
-    @Field("stats")
+    @Field("status")
     private PermissionStatus permissionStatus;
 }

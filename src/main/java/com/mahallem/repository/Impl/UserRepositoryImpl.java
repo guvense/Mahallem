@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findByUserName(String username) {
-        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("userName").is(username)), User.class));
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("username").is(username)), User.class));
 
     }
 

@@ -1,6 +1,7 @@
 package com.mahallem.service.Impl;
 
 import com.mahallem.constants.PermissionType;
+import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.dto.Response.PermissionResponse;
 import com.mahallem.entity.Permission;
@@ -11,8 +12,12 @@ import com.mahallem.service.PermissionService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -32,6 +37,19 @@ public class PermissionServiceImpl implements PermissionService {
         Permission permissionMapped = permissionMapper.permissionRequestToPermission(permissionRequest, userId);
         Permission permission = permissionRepository.save(permissionMapped);
         return permissionMapper.permissionToPermissionResponse(permission);
+    }
+
+    @Override
+    public Page<PermissionResponse> getAllPendingPermissionRequest(String userId, Pageable pageable) {
+
+        List<Permission> allPendingPermissions = permissionRepository.getAllPendingPermissions(new ObjectId(userId), pageable);
+        List<PermissionResponse> permissionResponses = permissionMapper.permissionToPermissionResponse(allPendingPermissions);
+        return new PageImpl<>(permissionResponses);
+    }
+
+    @Override
+    public PermissionResponse approvePermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest) {
+        return null;
     }
 
     private void checkPermissionExist(String fromUserId, PermissionRequest permissionRequest) {
