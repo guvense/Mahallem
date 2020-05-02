@@ -24,7 +24,7 @@ public interface UserRepository {
 
     Long countAllUsers();
 
-    List<User> findByHouseId(String userId,ObjectId houseId);
+    List<User> findHomematesByHouseId(String hostUserId, ObjectId houseId);
 
     Optional<User> getUserInfoFromUsername(String username);
 

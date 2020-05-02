@@ -1,11 +1,14 @@
 package com.mahallem.entity;
 
 import com.mahallem.constants.ProgressStatus;
+import com.mahallem.constants.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Task extends BaseEntity {
-    private String ownerId;
+    @Field("owner_id")
+    private ObjectId ownerId;
 
     private String title;
 
@@ -24,9 +28,10 @@ public class Task extends BaseEntity {
 
     private Date deadline;
 
-    private boolean isActive = true;
+    private Status status=Status.ACTIVE;
 
-    private ProgressStatus Status = ProgressStatus.OPEN;
+    @Field("progress_status")
+    private ProgressStatus progressStatus = ProgressStatus.OPEN;
 
     private List<Comment> comments;
 

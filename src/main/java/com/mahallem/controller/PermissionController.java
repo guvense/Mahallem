@@ -35,18 +35,19 @@ public class PermissionController {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return ResponseUtil.data(permissionService.createUserToHouseRequest(userId, permissionRequest));
     }
+
     @ApiPageable
     @GetMapping
     public ResponseEntity<Page<PermissionResponse>> getAllPendingPermissionRequests(Pageable pageable, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return ResponseUtil.data(permissionService.getAllPendingPermissionRequest(userId,pageable));
+        return ResponseUtil.data(permissionService.getAllPendingPermissionRequest(userId, pageable));
     }
 
     @PostMapping("approve")
     public ResponseEntity<MainResponse<UserResponse>> approvePermission(@Valid @RequestBody PermissionAnswerRequest permissionAnswerRequest, HttpServletRequest httpServletRequest) {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return ResponseUtil.data(permissionService.approvePermissionRequest(userId,permissionAnswerRequest));
+        return ResponseUtil.data(permissionService.approvePermissionRequest(userId, permissionAnswerRequest));
 
     }
 

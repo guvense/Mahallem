@@ -9,7 +9,6 @@ import com.mahallem.exception.UserNotFoundException;
 import com.mahallem.mapper.service.UserMapper;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.repository.UserRepository;
-import com.mahallem.service.PermissionService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -35,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
         userRepository.updateUserDetailInfo(userId, userDetailRequest);
         User user = userRepository.findById(new ObjectId(userId))
-                                  .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(UserNotFoundException::new);
         return UserMapper.map.userToUserResponse(user);
 
     }
@@ -44,14 +43,14 @@ public class UserServiceImpl implements UserService {
     public UserResponse userInfo(String userId) {
 
         User user = userRepository.getUserInfo(userId)
-                                  .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(UserNotFoundException::new);
         return UserMapper.map.userToUserResponse(user);
     }
 
     @Override
     public UserResponse getUser(String userId) {
         User user = userRepository.getUserInfo(userId)
-                                  .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(UserNotFoundException::new);
 
         return UserMapper.map.userToUserResponse(user);
     }
@@ -77,9 +76,8 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> getHomemates(String userId) {
         User user = userRepository.getUserInfo(userId)
                 .orElseThrow(UserNotFoundException::new);
-        List<User> homemates=userRepository.findByHouseId(userId,user.getHouseId());
-        List<UserResponse> userResponseList = UserMapper.map.userListToUserResponseList(homemates);
-        return userResponseList;
+        List<User> homemates = userRepository.findHomematesByHouseId(userId, user.getHouseId());
+        return UserMapper.map.userListToUserResponseList(homemates);
     }
 
     @Override
@@ -91,7 +89,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setApproveUserPermission(Permission permission) {
         Boolean success = permissionRepository.setPermissionStatusToApprove(permission);
-        if(!success)
+        if (!success)
             throw new PermissionProgressUpdateException();
     }
 }

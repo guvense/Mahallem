@@ -2,6 +2,6 @@ package com.mahallem.constants;
 
 public enum ProgressStatus {
     OPEN,
-    DOING,
+    IN_PROGRESS,
     DONE
 }

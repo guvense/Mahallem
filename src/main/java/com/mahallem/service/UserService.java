@@ -23,8 +23,8 @@ public interface UserService {
 
     List<UserResponse> getHomemates(String userId);
 
-   ObjectId getUserIdFromUsername(String username);
+    ObjectId getUserIdFromUsername(String username);
 
-   void setApproveUserPermission(Permission permission);
+    void setApproveUserPermission(Permission permission);
 
 }

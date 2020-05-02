@@ -43,9 +43,9 @@ public class UserController {
 
     }
 
-    @GetMapping("homemates")
-    public ResponseEntity<MainResponse<List<UserResponse>>> homemates(HttpServletRequest httpServletRequest){
-        String userId=JwtUtil.getObjectIdFromRequest(httpServletRequest);
+    @GetMapping("homemate")
+    public ResponseEntity<MainResponse<List<UserResponse>>> homemates(HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return ResponseUtil.data(userService.getHomemates(userId));
     }
 

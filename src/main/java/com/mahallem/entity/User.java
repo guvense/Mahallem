@@ -35,7 +35,6 @@ public class User extends BaseEntity implements Serializable {
     private String email;
 
     @Field("cell_phone")
-
     private String cellPhone;
 
     private String password;

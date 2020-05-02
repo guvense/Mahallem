@@ -77,8 +77,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findByHouseId(String userId,ObjectId houseId) {
-        return mongoTemplate.find(Query.query(Criteria.where("houseId").is(houseId).and("_id").not().is(userId)),User.class);
+    public List<User> findHomematesByHouseId(String hostUserId, ObjectId houseId) {
+        return mongoTemplate.find(Query.query(Criteria.where("house_id").is(houseId).and("_id").not().is(hostUserId)), User.class);
     }
 
     @Override
