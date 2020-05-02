@@ -4,6 +4,7 @@ package com.mahallem.config;
 import com.mahallem.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -21,6 +22,7 @@ import javax.servlet.Filter;
 
 @Configuration
 @RequiredArgsConstructor
+@Order(1)
 public class JWTFilter implements Filter {
 
     private final JwtUtil jwtUtil;
@@ -41,18 +43,9 @@ public class JWTFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
 
-
-        boolean isOptionsRequest = HTTP_OPTIONS_METHOD.equals(httpServletRequest.getMethod());
-
-        if (isOptionsRequest) {
-            httpServletResponse.sendError(HttpServletResponse.SC_OK, "SUCCESS");
-        }
-
-
         if (allowRequestWithoutToken(httpServletRequest)) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            String requestURI = httpServletRequest.getRequestURI();
             String token = httpServletRequest.getHeader("Authorization");
             if (token != null) {
                 token = token.replace("Bearer ", "");
