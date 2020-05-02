@@ -15,4 +15,6 @@ public interface UserService {
     void addHouseIdToUser(String userId, ObjectId houseId);
 
     String getHouseId(String userId);
+
+    Long countAllUsers();
 }

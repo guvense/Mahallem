@@ -1,6 +1,7 @@
 package com.mahallem.entity;
 
 import com.mahallem.constants.Sex;
+import com.mahallem.constants.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,4 +42,6 @@ public class User extends BaseEntity implements Serializable {
     private House house;
 
     private List<Animal> animals;
+
+    private Status status;
 }

@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String getHouseId(String userId) {
+
         return getUser(userId).getHouseResponse().getId();
+    }
+
+    public Long countAllUsers(){
+        return userRepository.countAllUsers();
     }
 }

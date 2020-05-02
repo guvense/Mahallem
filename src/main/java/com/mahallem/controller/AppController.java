@@ -3,6 +3,7 @@ package com.mahallem.controller;
 import com.mahallem.config.AppConfig;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.service.AuthService;
+import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,17 @@ public class AppController {
 
     @NotNull
     private final AppConfig appConfig;
+    private final UserService userService;
 
     @GetMapping("version")
     public ResponseEntity<String> version() {
 
         return new ResponseEntity<>(appConfig.getVersion(), HttpStatus.OK);
 
+    }
+
+    @GetMapping("active-users")
+    public Long getActiveUser(){
+        return userService.countAllUsers();
     }
 }

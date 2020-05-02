@@ -1,5 +1,6 @@
 package com.mahallem.repository.Impl;
 
+import com.mahallem.constants.Status;
 import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.entity.User;
 import com.mahallem.exception.UserUpdateException;
@@ -17,6 +18,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -34,6 +36,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<User> findById(ObjectId id) {
         return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("_id").is(id)), User.class));
+
+    }
+
+    @Override
+    public Long countAllUsers(){
+        //List<User> users = mongoTemplate.findAll(User.class);
+       return mongoTemplate.count(Query.query(Criteria.where("status").is(Status.ACTIVE)), User.class);
 
     }
 
