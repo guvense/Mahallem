@@ -48,7 +48,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Optional<User> findByUserName(String username) {
-        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("userName").is(username)), User.class));
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("username").is(username)), User.class));
 
     }
 
@@ -77,6 +77,17 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public List<User> findHomematesByHouseId(String hostUserId, ObjectId houseId) {
+        return mongoTemplate.find(Query.query(Criteria.where("house_id").is(houseId).and("_id").not().is(hostUserId)), User.class);
+    }
+
+    @Override
+    public Optional<User> getUserInfoFromUsername(String username) {
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("username").is(username)), User.class));
+    }
+
+
+    @Override
     public Optional<User> getUserInfo(String id) {
         AggregationOperation matchOperation = Aggregation.match(Criteria.where("_id").is(new ObjectId(id)));
 
@@ -94,7 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         return LookupOperation.newLookup()
                 .from("house")
-                .localField("houseId")
+                .localField("house_id")
                 .foreignField("_id")
                 .as("house");
 
@@ -103,7 +114,7 @@ public class UserRepositoryImpl implements UserRepository {
     private LookupOperation lookUpHouseToAnimal() {
         return LookupOperation.newLookup()
                 .from("animal")
-                .localField("houseId")
+                .localField("house_id")
                 .foreignField("houseId")
                 .as("animals");
     }

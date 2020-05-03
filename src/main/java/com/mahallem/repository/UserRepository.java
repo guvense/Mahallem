@@ -4,6 +4,7 @@ import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.entity.User;
 import org.bson.types.ObjectId;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -22,5 +23,9 @@ public interface UserRepository {
     User save(User user);
 
     Long countAllUsers();
+
+    List<User> findHomematesByHouseId(String hostUserId, ObjectId houseId);
+
+    Optional<User> getUserInfoFromUsername(String username);
 
 }

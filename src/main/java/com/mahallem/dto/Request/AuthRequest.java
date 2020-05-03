@@ -19,7 +19,7 @@ public class AuthRequest {
 
 
     @NotBlank(message = "{username.not.blank}")
-    private String userName;
+    private String username;
 
     @NotBlank(message = "{first.name.not.blank}")
     private String firstName;

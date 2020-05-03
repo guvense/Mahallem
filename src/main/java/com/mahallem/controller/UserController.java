@@ -1,19 +1,22 @@
 package com.mahallem.controller;
 
 import com.mahallem.dto.Request.UserDetailRequest;
-import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.service.UserService;
 import com.mahallem.util.JwtUtil;
 import com.mahallem.util.ResponseUtil;
 import com.mahallem.viewmodel.MainResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -38,6 +41,12 @@ public class UserController {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return ResponseUtil.data(userService.userInfo(userId));
 
+    }
+
+    @GetMapping("homemate")
+    public ResponseEntity<MainResponse<List<UserResponse>>> homemates(HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(userService.getHomemates(userId));
     }
 
 }

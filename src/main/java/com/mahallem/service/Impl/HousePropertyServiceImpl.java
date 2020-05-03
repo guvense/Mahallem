@@ -2,10 +2,9 @@ package com.mahallem.service.Impl;
 
 import com.mahallem.dto.Request.HousePropertyRequest;
 import com.mahallem.dto.Response.HouseResponse;
-import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.HouseProperty;
 import com.mahallem.exception.HousePropertyExistException;
-import com.mahallem.mapper.HouseMapper;
+import com.mahallem.mapper.service.HouseMapper;
 import com.mahallem.repository.PropertyRepository;
 import com.mahallem.service.HousePropertyService;
 import com.mahallem.service.HouseService;

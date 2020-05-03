@@ -4,7 +4,7 @@ import com.mahallem.dto.Request.HouseRequest;
 import com.mahallem.dto.Response.HouseResponse;
 import com.mahallem.entity.House;
 import com.mahallem.exception.HouseNotFoundException;
-import com.mahallem.mapper.HouseMapper;
+import com.mahallem.mapper.service.HouseMapper;
 import com.mahallem.repository.HouseRepository;
 import com.mahallem.service.HouseService;
 import com.mahallem.service.UserService;

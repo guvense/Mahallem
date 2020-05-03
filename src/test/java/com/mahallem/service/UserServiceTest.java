@@ -58,7 +58,7 @@ public class UserServiceTest {
     @Test
     public void setUserDetailInformation_withAllProperties() {
         UserResponse userResponse = userService.setUserDetailInformation(userId, userDetailRequest);
-        assertNotNull(userResponse.getUserName());
+        assertNotNull(userResponse.getUsername());
         assertNotNull(userResponse.getFirstName());
         assertNotNull(userResponse.getLastName());
     }
@@ -72,8 +72,8 @@ public class UserServiceTest {
     @Test
     public void userInfo_getUserWithProperties() {
         UserResponse userResponse = userService.userInfo(userId);
-        assertNotNull(userResponse.getUserName());
-        assertEquals(user.getUserName(), userResponse.getUserName());
+        assertNotNull(userResponse.getUsername());
+        assertEquals(user.getUsername(), userResponse.getUsername());
         assertNotNull(userResponse.getFirstName());
         assertEquals(user.getFirstName(), userResponse.getFirstName());
         assertNotNull(userResponse.getLastName());
@@ -90,8 +90,8 @@ public class UserServiceTest {
     @Test
     public void getUser_getUserWithProperties() {
         UserResponse userResponse = userService.getUser(userId);
-        assertNotNull(userResponse.getUserName());
-        assertEquals(user.getUserName(), userResponse.getUserName());
+        assertNotNull(userResponse.getUsername());
+        assertEquals(user.getUsername(), userResponse.getUsername());
         assertNotNull(userResponse.getFirstName());
         assertEquals(user.getFirstName(), userResponse.getFirstName());
         assertNotNull(userResponse.getLastName());

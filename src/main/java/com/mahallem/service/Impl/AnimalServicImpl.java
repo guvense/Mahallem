@@ -6,7 +6,7 @@ import com.mahallem.entity.Animal;
 import com.mahallem.entity.User;
 import com.mahallem.exception.AnimalHouseIdNullException;
 import com.mahallem.exception.UserNotFoundException;
-import com.mahallem.mapper.AnimalMapper;
+import com.mahallem.mapper.service.AnimalMapper;
 import com.mahallem.repository.AnimalRepository;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AnimalService;

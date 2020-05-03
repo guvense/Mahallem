@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class MessageRepositoryImpl implements MessageRepository {
 
     @NotNull
-    final MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
 
     @Override
     public Message save(Message message) {

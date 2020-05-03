@@ -27,7 +27,7 @@ public class UserResponse implements Serializable {
 
     private String firstName;
 
-    private String userName;
+    private String username;
 
     private String lastName;
 
@@ -37,7 +37,7 @@ public class UserResponse implements Serializable {
 
     private String cellPhone;
 
-    private HouseResponse houseResponse;
+    private HouseResponse house;
 
     private Integer age;
 
