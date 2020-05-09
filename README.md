@@ -37,7 +37,7 @@ git clone https://github.com/guvense/Mahallem-Backend.git
 A docker-compose file was prepared in order to setup 3th party applications. Redis, Mongodb and Elasticsearch.
 In root directory,
 ```
-docker-compose up -d
+docker-compose -f docker-compose.env.yml up -d
 ```
 http://localhost:8081/api/v1/swagger-ui.html#/
 
