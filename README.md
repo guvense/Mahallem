@@ -25,7 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You need to install Java SDK 11 , Node.js and NPM, Maven, MongoDb, Redis
+You need to install Java SDK 11 , Node.js and NPM, Maven, MongoDb, Redis, ElasticSearch
 
 
 ### Getting the project
