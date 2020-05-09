@@ -17,4 +17,6 @@ public interface PermissionService {
 
     UserResponse approvePermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest);
 
+    UserResponse rejectPermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest);
+
 }

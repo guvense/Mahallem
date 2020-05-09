@@ -51,4 +51,11 @@ public class PermissionController {
 
     }
 
+    @PostMapping("reject")
+    public ResponseEntity<MainResponse<UserResponse>> rejectPermission(@Valid @RequestBody PermissionAnswerRequest permissionAnswerRequest, HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(permissionService.rejectPermissionRequest(userId, permissionAnswerRequest));
+
+    }
+
 }

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 
 @RequiredArgsConstructor
+@SuppressWarnings("unchecked")
 public class HouseInclusionPermissionOperation extends PermissionOperation {
 
     private final UserService userService;
@@ -15,7 +16,6 @@ public class HouseInclusionPermissionOperation extends PermissionOperation {
     private final Permission permission;
 
     @Override
-    @SuppressWarnings("unchecked")
     public <T> T approve() {
         UserResponse user = userService.userInfo(permission.getFromUserId().toString());
         String houseId = user.getHouse().getId();
@@ -24,6 +24,11 @@ public class HouseInclusionPermissionOperation extends PermissionOperation {
         return (T)userService.getUser(permission.getToUserId().toString());
     }
 
+    @Override
+    public <T> T reject() {
+        userService.setRejectUserPermission(permission);
+        return (T)userService.getUser(permission.getToUserId().toString());
+    }
 
 
 }

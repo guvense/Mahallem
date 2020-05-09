@@ -60,6 +60,13 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionOperation.approve();
     }
 
+    @Override
+    public UserResponse rejectPermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest) {
+        Permission permission = PermissionAnswerMapper.map.permissionAnswerRequestToPermission(permissionAnswerRequest, userId);
+        PermissionOperation permissionOperation = permissionFactory.getPermission(permission);
+        return permissionOperation.reject();
+    }
+
     private void checkPermissionExist(String fromUserId, PermissionRequest permissionRequest) {
 
         ObjectId toUserId = userService.getUserIdFromUsername(permissionRequest.getToUserName());

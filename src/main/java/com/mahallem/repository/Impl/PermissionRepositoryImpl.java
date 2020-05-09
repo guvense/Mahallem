@@ -42,8 +42,8 @@ public class PermissionRepositoryImpl implements PermissionRepository {
     }
 
     @Override
-    public Boolean setPermissionStatusToApprove(Permission permission) {
-        Update update = new Update().set("status", PermissionStatus.APPROVE);
+    public Boolean setPermissionStatus(Permission permission, PermissionStatus permissionStatus) {
+        Update update = new Update().set("status", permissionStatus);
 
         UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("from_user_id").is(permission.getFromUserId())
                                                                                   .and("to_user_id").is(permission.getToUserId())

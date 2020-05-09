@@ -1,5 +1,6 @@
 package com.mahallem.repository;
 
+import com.mahallem.constants.PermissionStatus;
 import com.mahallem.constants.PermissionType;
 import com.mahallem.dto.Response.PermissionResponse;
 import com.mahallem.entity.Permission;
@@ -17,5 +18,5 @@ public interface PermissionRepository {
 
     List<Permission> getAllPendingPermissions(ObjectId userId, Pageable pageable);
 
-    Boolean setPermissionStatusToApprove(Permission permission);
+    Boolean setPermissionStatus(Permission permission, PermissionStatus permissionStatus);
 }

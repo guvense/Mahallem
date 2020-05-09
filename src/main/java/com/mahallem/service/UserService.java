@@ -27,4 +27,6 @@ public interface UserService {
 
     void setApproveUserPermission(Permission permission);
 
+    void setRejectUserPermission(Permission permission);
+
 }
