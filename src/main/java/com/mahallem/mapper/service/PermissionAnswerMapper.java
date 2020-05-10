@@ -2,8 +2,6 @@ package com.mahallem.mapper.service;
 
 import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.entity.Permission;
-import com.mahallem.mapper.customize.ObjectIdMapper;
-import com.mahallem.service.UserService;
 import org.bson.types.ObjectId;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Context;
@@ -20,18 +18,26 @@ public interface PermissionAnswerMapper {
     PermissionAnswerMapper map = Mappers.getMapper(PermissionAnswerMapper.class);
 
     @Mappings({
-        @Mapping(source = "permissionAnswerRequest",target = "fromUserId",qualifiedByName = "fromUserId" ),
+            @Mapping(source = "permissionAnswerRequest", target = "fromUserId", qualifiedByName = "fromUserId"),
+            @Mapping(source = "permissionAnswerRequest", target = "taskId", qualifiedByName = "toTaskId"),
     })
     Permission permissionAnswerRequestToPermission(PermissionAnswerRequest permissionAnswerRequest, @Context String toUserId);
 
     @AfterMapping
-    default void setToUserId(@MappingTarget Permission.PermissionBuilder permission, @Context String toUserId ) {
+    default void setToUserId(@MappingTarget Permission.PermissionBuilder permission, @Context String toUserId) {
         permission.toUserId(new ObjectId(toUserId));
     }
 
     @Named("fromUserId")
-    default ObjectId toObjectId(PermissionAnswerRequest permissionAnswerRequest) {
+    default ObjectId toFromUserObjectId(PermissionAnswerRequest permissionAnswerRequest) {
 
-       return new ObjectId(permissionAnswerRequest.getFromUserId());
+        return new ObjectId(permissionAnswerRequest.getFromUserId());
+    }
+
+    @Named("toTaskId")
+    default ObjectId toTaskObjectId(PermissionAnswerRequest permissionAnswerRequest) {
+        if (null == permissionAnswerRequest.getTaskId())
+            return null;
+        return new ObjectId(permissionAnswerRequest.getTaskId());
     }
 }

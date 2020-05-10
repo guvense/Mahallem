@@ -6,10 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.ObjectId;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -24,4 +20,6 @@ public class PermissionResponse {
     protected String fromUserId;
 
     protected PermissionStatus permissionStatus;
+
+    protected String taskId;
 }

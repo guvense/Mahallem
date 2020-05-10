@@ -1,27 +1,25 @@
 package com.mahallem.permission;
 
-import com.mahallem.dto.Response.UserResponse;
+import com.mahallem.constants.ProgressStatus;
 import com.mahallem.entity.Permission;
+import com.mahallem.service.TaskService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
-public class HouseInclusionPermissionOperation extends PermissionOperation {
-
+public class TaskAssignPermissionOperation extends PermissionOperation {
     private final UserService userService;
-
+    private final TaskService taskService;
     private final Permission permission;
 
+    @Transactional
     @Override
     @SuppressWarnings("unchecked")
     public <T> T approve() {
-        UserResponse user = userService.userInfo(permission.getFromUserId().toString());
-        String houseId = user.getHouse().getId();
         userService.setApproveUserPermission(permission);
-        userService.addHouseIdToUser(permission.getToUserId().toString(), new ObjectId(houseId));
+        taskService.updateTaskProgressStatus(permission.getTaskId().toString(), ProgressStatus.OPEN);
+        taskService.setTaskOwner(permission.getToUserId(), permission.getTaskId());
         return (T) userService.getUser(permission.getToUserId().toString());
     }
-
-
 }
