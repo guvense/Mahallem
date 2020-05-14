@@ -30,15 +30,16 @@ public class PermissionRepositoryImpl implements PermissionRepository {
     }
 
     @Override
-    public Permission getPermission(ObjectId fromUserId, ObjectId toUserId, PermissionType permissionType) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("from_user_id").is(fromUserId)
-                .and("to_user_id").is(toUserId).and("type").is(permissionType)), Permission.class);
-    }
+    public Permission getPermission(ObjectId fromUserId, ObjectId toUserId, Permission permission) {
 
-    @Override
-    public Permission getPermission(ObjectId fromUserId, ObjectId toUserId, PermissionType permissionType, ObjectId taskId) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("from_user_id").is(fromUserId)
-                .and("to_user_id").is(toUserId).and("type").is(permissionType).and("taskId").is(taskId)), Permission.class);
+        Criteria criteria = Criteria.where("from_user_id").is(fromUserId)
+                                    .and("to_user_id").is(toUserId).and("type").is(permission.getPermissionType());
+
+        if(PermissionType.ASSIGN_TASK == permission.getPermissionType()) {
+            criteria.and("taskId").is(permission.getTaskId());
+        }
+
+        return mongoTemplate.findOne(Query.query(criteria), Permission.class);
     }
 
     @Override
@@ -50,12 +51,12 @@ public class PermissionRepositoryImpl implements PermissionRepository {
     public Boolean setPermissionStatus(Permission permission, PermissionStatus permissionStatus) {
         Update update = new Update().set("status", permissionStatus);
 
-        CriteriaDefinition criteria = Criteria.where("fromUserId").is(permission.getFromUserId())
+        Criteria criteria = Criteria.where("fromUserId").is(permission.getFromUserId())
                 .and("toUserId").is(permission.getToUserId())
                 .and("type").is(permission.getPermissionType());
 
         if (null != permission.getTaskId()) {
-            ((Criteria) criteria).and("taskId").is(permission.getTaskId());
+             criteria.and("taskId").is(permission.getTaskId());
 
         }
         UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(criteria), update, Permission.class);

@@ -11,14 +11,12 @@ import org.springframework.data.domain.Pageable;
 
 public interface PermissionService {
 
-    PermissionResponse createUserToHouseRequest(String userId, PermissionRequest permissionRequest);
-
     Page<PermissionResponse> getAllPendingPermissionRequest(String userId, Pageable pageable);
 
     UserResponse approvePermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest);
 
     UserResponse rejectPermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest);
 
-    PermissionResponse assignTaskToUser(String userId, PermissionRequest permissionRequest);
+    PermissionResponse createPermission(String userId, PermissionRequest permissionRequest);
 
 }
