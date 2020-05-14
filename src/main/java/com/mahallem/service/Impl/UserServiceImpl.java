@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> getHomemates(String userId) {
         User user = userRepository.getUserInfo(userId)
                 .orElseThrow(UserNotFoundException::new);
-        List<User> homemates = userRepository.findHomematesByHouseId(userId, user.getHouseId());
+        List<User> homemates = userRepository.findHomematesByHouseId(new ObjectId(userId), user.getHouseId());
         return UserMapper.map.userListToUserResponseList(homemates);
     }
 

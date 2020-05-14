@@ -2,7 +2,6 @@ package com.mahallem.permission;
 
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
-import com.mahallem.service.PermissionService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -20,8 +19,8 @@ public class HouseInclusionPermissionOperation extends PermissionOperation {
         UserResponse user = userService.userInfo(permission.getFromUserId().toString());
         String houseId = user.getHouse().getId();
         userService.setApproveUserPermission(permission);
-        userService.addHouseIdToUser(permission.getToUserId().toString(),new ObjectId(houseId));
-        return (T)userService.getUser(permission.getToUserId().toString());
+        userService.addHouseIdToUser(permission.getToUserId().toString(), new ObjectId(houseId));
+        return (T) userService.getUser(permission.getToUserId().toString());
     }
 
     @Override
@@ -29,6 +28,5 @@ public class HouseInclusionPermissionOperation extends PermissionOperation {
         userService.setRejectUserPermission(permission);
         return (T)userService.getUser(permission.getToUserId().toString());
     }
-
 
 }

@@ -58,4 +58,10 @@ public class PermissionController {
 
     }
 
+    @PostMapping("task-to-user")
+    public ResponseEntity<MainResponse<Object>> assignTaskToUser(@Valid @RequestBody PermissionRequest permissionRequest, HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(permissionService.assignTaskToUser(userId, permissionRequest));
+    }
+
 }

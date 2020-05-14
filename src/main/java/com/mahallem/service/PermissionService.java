@@ -19,4 +19,6 @@ public interface PermissionService {
 
     UserResponse rejectPermissionRequest(String userId, PermissionAnswerRequest permissionAnswerRequest);
 
+    PermissionResponse assignTaskToUser(String userId, PermissionRequest permissionRequest);
+
 }
