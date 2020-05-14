@@ -1,6 +1,8 @@
 package com.mahallem.repository;
 
+import com.mahallem.constants.PermissionStatus;
 import com.mahallem.constants.PermissionType;
+import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.entity.Permission;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Pageable;
@@ -11,11 +13,9 @@ public interface PermissionRepository {
 
     Permission save(Permission permission);
 
-    Permission getPermission(ObjectId fromUserId, ObjectId toUserId, PermissionType permissionType);
-
-    Permission getPermission(ObjectId fromUserId, ObjectId toUserId, PermissionType permissionType,ObjectId taskId);
+    Permission getPermission(ObjectId fromUserId, ObjectId toUserId, Permission permission);
 
     List<Permission> getAllPendingPermissions(ObjectId userId, Pageable pageable);
 
-    Boolean setPermissionStatusToApprove(Permission permission);
+    Boolean setPermissionStatus(Permission permission, PermissionStatus permissionStatus);
 }

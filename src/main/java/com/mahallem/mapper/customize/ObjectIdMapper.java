@@ -8,7 +8,7 @@ public class ObjectIdMapper {
 
     public String asString(ObjectId id) {
 
-        return id == null ? "" : id.toString();
+        return id == null ? null : id.toString();
 
     }
 

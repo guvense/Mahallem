@@ -29,13 +29,6 @@ public class PermissionController {
 
     private final PermissionService permissionService;
 
-    @PostMapping("user-to-house")
-    public ResponseEntity<MainResponse<Object>> addUserToHouseRequestCreate(@Valid @RequestBody PermissionRequest permissionRequest, HttpServletRequest httpServletRequest) {
-
-        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return ResponseUtil.data(permissionService.createUserToHouseRequest(userId, permissionRequest));
-    }
-
     @ApiPageable
     @GetMapping
     public ResponseEntity<Page<PermissionResponse>> getAllPendingPermissionRequests(Pageable pageable, HttpServletRequest httpServletRequest) {
@@ -51,10 +44,17 @@ public class PermissionController {
 
     }
 
-    @PostMapping("task-to-user")
-    public ResponseEntity<MainResponse<Object>> assignTaskToUser(@Valid @RequestBody PermissionRequest permissionRequest, HttpServletRequest httpServletRequest) {
+    @PostMapping("reject")
+    public ResponseEntity<MainResponse<UserResponse>> rejectPermission(@Valid @RequestBody PermissionAnswerRequest permissionAnswerRequest, HttpServletRequest httpServletRequest) {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return ResponseUtil.data(permissionService.assignTaskToUser(userId, permissionRequest));
+        return ResponseUtil.data(permissionService.rejectPermissionRequest(userId, permissionAnswerRequest));
+
+    }
+
+    @PostMapping
+    public ResponseEntity<MainResponse<Object>> createPermission(@Valid @RequestBody PermissionRequest permissionRequest, HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(permissionService.createPermission(userId, permissionRequest));
     }
 
 }

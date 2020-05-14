@@ -48,6 +48,9 @@ public abstract class PermissionMapper {
     @Named("toTaskId")
     ObjectId toObjectId(PermissionRequest permissionRequest) {
 
+        if (null == permissionRequest.getTaskId()) {
+            return null;
+        }
         return new ObjectId(permissionRequest.getTaskId());
     }
 

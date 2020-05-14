@@ -62,7 +62,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void updateTaskProgressStatus(String taskId, ProgressStatus progressStatus) {
-        Task task = taskRepository.getTaskById(new ObjectId(taskId)).orElseThrow(TaskNotFoundException::new);
+        taskRepository.getTaskById(new ObjectId(taskId)).orElseThrow(TaskNotFoundException::new);
         taskRepository.updateProgressStatus(new ObjectId(taskId), progressStatus);
     }
 

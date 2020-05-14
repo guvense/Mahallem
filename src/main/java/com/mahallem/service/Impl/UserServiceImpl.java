@@ -1,5 +1,6 @@
 package com.mahallem.service.Impl;
 
+import com.mahallem.constants.PermissionStatus;
 import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
@@ -88,7 +89,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void setApproveUserPermission(Permission permission) {
-        Boolean success = permissionRepository.setPermissionStatusToApprove(permission);
+        Boolean success = permissionRepository.setPermissionStatus(permission, PermissionStatus.APPROVE);
+        if (!success)
+            throw new PermissionProgressUpdateException();
+    }
+
+    @Override
+    public void setRejectUserPermission(Permission permission) {
+        Boolean success = permissionRepository.setPermissionStatus(permission, PermissionStatus.REJECT);
         if (!success)
             throw new PermissionProgressUpdateException();
     }
