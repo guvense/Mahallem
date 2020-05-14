@@ -1,8 +1,8 @@
 package com.mahallem.entity;
 
 
-import com.mahallem.constants.PermissionType;
 import com.mahallem.constants.PermissionStatus;
+import com.mahallem.constants.PermissionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Permission extends BaseEntity{
+public class Permission extends BaseEntity {
 
     @Field("from_user_id")
     private ObjectId fromUserId;
@@ -29,4 +29,7 @@ public class Permission extends BaseEntity{
 
     @Field("status")
     private PermissionStatus permissionStatus;
+
+    @Field("task_id")
+    private ObjectId taskId;
 }

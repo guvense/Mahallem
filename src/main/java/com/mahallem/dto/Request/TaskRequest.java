@@ -1,7 +1,5 @@
 package com.mahallem.dto.Request;
 
-import com.mahallem.constants.AnimalSex;
-import com.mahallem.constants.AnimalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,20 +12,19 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalRequest {
+@Builder
+public class TaskRequest {
 
-    @NotNull(message = "Animal type cannot be null")
-    private AnimalType type;
+    @NotNull(message = "{title.notnull}")
+    private String title;
 
-    @NotNull(message = "Animal sex cannot be null")
-    private AnimalSex sex;
+    @NotNull(message = "{description.notnull}")
+    private String description;
 
-    @NotNull(message = "Animal birthdate cannot be sull")
+    @NotNull(message = "{deadline.notnull}")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date birthDate;
-
+    private Date deadline;
 
 }

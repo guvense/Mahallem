@@ -1,4 +1,4 @@
-package com.mahallem.entity;
+package com.mahallem.dto.Response;
 
 import com.mahallem.constants.ProgressStatus;
 import com.mahallem.constants.Status;
@@ -7,35 +7,31 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Task extends BaseEntity {
-    @Field("owner_id")
-    private ObjectId ownerId;
+public class TaskResponse {
 
-    @Field("creator_id")
-    private ObjectId creatorId;
+    private String id;
+
+    private String ownerId;
 
     private String title;
 
     private String description;
 
+    private Date createDate;
+
     private Date deadline;
 
-    private Status status ;
+    private Status status;
 
-    @Field("progress_status")
     private ProgressStatus progressStatus;
 
-    private List<Comment> comments;
-
+    private int commentNumber;
 }

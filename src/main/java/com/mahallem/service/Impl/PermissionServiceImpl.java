@@ -1,18 +1,20 @@
 package com.mahallem.service.Impl;
 
+import com.mahallem.constants.PermissionType;
+import com.mahallem.constants.ProgressStatus;
 import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.dto.Response.PermissionResponse;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
-import com.mahallem.exception.PermissionProgressUpdateException;
 import com.mahallem.exception.PermissionRequestExistException;
 import com.mahallem.mapper.service.PermissionAnswerMapper;
 import com.mahallem.mapper.service.PermissionMapper;
-import com.mahallem.permission.PermissionOperation;
 import com.mahallem.permission.PermissionFactory;
+import com.mahallem.permission.PermissionOperation;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.service.PermissionService;
+import com.mahallem.service.TaskService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -31,6 +33,8 @@ public class PermissionServiceImpl implements PermissionService {
     private final PermissionRepository permissionRepository;
 
     private final UserService userService;
+
+    private final TaskService taskService;
 
     private final PermissionMapper permissionMapper;
 
@@ -60,16 +64,26 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionOperation.approve();
     }
 
-    private void checkPermissionExist(String fromUserId, PermissionRequest permissionRequest) {
+    @Override
+    public PermissionResponse assignTaskToUser(String userId, PermissionRequest permissionRequest) {
+        checkPermissionExist(userId, permissionRequest);
+        Permission permissionMapped = permissionMapper.permissionRequestToPermission(permissionRequest, userId);
+        Permission permission = permissionRepository.save(permissionMapped);
+        taskService.updateTaskProgressStatus(permissionRequest.getTaskId(), ProgressStatus.PENDING);
+        return permissionMapper.permissionToPermissionResponse(permission);
+    }
 
+    private void checkPermissionExist(String fromUserId, PermissionRequest permissionRequest) {
         ObjectId toUserId = userService.getUserIdFromUsername(permissionRequest.getToUserName());
-        Permission permission = permissionRepository.getPermission(new ObjectId(fromUserId), toUserId, permissionRequest.getPermissionType());
-         Optional.ofNullable(permission)
+        Permission permission;
+        if (permissionRequest.getPermissionType().equals(PermissionType.ADD_HOME)) {
+            permission = permissionRepository.getPermission(new ObjectId(fromUserId), toUserId, permissionRequest.getPermissionType());
+        } else {
+            permission = permissionRepository.getPermission(new ObjectId(fromUserId), toUserId, permissionRequest.getPermissionType(), new ObjectId(permissionRequest.getTaskId()));
+        }
+        Optional.ofNullable(permission)
                 .ifPresent(s -> {
                     throw new PermissionRequestExistException();
                 });
-
-
-
     }
 }

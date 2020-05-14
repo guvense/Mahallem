@@ -30,5 +30,11 @@ public final class ExceptionCode {
 
     static final String PERMISSION_PROGRESS_UPDATE_FAILED = "Exception.permissionUpdateFailed";
 
+    static final String TASK_NOT_FOUND = "Exception.taskNotFound";
+
+    static final String TASK_NOT_FOUND_WITH_STATUS = "Exception.taskNotFoundWithThisStatus";
+
+    static final String COMMENT_NOT_FOUND = "Exception.commentNotFound";
+
 
 }

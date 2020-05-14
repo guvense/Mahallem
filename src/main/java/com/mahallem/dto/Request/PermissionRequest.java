@@ -20,4 +20,6 @@ public class PermissionRequest {
 
     @NotBlank
     protected String toUserName;
+
+    protected String taskId;
 }
