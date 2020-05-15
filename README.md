@@ -45,10 +45,6 @@ http://localhost:8081/api/v1/swagger-ui.html#/
   MethodName_StateUnderTest_ExpectedBehavior
   Your branch name should be unit-test/mah-<Issue Id>
  
-## Authors
-* **Guven SECKIN** [profile](https://github.com/guvense)
-* **Gokhan YILMAZ** [profile](https://github.com/GokhanYilmaz44)
-* **Sercan KAL** [profile](https://github.com/srcnkl)
 
 See also the list of [contributors](https://github.com/guvense/Mahallem-Backend/graphs/contributors) who participated in this project.
 
