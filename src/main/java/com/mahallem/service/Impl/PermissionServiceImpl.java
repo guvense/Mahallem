@@ -1,13 +1,10 @@
 package com.mahallem.service.Impl;
 
-import com.mahallem.constants.PermissionType;
-import com.mahallem.constants.ProgressStatus;
 import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.dto.Response.PermissionResponse;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
-import com.mahallem.entity.User;
 import com.mahallem.exception.PermissionRequestExistException;
 import com.mahallem.mapper.service.PermissionAnswerMapper;
 import com.mahallem.mapper.service.PermissionMapper;
@@ -15,7 +12,6 @@ import com.mahallem.permission.PermissionFactory;
 import com.mahallem.permission.PermissionOperation;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.service.PermissionService;
-import com.mahallem.service.TaskService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -71,7 +67,7 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionOperation.save();
     }
 
-    private void checkPermissionExist(String fromUserId, Permission permission) {
+    public void checkPermissionExist(String fromUserId, Permission permission) {
         UserResponse user =  userService.getUser(permission.getToUserId().toString());
         Permission  permissionRequest = permissionRepository.getPermission(new ObjectId(fromUserId), new ObjectId(user.getId()), permission);
         Optional.ofNullable(permissionRequest)
