@@ -7,6 +7,7 @@ import com.mahallem.mapper.service.PermissionMapper;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @SuppressWarnings("unchecked")
@@ -18,6 +19,7 @@ public class HouseInclusionPermissionOperation extends PermissionOperation {
 
     private final PermissionMapper permissionMapper;
 
+    @Transactional
     @Override
     public <T> T approve() {
         UserResponse user = userService.userInfo(permission.getFromUserId().toString());
@@ -27,6 +29,7 @@ public class HouseInclusionPermissionOperation extends PermissionOperation {
         return (T) userService.getUser(permission.getToUserId().toString());
     }
 
+    @Transactional
     @Override
     public <T> T reject() {
         userService.setRejectUserPermission(permission);

@@ -8,14 +8,15 @@ import org.bson.types.ObjectId;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PermissionRepository {
 
     Permission save(Permission permission);
 
-    Permission getPermission(ObjectId fromUserId, ObjectId toUserId, Permission permission);
+    Optional<Permission> getPermission(ObjectId fromUserId, ObjectId toUserId, Permission permission);
 
-    List<Permission> getAllPendingPermissions(ObjectId userId, Pageable pageable);
+    List<Permission> getAllPendingPermissions(String userId, Pageable pageable);
 
     Boolean setPermissionStatus(Permission permission, PermissionStatus permissionStatus);
 }

@@ -31,14 +31,14 @@ public class PermissionServiceImpl implements PermissionService {
 
     private final UserService userService;
 
-    private final PermissionMapper permissionMapper;
-
     private final PermissionFactory permissionFactory;
+
+    private final PermissionMapper permissionMapper;
 
     @Override
     public Page<PermissionResponse> getAllPendingPermissionRequest(String userId, Pageable pageable) {
 
-        List<Permission> allPendingPermissions = permissionRepository.getAllPendingPermissions(new ObjectId(userId), pageable);
+        List<Permission> allPendingPermissions = permissionRepository.getAllPendingPermissions(userId, pageable);
         List<PermissionResponse> permissionResponses = permissionMapper.permissionToPermissionResponse(allPendingPermissions);
         return new PageImpl<>(permissionResponses);
     }
@@ -67,12 +67,11 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionOperation.save();
     }
 
-    public void checkPermissionExist(String fromUserId, Permission permission) {
-        UserResponse user =  userService.getUser(permission.getToUserId().toString());
-        Permission  permissionRequest = permissionRepository.getPermission(new ObjectId(fromUserId), new ObjectId(user.getId()), permission);
-        Optional.ofNullable(permissionRequest)
-                .ifPresent(s -> {
-                    throw new PermissionRequestExistException();
-                });
+    private void checkPermissionExist(String fromUserId, Permission permission) {
+        UserResponse user = userService.getUser(permission.getToUserId().toString());
+        Optional<Permission> permissionOp = permissionRepository.getPermission(new ObjectId(fromUserId), new ObjectId(user.getId()), permission);
+        permissionOp.ifPresent(s -> {
+            throw new PermissionRequestExistException();
+        });
     }
 }
