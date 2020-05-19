@@ -44,7 +44,7 @@ public class TaskRepositoryImpl implements TaskRepository {
         return Optional.ofNullable(mongoTemplate.find(Query.query(Criteria.where("ownerId").is(ownerId)), Task.class));
     }
 
-    //TO-DO
+
     @Override
     public Optional<Task> delete(ObjectId taskId) {
         Task task = mongoTemplate.findOne(Query.query(Criteria.where("taskId").is(taskId)), Task.class);
@@ -53,10 +53,6 @@ public class TaskRepositoryImpl implements TaskRepository {
         return Optional.of(task);
     }
 
-    @Override
-    public Task update(Task task) {
-        return null;
-    }
 
     @Override
     public Optional<List<Task>> getTaskByStatus(ProgressStatus progressStatus) {
