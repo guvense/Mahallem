@@ -16,6 +16,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -28,7 +29,6 @@ public abstract class PermissionMapper {
 
     @Autowired
     protected UserService userService;
-
     @Mappings({
             @Mapping(target = "toUserId", expression = "java(userService.getUserIdFromUsername(permissionRequest.getToUserName()))"),
             @Mapping(source = "permissionRequest", target = "taskId", qualifiedByName = "toTaskId"),

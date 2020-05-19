@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class PermissionRepositoryImpl implements PermissionRepository {
     }
 
     @Override
-    public Permission getPermission(ObjectId fromUserId, ObjectId toUserId, Permission permission) {
+    public Optional<Permission> getPermission(ObjectId fromUserId, ObjectId toUserId, Permission permission) {
 
         Criteria criteria = Criteria.where("from_user_id").is(fromUserId)
                                     .and("to_user_id").is(toUserId).and("type").is(permission.getPermissionType());
@@ -39,12 +40,12 @@ public class PermissionRepositoryImpl implements PermissionRepository {
             criteria.and("taskId").is(permission.getTaskId());
         }
 
-        return mongoTemplate.findOne(Query.query(criteria), Permission.class);
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(criteria), Permission.class));
     }
 
     @Override
-    public List<Permission> getAllPendingPermissions(ObjectId userId, Pageable pageable) {
-        return mongoTemplate.find(Query.query(Criteria.where("to_user_id").is(userId).and("status").is(PermissionStatus.PENDING)).with(pageable), Permission.class);
+    public List<Permission> getAllPendingPermissions(String userId, Pageable pageable) {
+        return mongoTemplate.find(Query.query(Criteria.where("to_user_id").is(new ObjectId(userId)).and("status").is(PermissionStatus.PENDING)).with(pageable), Permission.class);
     }
 
     @Override

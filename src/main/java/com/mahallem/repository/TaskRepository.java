@@ -17,8 +17,6 @@ public interface TaskRepository {
 
     Optional<Task> delete(ObjectId taskId);
 
-    Task update(Task task);
-
     void updateProgressStatus(ObjectId taskId,ProgressStatus progressStatus);
 
     Optional<List<Task>> getTaskByStatus(ProgressStatus progressStatus);

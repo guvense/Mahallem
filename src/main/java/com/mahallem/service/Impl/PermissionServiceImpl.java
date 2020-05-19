@@ -1,13 +1,10 @@
 package com.mahallem.service.Impl;
 
-import com.mahallem.constants.PermissionType;
-import com.mahallem.constants.ProgressStatus;
 import com.mahallem.dto.Request.PermissionAnswerRequest;
 import com.mahallem.dto.Request.PermissionRequest;
 import com.mahallem.dto.Response.PermissionResponse;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
-import com.mahallem.entity.User;
 import com.mahallem.exception.PermissionRequestExistException;
 import com.mahallem.mapper.service.PermissionAnswerMapper;
 import com.mahallem.mapper.service.PermissionMapper;
@@ -15,7 +12,6 @@ import com.mahallem.permission.PermissionFactory;
 import com.mahallem.permission.PermissionOperation;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.service.PermissionService;
-import com.mahallem.service.TaskService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -35,14 +31,14 @@ public class PermissionServiceImpl implements PermissionService {
 
     private final UserService userService;
 
-    private final PermissionMapper permissionMapper;
-
     private final PermissionFactory permissionFactory;
+
+    private final PermissionMapper permissionMapper;
 
     @Override
     public Page<PermissionResponse> getAllPendingPermissionRequest(String userId, Pageable pageable) {
 
-        List<Permission> allPendingPermissions = permissionRepository.getAllPendingPermissions(new ObjectId(userId), pageable);
+        List<Permission> allPendingPermissions = permissionRepository.getAllPendingPermissions(userId, pageable);
         List<PermissionResponse> permissionResponses = permissionMapper.permissionToPermissionResponse(allPendingPermissions);
         return new PageImpl<>(permissionResponses);
     }
@@ -72,11 +68,10 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     private void checkPermissionExist(String fromUserId, Permission permission) {
-        UserResponse user =  userService.getUser(permission.getToUserId().toString());
-        Permission  permissionRequest = permissionRepository.getPermission(new ObjectId(fromUserId), new ObjectId(user.getId()), permission);
-        Optional.ofNullable(permissionRequest)
-                .ifPresent(s -> {
-                    throw new PermissionRequestExistException();
-                });
+        UserResponse user = userService.getUser(permission.getToUserId().toString());
+        Optional<Permission> permissionOp = permissionRepository.getPermission(new ObjectId(fromUserId), new ObjectId(user.getId()), permission);
+        permissionOp.ifPresent(s -> {
+            throw new PermissionRequestExistException();
+        });
     }
 }

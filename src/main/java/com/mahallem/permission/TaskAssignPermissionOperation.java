@@ -9,6 +9,7 @@ import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("unchecked")
 @RequiredArgsConstructor
 public class TaskAssignPermissionOperation extends PermissionOperation {
     private final UserService userService;
@@ -18,7 +19,6 @@ public class TaskAssignPermissionOperation extends PermissionOperation {
 
     @Transactional
     @Override
-    @SuppressWarnings("unchecked")
     public <T> T approve() {
         userService.setApproveUserPermission(permission);
         taskService.updateTaskProgressStatus(permission.getTaskId().toString(), ProgressStatus.OPEN);
@@ -28,8 +28,9 @@ public class TaskAssignPermissionOperation extends PermissionOperation {
 
     @Override
     public <T> T reject() {
-        // This should be done : @Serco
-        return null;
+        userService.setRejectUserPermission(permission);
+        taskService.updateTaskProgressStatus(permission.getTaskId().toString(), ProgressStatus.CREATED);
+        return (T) userService.getUser(permission.getToUserId().toString());
     }
 
     @Override

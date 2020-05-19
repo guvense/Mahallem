@@ -6,6 +6,7 @@ import com.mahallem.dto.Response.TaskResponse;
 import com.mahallem.entity.Task;
 import com.mahallem.exception.TaskNotFoundException;
 import com.mahallem.exception.TaskNotFoundWithStatus;
+import com.mahallem.exception.TaskNotFoundWithThisUserId;
 import com.mahallem.mapper.service.TaskMapper;
 import com.mahallem.repository.TaskRepository;
 import com.mahallem.service.TaskService;
@@ -39,7 +40,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskResponse> getTaskByOwnerId(String ownerId) {
-        List<Task> taskList = taskRepository.getTaskByOwnerId(new ObjectId(ownerId)).orElseThrow(TaskNotFoundException::new);
+        List<Task> taskList = taskRepository.getTaskByOwnerId(new ObjectId(ownerId)).orElseThrow(TaskNotFoundWithThisUserId::new);
         return TaskMapper.map.taskListToTaskResponseList(taskList);
     }
 
