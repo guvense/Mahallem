@@ -5,6 +5,7 @@ import com.mahallem.constants.ProgressStatus;
 import com.mahallem.constants.Status;
 import com.mahallem.dto.Request.TaskRequest;
 import com.mahallem.dto.Response.TaskResponse;
+import com.mahallem.elasticsearch.model.RegisteredUser;
 import com.mahallem.entity.Task;
 import com.mahallem.exception.TaskNotFoundException;
 import com.mahallem.exception.TaskNotFoundWithStatus;
@@ -16,6 +17,8 @@ import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -24,9 +27,11 @@ import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RestClientTest(TaskService.class)
@@ -49,7 +54,8 @@ public class TaskServiceTest {
 
     private String taskOwnerId;
 
-    private List<Task> taskList;
+    @Captor
+    ArgumentCaptor<Task> captor;
 
     @Before
     public void init() {
@@ -59,7 +65,7 @@ public class TaskServiceTest {
         task = TaskResource.task;
         task.setId(new ObjectId(taskId));
         taskRequest = TaskResource.taskRequest;
-        taskList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         taskList.add(task);
 
         when(taskRepository.save(any())).thenReturn(task);
@@ -74,7 +80,7 @@ public class TaskServiceTest {
         TaskResponse taskResponse = taskService.saveTask(taskRequest, taskCreatorId);
         assertEquals("test", taskResponse.getDescription());
         assertEquals("test", taskResponse.getTitle());
-        assertEquals(taskCreatorId, taskResponse.getId().toString());
+        assertEquals(taskCreatorId, taskResponse.getId());
         assertEquals(ProgressStatus.CREATED, taskResponse.getProgressStatus());
     }
 
@@ -83,7 +89,7 @@ public class TaskServiceTest {
         TaskResponse taskResponse = taskService.getTask(taskId);
         assertEquals("test", taskResponse.getDescription());
         assertEquals("test", taskResponse.getTitle());
-        assertEquals(taskCreatorId, taskResponse.getId().toString());
+        assertEquals(taskCreatorId, taskResponse.getId());
         assertEquals(ProgressStatus.CREATED, taskResponse.getProgressStatus());
     }
 
@@ -132,5 +138,14 @@ public class TaskServiceTest {
         taskService.getTaskByStatus(any());
     }
 
+    @Test
+    public void setTaskOwner_setTaskOwnerId_getTaskWithOwnerId() {
+
+        ObjectId taskOwnerId = new ObjectId("5eb6a52256d8a1577c49621c");
+        taskService.setTaskOwner(taskOwnerId, new ObjectId(taskId));
+        verify(taskRepository).save(captor.capture());
+        assertEquals(taskOwnerId, captor.getValue().getOwnerId());
+
+    }
 
 }
