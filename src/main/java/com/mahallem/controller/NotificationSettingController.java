@@ -23,9 +23,10 @@ public class NotificationSettingController {
     @NotNull
     private final NotificationSettingService notificationSettingService;
 
-    @GetMapping("detail-notification/{id}")
-    public ResponseEntity<MainResponse<NotificationSettingResponse>> detailNotification(@PathVariable String id) {
-        return ResponseUtil.data(notificationSettingService.getNotificationSetting(id));
+    @GetMapping("notification-settings")
+    public ResponseEntity<MainResponse<NotificationSettingResponse>> detailNotification(HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(notificationSettingService.getNotificationSetting(userId));
     }
 
     @PutMapping("update-notification-settings")

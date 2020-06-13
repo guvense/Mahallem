@@ -24,8 +24,8 @@ public class NotificationSettingRepositoryImpl implements NotificationSettingRep
     final MongoTemplate mongoTemplate;
 
     @Override
-    public Optional<NotificationSetting> getNotificationSettingById(ObjectId id) {
-        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("_id").is(id)), NotificationSetting.class));
+    public Optional<NotificationSettings> getNotificationSettingById(ObjectId userId) {
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("user_id").is(userId)), NotificationSettings.class));
     }
 
     @Override
@@ -35,10 +35,12 @@ public class NotificationSettingRepositoryImpl implements NotificationSettingRep
                         .set("userId", userId)
                         .set("isEmail", notificationSettingRequest.getIsEmail())
                         .set("isSms", notificationSettingRequest.getIsSms())
-                        .set("isPushNotification", notificationSettingRequest.getIsPushNotification()), NotificationSetting.class);
+                        .set("isPushNotification", notificationSettingRequest.getIsPushNotification()), NotificationSettings.class);
 
         if (!updateResult.wasAcknowledged()) {
             throw new NotificationSettingUpdateException();
         }
     }
+
+
 }

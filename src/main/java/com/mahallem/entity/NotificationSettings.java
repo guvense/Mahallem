@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NotificationSetting extends BaseEntity {
+public class NotificationSettings extends BaseEntity {
 
     @Field("user_id")
     private ObjectId userId;

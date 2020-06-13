@@ -22,6 +22,8 @@ public final class ExceptionCode {
 
     static final String NOTIFICATION_SETTING_UPDATE_FAILED = "Exception.notificationSettingUpdatedFailed";
 
+    static final String NOTIFICATION_NOT_FOUND = "Exception.notificationNotFound";
+
     static final String HOUSE_PROPERTY_EXIST = "Exception.housePropertyExist";
 
     static final String HOUSE_ID_NULL_ANIMAL = "Exception.houseIDNullAnimal";
