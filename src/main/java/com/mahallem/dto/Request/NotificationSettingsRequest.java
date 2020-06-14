@@ -9,9 +9,7 @@ import org.bson.types.ObjectId;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NotificationSettingRequest {
-
-    private ObjectId id;
+public class NotificationSettingsRequest {
 
     private Boolean isEmail;
 

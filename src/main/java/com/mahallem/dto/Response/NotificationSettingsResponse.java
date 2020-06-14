@@ -8,9 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NotificationSettingResponse {
+public class NotificationSettingsResponse {
 
-    private String id;
 
     private String userId;
 
