@@ -9,5 +9,4 @@ public interface NotificationSettingsService {
 
     NotificationSettingsResponse getNotificationSettings(String userId);
 
-    void setInitialNotificationSettings(String userId);
 }

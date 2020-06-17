@@ -33,10 +33,4 @@ public class NotificationSettingsServiceImpl implements NotificationSettingsServ
         return NotificationSettingsMapper.map.notificationToNotificationResponse(notificationSettings);
     }
 
-    @Override
-    public void setInitialNotificationSettings(String userId) {
-        notificationSettingsRepository.setNotificationSettings(new ObjectId(userId));
-    }
-
-
 }
