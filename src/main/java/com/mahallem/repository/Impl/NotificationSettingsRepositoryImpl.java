@@ -51,7 +51,7 @@ public class NotificationSettingsRepositoryImpl implements NotificationSettingsR
         notificationSettings.setIsEmail(false);
         notificationSettings.setIsSms(false);
         notificationSettings.setIsPushNotification(false);
-        mongoTemplate.insert(notificationSettings);
+        mongoTemplate.save(notificationSettings);
     }
 
 

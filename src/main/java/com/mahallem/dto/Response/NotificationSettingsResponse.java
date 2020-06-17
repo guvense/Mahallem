@@ -10,9 +10,6 @@ import lombok.*;
 @Builder
 public class NotificationSettingsResponse {
 
-
-    private String userId;
-
     private Boolean isEmail;
 
     private Boolean isSms;
