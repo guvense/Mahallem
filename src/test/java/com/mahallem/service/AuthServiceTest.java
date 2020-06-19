@@ -7,6 +7,7 @@ import com.mahallem.entity.User;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
 import com.mahallem.repository.Impl.UserRepositoryImpl;
+import com.mahallem.repository.NotificationSettingsRepository;
 import com.mahallem.resource.AuthResource;
 import com.mahallem.resource.UserResource;
 import com.mahallem.service.Impl.AuthServiceImpl;
@@ -53,11 +54,12 @@ public class AuthServiceTest {
     @InjectMocks
     private AuthServiceImpl authService;
 
+    @Mock
+    private NotificationSettingsRepository notificationSettingsRepository;
 
     private AuthRequest authRequest;
 
     private User user;
-
 
     @Before
     public void init() {
