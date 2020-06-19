@@ -1,7 +1,8 @@
 package com.mahallem.dto.Request;
 
 import lombok.*;
-import org.bson.types.ObjectId;
+
+import javax.validation.constraints.NotNull;
 
 
 @Getter
@@ -11,10 +12,13 @@ import org.bson.types.ObjectId;
 @Builder
 public class NotificationSettingsRequest {
 
+    @NotNull
     private Boolean isEmail;
 
+    @NotNull
     private Boolean isSms;
 
+    @NotNull
     private Boolean isPushNotification;
 
 }

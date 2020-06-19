@@ -16,6 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -81,6 +83,43 @@ public class NotificationSettingsServiceTest {
         inOrder.verify(notificationSettingsRepository).updateNotificationSetting(any() ,eq(notificationSettings));
         inOrder.verify(notificationSettingsMapper).notificationToNotificationResponse(notificationSettings);
     }
+
+    @Test
+    public void getNotificationSettings_validParameters_SuccessReturnNotificationResponse(){
+        // given
+
+        final NotificationSettings notificationSettings = NotificationSettings.builder()
+                .isPushNotification(true)
+                .isEmail(true)
+                .isSms(false)
+                .build();
+
+        final NotificationSettingsResponse notificationSettingsResponse = NotificationSettingsResponse.builder()
+                .isPushNotification(true)
+                .isEmail(true)
+                .isSms(false)
+                .build();
+
+        // when
+        when(notificationSettingsRepository.getNotificationSettingById(any())).thenReturn(Optional.of(notificationSettings));
+        when(notificationSettingsMapper.notificationToNotificationResponse(notificationSettings)).thenReturn(notificationSettingsResponse);
+
+        NotificationSettingsResponse response = notificationSettingsService.getNotificationSettings("5e1a436310c40031d8a7b6d9");
+
+        // then
+
+        assertTrue(response.getIsEmail());
+        assertTrue(response.getIsPushNotification());
+        assertFalse(response.getIsSms());
+
+        InOrder inOrder = inOrder(notificationSettingsRepository,
+                notificationSettingsMapper);
+
+        inOrder.verify(notificationSettingsRepository).getNotificationSettingById(any());
+        inOrder.verify(notificationSettingsMapper).notificationToNotificationResponse(eq(notificationSettings));
+
+    }
+
 
 
 }

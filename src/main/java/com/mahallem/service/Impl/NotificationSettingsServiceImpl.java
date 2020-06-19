@@ -2,10 +2,8 @@ package com.mahallem.service.Impl;
 
 import com.mahallem.dto.Request.NotificationSettingsRequest;
 import com.mahallem.dto.Response.NotificationSettingsResponse;
-import com.mahallem.entity.House;
 import com.mahallem.entity.NotificationSettings;
 import com.mahallem.exception.NotificationSettingsNotFound;
-import com.mahallem.mapper.service.HouseMapper;
 import com.mahallem.mapper.service.NotificationSettingsMapper;
 import com.mahallem.repository.NotificationSettingsRepository;
 import com.mahallem.service.NotificationSettingsService;

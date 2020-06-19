@@ -1,6 +1,5 @@
 package com.mahallem.repository.Impl;
 
-import com.mahallem.dto.Request.NotificationSettingsRequest;
 import com.mahallem.entity.*;
 import com.mahallem.exception.NotificationSettingUpdateException;
 import com.mahallem.repository.NotificationSettingsRepository;
