@@ -10,10 +10,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface NotificationSettingsMapper {
 
-    NotificationSettingsMapper map = Mappers.getMapper(NotificationSettingsMapper.class);
-
     NotificationSettings notificationRequestToNotification(NotificationSettingsRequest notificationSettingsRequest);
 
     NotificationSettingsResponse notificationToNotificationResponse(NotificationSettings notificationSettings);
-
 }
