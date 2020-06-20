@@ -42,7 +42,7 @@ public class NotificationSettingsServiceTest {
     @Before
     public void init() {
 
-    }git
+    }
 
     @Test
     public void updateNotificationSettings_validParameters_SuccessReturnNotificationResponse(){
