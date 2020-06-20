@@ -67,8 +67,11 @@ public class AnimalServiceTest {
 
     @Test(expected = UserNotFoundException.class)
     public void saveAnimal_getUserInfo_ExceptionThrown() {
+        //given
         when(userRepository.getUserInfo(any())).thenReturn(Optional.empty());
+        //when
         animalService.saveAnimal(user.getUsername(), animalRequest);
+        //then
     }
 
     @Test

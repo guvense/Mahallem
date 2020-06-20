@@ -7,6 +7,7 @@ import com.mahallem.entity.User;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
 import com.mahallem.mapper.service.AuthMapper;
+import com.mahallem.repository.NotificationSettingsRepository;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
@@ -25,6 +26,9 @@ public class AuthServiceImpl implements AuthService {
 
     @NotNull
     private final UserRepository userRepository;
+
+    @NotNull
+    private final NotificationSettingsRepository notificationSettingsRepository;
 
     @NotNull
     private final EsUserServiceImpl esUserServiceImpl;
@@ -52,6 +56,7 @@ public class AuthServiceImpl implements AuthService {
         AuthResponse authResponse = AuthMapper.map.userToAuthResponse(savedUser);
         authResponse.setToken(jwtUtil.createToken(savedUser.getId()));
 
+        notificationSettingsRepository.setNotificationSettings(savedUser.getId());
         esUserServiceImpl.addRegisterRecord(savedUser);
 
         return authResponse;

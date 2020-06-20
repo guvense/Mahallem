@@ -50,7 +50,7 @@ public class UserServiceTest {
     }
 
     @Test(expected = UserNotFoundException.class)
-    public void setUserDetailInformation_userNotFoundException() {
+    public void setUserDetailInformation_returnEmpty_userNotFoundException() {
         when(userRepository.findById(any())).thenReturn(Optional.empty());
         userService.setUserDetailInformation(userId, userDetailRequest);
     }
