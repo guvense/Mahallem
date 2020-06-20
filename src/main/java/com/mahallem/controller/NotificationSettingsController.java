@@ -7,6 +7,7 @@ import com.mahallem.util.JwtUtil;
 import com.mahallem.util.ResponseUtil;
 import com.mahallem.viewmodel.MainResponse;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class NotificationSettingsController {
     @GetMapping("notification-settings")
     public ResponseEntity<MainResponse<NotificationSettingsResponse>> detailNotification(HttpServletRequest httpServletRequest) {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return ResponseUtil.data(notificationSettingsService.getNotificationSettings(userId));
+        return ResponseUtil.data(notificationSettingsService.getNotificationSettings(new ObjectId(userId)));
     }
 
     @PutMapping("update-notification-settings")

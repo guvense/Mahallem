@@ -4,6 +4,7 @@ import com.mahallem.dto.Request.NotificationSettingsRequest;
 import com.mahallem.dto.Response.NotificationSettingsResponse;
 import com.mahallem.entity.NotificationSettings;
 import com.mahallem.entity.Permission;
+import com.mahallem.exception.NotificationSettingsNotFound;
 import com.mahallem.mapper.service.NotificationSettingsMapper;
 import com.mahallem.repository.NotificationSettingsRepository;
 import com.mahallem.service.Impl.NotificationSettingsServiceImpl;
@@ -41,7 +42,7 @@ public class NotificationSettingsServiceTest {
     @Before
     public void init() {
 
-    }
+    }git
 
     @Test
     public void updateNotificationSettings_validParameters_SuccessReturnNotificationResponse(){
@@ -104,7 +105,7 @@ public class NotificationSettingsServiceTest {
         when(notificationSettingsRepository.getNotificationSettingById(any())).thenReturn(Optional.of(notificationSettings));
         when(notificationSettingsMapper.notificationToNotificationResponse(notificationSettings)).thenReturn(notificationSettingsResponse);
 
-        NotificationSettingsResponse response = notificationSettingsService.getNotificationSettings("5e1a436310c40031d8a7b6d9");
+        NotificationSettingsResponse response = notificationSettingsService.getNotificationSettings(new ObjectId("5e1a436310c40031d8a7b6d9"));
 
         // then
 
@@ -120,6 +121,13 @@ public class NotificationSettingsServiceTest {
 
     }
 
+    @Test(expected = NotificationSettingsNotFound.class)
+    public void getNotificationSettings_NotExistNotificationSettings_NotificationSettingsNotFoundException(){
+        ObjectId userId = new ObjectId("5eb6a52256d8a1577c49621d");
+        when(notificationSettingsRepository.getNotificationSettingById(userId)).thenReturn(Optional.empty());
 
+        notificationSettingsService.getNotificationSettings(userId);
+
+    }
 
 }

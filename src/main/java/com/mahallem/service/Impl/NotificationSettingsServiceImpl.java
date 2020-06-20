@@ -27,8 +27,8 @@ public class NotificationSettingsServiceImpl implements NotificationSettingsServ
     }
 
     @Override
-    public NotificationSettingsResponse getNotificationSettings(String userId) {
-        NotificationSettings notificationSettings = notificationSettingsRepository.getNotificationSettingById(new ObjectId(userId))
+    public NotificationSettingsResponse getNotificationSettings(ObjectId userId) {
+        NotificationSettings notificationSettings = notificationSettingsRepository.getNotificationSettingById(userId)
                                                                                   .orElseThrow(NotificationSettingsNotFound::new);
         return notificationSettingsMapper.notificationToNotificationResponse(notificationSettings);
     }
