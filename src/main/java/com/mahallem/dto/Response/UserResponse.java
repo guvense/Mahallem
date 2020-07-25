@@ -40,6 +40,4 @@ public class UserResponse implements Serializable {
     private HouseResponse house;
 
     private Integer age;
-
-    private List<AnimalResponse> animals;
 }
