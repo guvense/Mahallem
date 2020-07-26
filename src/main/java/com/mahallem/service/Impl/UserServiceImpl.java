@@ -1,6 +1,7 @@
 package com.mahallem.service.Impl;
 
 import com.mahallem.constants.PermissionStatus;
+import com.mahallem.constants.Status;
 import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
@@ -33,10 +34,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse setUserDetailInformation(String userId, UserDetailRequest userDetailRequest) {
 
-        userRepository.updateUserDetailInfo(userId, userDetailRequest);
-        User user = userRepository.findById(new ObjectId(userId))
+        User user = UserMapper.map.userRequestToUser(userDetailRequest);
+        userRepository.updateUserDetailInfo(userId, user);
+        User userSaved = userRepository.findById(new ObjectId(userId))
                 .orElseThrow(UserNotFoundException::new);
-        return UserMapper.map.userToUserResponse(user);
+        return UserMapper.map.userToUserResponse(userSaved);
 
     }
 

@@ -9,10 +9,8 @@ import org.bson.types.ObjectId;
 
 public class UserResource {
     public static UserDetailRequest userDetailRequest = UserDetailRequest.builder()
-                                                                         .age(1)
                                                                          .cellPhone("test")
                                                                          .email("test")
-                                                                         .sex(Sex.MALE)
                                                                          .build();
 
     public static User user = User.builder()
