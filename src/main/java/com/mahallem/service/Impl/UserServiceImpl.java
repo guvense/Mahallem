@@ -1,7 +1,6 @@
 package com.mahallem.service.Impl;
 
 import com.mahallem.constants.PermissionStatus;
-import com.mahallem.constants.Status;
 import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
