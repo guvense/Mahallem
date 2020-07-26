@@ -24,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "user")
-public class User extends BaseEntity  {
+public class User extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 7008382284927112393L;
 
