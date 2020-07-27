@@ -15,7 +15,7 @@ import java.util.List;
 public class QueryUtil {
 
     @NotNull
-    final MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
 
     /**
      * <p>The intent of this method is to generate update query

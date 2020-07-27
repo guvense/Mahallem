@@ -7,6 +7,8 @@ import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.User;
 import org.bson.types.ObjectId;
 
+import java.util.Date;
+
 public class UserResource {
     public static UserDetailRequest userDetailRequest = UserDetailRequest.builder()
                                                                          .cellPhone("test")
@@ -17,6 +19,7 @@ public class UserResource {
                                   .username("test")
                                   .firstName("test")
                                   .lastName("test")
+                                  .birthDate(new Date())
                                   .houseId(new ObjectId("5e1a436310c40031d8a7b6d9"))
                                   .build();
 

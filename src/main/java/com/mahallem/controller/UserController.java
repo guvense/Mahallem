@@ -32,7 +32,6 @@ public class UserController {
         UserResponse userResponse = userService.setUserDetailInformation(userId, userDetailRequest);
 
         return ResponseUtil.data(userResponse);
-
     }
 
     @GetMapping

@@ -46,8 +46,6 @@ public class User extends BaseEntity implements Serializable {
     @Field("house_id")
     private ObjectId houseId;
 
-    private Integer age;
-
     private House house;
 
     private List<Animal> animals;
