@@ -2,7 +2,6 @@ package com.mahallem.controller;
 
 import com.mahallem.dto.Request.HousePropertyRequest;
 import com.mahallem.dto.Response.HouseResponse;
-import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.service.HousePropertyService;
 import com.mahallem.util.JwtUtil;
 import com.mahallem.util.ResponseUtil;

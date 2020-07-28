@@ -17,13 +17,10 @@ public interface TaskService {
 
     TaskResponse deleteTask(String taskId);
 
-    TaskResponse updateTask(String taskId, TaskRequest taskRequest);
-
     void updateTaskProgressStatus(String taskId,ProgressStatus progressStatus);
 
     void setTaskOwner(ObjectId taskOwnerId, ObjectId taskId);
 
     List<TaskResponse> getTaskByStatus(ProgressStatus progressStatus);
-
 
 }

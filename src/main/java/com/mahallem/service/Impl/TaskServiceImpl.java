@@ -51,11 +51,6 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskResponse updateTask(String taskId, TaskRequest taskRequest) {
-        return null;
-    }
-
-    @Override
     public List<TaskResponse> getTaskByStatus(ProgressStatus progressStatus) {
         List<Task> taskList = taskRepository.getTaskByStatus(progressStatus).orElseThrow(TaskNotFoundWithStatus::new);
         return TaskMapper.map.taskListToTaskResponseList(taskList);

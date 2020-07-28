@@ -22,7 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AnimalServicImpl implements AnimalService {
+public class AnimalServiceImpl implements AnimalService {
 
     @NotNull
     private final AnimalRepository animalRepository;

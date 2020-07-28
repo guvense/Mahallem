@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Setter
@@ -17,8 +18,10 @@ public class House extends BaseEntity{
 
     private Double grade;
 
+    @Field("geo_location")
     private GeoLocation geoLocation;
 
+    @Field("house_status")
     private String houseStatus;
 
 }
