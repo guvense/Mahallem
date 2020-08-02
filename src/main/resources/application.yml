@@ -15,3 +15,14 @@ spring:
     use-code-as-default-message: false
   jackson:
     property-naming-strategy: SNAKE_CASE
+  cloud:
+    azure:
+      credential-file-path: my.azureauth
+      region: westUS
+      resource-group: self_development
+      storage:
+        account: mahallemstorage
+
+blob: azure-blob://testmahallem/blobName
+  storage: azure
+

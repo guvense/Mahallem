@@ -245,6 +245,12 @@
             <type>jar</type>
         </dependency>
 
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>spring-azure-starter-storage</artifactId>
+            <version>1.0.0.M2</version>
+        </dependency>
+
 
     </dependencies>
 
