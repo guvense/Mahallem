@@ -10,5 +10,10 @@ spring:
   redis:
     host: localhost
     port: 6379
+  azure:
+    blob:
+      store:
+        connectionString: ${azure_blob_store_conncetion_string}
+        containerName: ${azure_blob_store_conncetionName}
 server:
   port: 8081

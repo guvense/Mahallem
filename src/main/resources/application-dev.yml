@@ -10,6 +10,11 @@ spring:
     host: ec2-34-254-83-127.eu-west-1.compute.amazonaws.com
     port: 8869
     password: ${redis_pass}
+  azure:
+    blob:
+      store:
+        connectionString: ${azure_blob_store_conncetion_string}
+        containerName: ${azure_blob_store_conncetionName}
 
 server:
   port: ${PORT}

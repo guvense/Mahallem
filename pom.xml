@@ -247,10 +247,15 @@
 
         <dependency>
             <groupId>com.microsoft.azure</groupId>
-            <artifactId>spring-azure-starter-storage</artifactId>
-            <version>1.0.0.M2</version>
+            <artifactId>azure-storage</artifactId>
+            <version>8.4.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
 
     </dependencies>
 
