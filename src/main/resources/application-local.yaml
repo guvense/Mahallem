@@ -13,7 +13,7 @@ spring:
   azure:
     blob:
       store:
-        connectionString: ${azure_blob_store_conncetion_string}
-        containerName: ${azure_blob_store_conncetionName}
+        connectionString: ${azure_blob_store_connection_string}
+        containerName: ${azure_blob_store_connectionName}
 server:
   port: 8081
