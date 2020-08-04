@@ -4,7 +4,9 @@ import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.dto.Response.UserResponse;
 import com.mahallem.entity.Permission;
 import org.bson.types.ObjectId;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -28,5 +30,7 @@ public interface UserService {
     void setApproveUserPermission(Permission permission);
 
     void setRejectUserPermission(Permission permission);
+
+    String uploadProfilePicture(MultipartFile multipartFile, String userId) throws IOException;
 
 }

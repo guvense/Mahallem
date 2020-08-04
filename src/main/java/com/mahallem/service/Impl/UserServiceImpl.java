@@ -11,20 +11,29 @@ import com.mahallem.mapper.service.UserMapper;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.service.UserService;
+import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FilenameUtils;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
+    private final CloudBlobContainer cloudBlobContainer;
     private final PermissionRepository permissionRepository;
 
     @NotNull
@@ -99,6 +108,29 @@ public class UserServiceImpl implements UserService {
         Boolean success = permissionRepository.setPermissionStatus(permission, PermissionStatus.REJECT);
         if (!success)
             throw new PermissionProgressUpdateException();
+    }
+
+    @Override
+    public String uploadProfilePicture(MultipartFile multipartFile, String userId) throws IOException {
+        String uri = upload(multipartFile).toURL().toString();
+        userRepository.uploadProfilePicture(uri, new ObjectId(userId));
+        return uri;
+    }
+
+    private URI upload(MultipartFile multipartFile){
+        URI uri = null;
+        CloudBlockBlob blob = null;
+        try {
+            String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+            String fileName = String.join(".", UUID.randomUUID().toString(), extension);
+            blob = cloudBlobContainer.getBlockBlobReference(fileName);
+            blob.upload(multipartFile.getInputStream(), -1);
+            uri = blob.getUri();
+        } catch (URISyntaxException | StorageException | IOException e) {
+            // TODO custom exception fırlatılacak
+            e.printStackTrace();
+        }
+        return uri;
     }
 }
 

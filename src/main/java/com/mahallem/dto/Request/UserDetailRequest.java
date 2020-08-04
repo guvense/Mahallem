@@ -32,4 +32,6 @@ public class UserDetailRequest {
     @NotNull(message = "{age.notnull}")
     @Min(value = 18, message = "{age.should.be.greater}")
     private Integer age;
+
+    private String profilePictureURL;
 }
