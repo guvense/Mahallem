@@ -44,5 +44,7 @@ public final class ExceptionCode {
 
     static final String PROFILE_PICTURE_UPDATE_FAILED = "Exception.profilePictureUpdatedFailed";
 
+    static final String UPLOAD_PICTURE_FAILED_EXCEPTION = "Exception.uploadPictureFailed";
+
 
 }
