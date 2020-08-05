@@ -30,7 +30,8 @@ public class BlobStorageServiceImpl implements BlobStorageService {
     @Override
     public URI uploadPicture(MultipartFile multipartFile) {
         URI uri;
-        LOGGER.info("Profile image uploading, image name: {}", multipartFile.getName());
+        String multipartName = multipartFile.getName().replaceAll("[\n|\r|\t]", "_");
+        LOGGER.info("Profile image uploading, image name: {}", multipartName);
 
         try {
             String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());

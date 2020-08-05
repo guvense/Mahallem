@@ -93,14 +93,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setApproveUserPermission(Permission permission) {
         Boolean success = permissionRepository.setPermissionStatus(permission, PermissionStatus.APPROVE);
-        if (!success)
+        if (Boolean.FALSE.equals(success))
             throw new PermissionProgressUpdateException();
     }
 
     @Override
     public void setRejectUserPermission(Permission permission) {
         Boolean success = permissionRepository.setPermissionStatus(permission, PermissionStatus.REJECT);
-        if (!success)
+        if (Boolean.FALSE.equals(success))
             throw new PermissionProgressUpdateException();
     }
 

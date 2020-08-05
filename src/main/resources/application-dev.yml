@@ -14,7 +14,7 @@ spring:
     blob:
       store:
         connectionString: ${azure_blob_store_connection_string}
-        containerName: ${azure_blob_store_connectionName}
+        containerName: ${azure_blob_store_connection_name}
 
 server:
   port: ${PORT}
