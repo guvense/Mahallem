@@ -31,6 +31,6 @@ public interface UserService {
 
     void setRejectUserPermission(Permission permission);
 
-    String uploadProfilePicture(MultipartFile multipartFile, String userId) throws IOException;
+    UserResponse uploadProfilePicture(MultipartFile multipartFile, String userId) throws IOException;
 
 }

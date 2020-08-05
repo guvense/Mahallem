@@ -30,16 +30,13 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
-    private final CloudBlobContainer cloudBlobContainer;
 
     @PutMapping("add-user-detail")
     public ResponseEntity<MainResponse<UserResponse>> addUserDetail(@Valid @RequestBody UserDetailRequest userDetailRequest, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         UserResponse userResponse = userService.setUserDetailInformation(userId, userDetailRequest);
-
         return ResponseUtil.data(userResponse);
-
     }
 
     @GetMapping
@@ -47,7 +44,6 @@ public class UserController {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return ResponseUtil.data(userService.userInfo(userId));
-
     }
 
     @GetMapping("homemate")
@@ -57,9 +53,8 @@ public class UserController {
     }
 
     @PostMapping("upload-profile-picture")
-    public ResponseEntity<MainResponse<String>> writeBlobFile(@RequestParam(value = "image", required = false) MultipartFile file, HttpServletRequest httpServletRequest) throws IOException {
+    public ResponseEntity<MainResponse<UserResponse>> writeBlobFile(@RequestParam(value = "image", required = false) MultipartFile file, HttpServletRequest httpServletRequest) throws IOException {
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return ResponseUtil.data(userService.uploadProfilePicture(file, userId));
     }
-
 }

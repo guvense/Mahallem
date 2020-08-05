@@ -1,4 +1,4 @@
-package com.mahallem.service.Impl;
+package com.mahallem.service.impl;
 
 import com.mahallem.constants.PermissionStatus;
 import com.mahallem.dto.Request.UserDetailRequest;
@@ -10,13 +10,9 @@ import com.mahallem.exception.UserNotFoundException;
 import com.mahallem.mapper.service.UserMapper;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.repository.UserRepository;
-import com.mahallem.service.BlobStorageService;
+import com.mahallem.blobstorage.BlobStorageService;
 import com.mahallem.service.UserService;
-import com.microsoft.azure.storage.StorageException;
-import com.microsoft.azure.storage.blob.CloudBlobContainer;
-import com.microsoft.azure.storage.blob.CloudBlockBlob;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.io.FilenameUtils;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -24,10 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -112,10 +105,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String uploadProfilePicture(MultipartFile multipartFile, String userId) throws IOException {
+    public UserResponse uploadProfilePicture(MultipartFile multipartFile, String userId) throws IOException {
         String uri = blobStorageService.uploadPicture(multipartFile).toURL().toString();
         userRepository.uploadProfilePicture(uri, new ObjectId(userId));
-        return uri;
+        return getUser(userId);
     }
 }
 

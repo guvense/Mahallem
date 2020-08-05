@@ -6,7 +6,7 @@ import com.mahallem.entity.User;
 import com.mahallem.exception.UserNotFoundException;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.resource.UserResource;
-import com.mahallem.service.Impl.UserServiceImpl;
+import com.mahallem.service.impl.UserServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

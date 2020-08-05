@@ -1,4 +1,4 @@
-package com.mahallem.service;
+package com.mahallem.blobstorage;
 
 import org.springframework.web.multipart.MultipartFile;
 

@@ -15,5 +15,8 @@ spring:
       store:
         connectionString: ${azure_blob_store_connection_string}
         containerName: ${azure_blob_store_connectionName}
+
+mock:
+  azure.blobstorage.service.enabled: true
 server:
   port: 8081
