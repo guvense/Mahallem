@@ -1,8 +1,6 @@
 package com.mahallem.blobstorage;
 
 import com.mahallem.exception.UploadPictureFailedException;
-import com.mahallem.blobstorage.BlobStorageService;
-import com.mahallem.service.impl.AuthServiceImpl;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
