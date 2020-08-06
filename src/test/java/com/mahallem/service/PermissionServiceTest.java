@@ -14,7 +14,7 @@ import com.mahallem.permission.PermissionOperation;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.resource.PermissionResource;
 import com.mahallem.resource.UserResource;
-import com.mahallem.service.Impl.PermissionServiceImpl;
+import com.mahallem.service.impl.PermissionServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

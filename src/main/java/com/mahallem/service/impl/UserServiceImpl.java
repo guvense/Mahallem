@@ -1,4 +1,4 @@
-package com.mahallem.service.Impl;
+package com.mahallem.service.impl;
 
 import com.mahallem.constants.PermissionStatus;
 import com.mahallem.dto.Request.UserDetailRequest;
@@ -10,13 +10,16 @@ import com.mahallem.exception.UserNotFoundException;
 import com.mahallem.mapper.service.UserMapper;
 import com.mahallem.repository.PermissionRepository;
 import com.mahallem.repository.UserRepository;
+import com.mahallem.blobstorage.BlobStorageService;
 import com.mahallem.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -24,7 +27,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
+    private final BlobStorageService blobStorageService;
     private final PermissionRepository permissionRepository;
 
     @NotNull
@@ -90,15 +93,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setApproveUserPermission(Permission permission) {
         Boolean success = permissionRepository.setPermissionStatus(permission, PermissionStatus.APPROVE);
-        if (!success)
+        if (Boolean.FALSE.equals(success))
             throw new PermissionProgressUpdateException();
     }
 
     @Override
     public void setRejectUserPermission(Permission permission) {
         Boolean success = permissionRepository.setPermissionStatus(permission, PermissionStatus.REJECT);
-        if (!success)
+        if (Boolean.FALSE.equals(success))
             throw new PermissionProgressUpdateException();
+    }
+
+    @Override
+    public UserResponse uploadProfilePicture(MultipartFile multipartFile, String userId) throws IOException {
+        String uri = blobStorageService.uploadPicture(multipartFile).toURL().toString();
+        userRepository.uploadProfilePicture(uri, new ObjectId(userId));
+        return getUser(userId);
     }
 }
 

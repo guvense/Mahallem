@@ -10,5 +10,13 @@ spring:
   redis:
     host: localhost
     port: 6379
+  azure:
+    blob:
+      store:
+        connectionString: ${azure_blob_store_connection_string}
+        containerName: ${azure_blob_store_connection_name}
+
+mock:
+  azure.blobstorage.service.enabled: true
 server:
   port: 8081

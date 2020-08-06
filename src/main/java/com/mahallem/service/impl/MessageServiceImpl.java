@@ -1,4 +1,4 @@
-package com.mahallem.service.Impl;
+package com.mahallem.service.impl;
 
 import com.mahallem.entity.Message;
 import com.mahallem.repository.MessageRepository;

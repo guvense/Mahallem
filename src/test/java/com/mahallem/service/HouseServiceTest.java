@@ -6,7 +6,7 @@ import com.mahallem.entity.House;
 import com.mahallem.exception.HouseNotFoundException;
 import com.mahallem.repository.HouseRepository;
 import com.mahallem.resource.HouseResource;
-import com.mahallem.service.Impl.HouseServiceImpl;
+import com.mahallem.service.impl.HouseServiceImpl;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;

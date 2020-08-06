@@ -49,4 +49,8 @@ public class User extends BaseEntity implements Serializable {
     private List<Animal> animals;
 
     private Status status;
+
+    @Field("profile_picture_url")
+    private String profilePictureURL;
+
 }

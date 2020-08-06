@@ -42,5 +42,9 @@ public final class ExceptionCode {
 
     static final String TASK_NOT_FOUND_WITH_THIS_OWNER_ID="Exception.taskNotFoundWithThisOwnerId";
 
+    static final String PROFILE_PICTURE_UPDATE_FAILED = "Exception.profilePictureUpdatedFailed";
+
+    static final String UPLOAD_PICTURE_FAILED_EXCEPTION = "Exception.uploadPictureFailed";
+
 
 }
