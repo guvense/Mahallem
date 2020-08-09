@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface AnimalRepository {
     List<Animal> getAnimals(ObjectId houseId, Pageable pageable);
 
-    Optional<Animal> getAnimalByHouseId(ObjectId animalHouseid);
+    Optional<Animal> getAnimalByHouseId(ObjectId animalHouseId);
 
     Animal save(Animal animal);
 

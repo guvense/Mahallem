@@ -15,3 +15,4 @@ spring:
     use-code-as-default-message: false
   jackson:
     property-naming-strategy: SNAKE_CASE
+

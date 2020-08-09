@@ -38,4 +38,6 @@ public class UserResponse implements Serializable {
     private HouseResponse house;
 
     private Integer age;
+
+    private String profilePictureURL;
 }

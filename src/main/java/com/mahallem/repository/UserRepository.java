@@ -28,4 +28,6 @@ public interface UserRepository {
 
     Optional<User> getUserInfoFromUsername(String username);
 
+    void uploadProfilePicture(String url, ObjectId id);
+
 }

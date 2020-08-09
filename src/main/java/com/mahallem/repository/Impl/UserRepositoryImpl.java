@@ -2,6 +2,7 @@ package com.mahallem.repository.Impl;
 
 import com.mahallem.constants.Status;
 import com.mahallem.entity.User;
+import com.mahallem.exception.ProfilePictureUpdateException;
 import com.mahallem.exception.UserUpdateException;
 import com.mahallem.repository.UserRepository;
 import com.mahallem.util.QueryUtil;
@@ -90,6 +91,15 @@ public class UserRepositoryImpl implements UserRepository {
         return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("username").is(username)), User.class));
     }
 
+    @Override
+    public void uploadProfilePicture(String url, ObjectId id) {
+        UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(id)),
+                new Update().set("profilePictureURL", url), User.class);
+
+        if (!updateResult.wasAcknowledged()) {
+            throw new ProfilePictureUpdateException();
+        }
+    }
 
     @Override
     public Optional<User> getUserInfo(String id) {

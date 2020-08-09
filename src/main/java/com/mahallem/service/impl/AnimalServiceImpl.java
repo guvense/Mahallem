@@ -1,4 +1,4 @@
-package com.mahallem.service.Impl;
+package com.mahallem.service.impl;
 
 import com.mahallem.dto.Request.AnimalRequest;
 import com.mahallem.dto.Response.AnimalResponse;
@@ -22,7 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AnimalServicImpl implements AnimalService {
+public class AnimalServiceImpl implements AnimalService {
 
     @NotNull
     private final AnimalRepository animalRepository;

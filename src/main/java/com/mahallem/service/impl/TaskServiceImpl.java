@@ -1,4 +1,4 @@
-package com.mahallem.service.Impl;
+package com.mahallem.service.impl;
 
 import com.mahallem.constants.ProgressStatus;
 import com.mahallem.dto.Request.TaskRequest;
@@ -48,11 +48,6 @@ public class TaskServiceImpl implements TaskService {
     public TaskResponse deleteTask(String taskId) {
         Task task = taskRepository.delete(new ObjectId(taskId)).orElseThrow(TaskNotFoundException::new);
         return TaskMapper.map.taskToTaskResponse(task);
-    }
-
-    @Override
-    public TaskResponse updateTask(String taskId, TaskRequest taskRequest) {
-        return null;
     }
 
     @Override

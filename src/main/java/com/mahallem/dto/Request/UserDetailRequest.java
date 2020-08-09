@@ -32,4 +32,6 @@ public class UserDetailRequest {
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date birthDate;
+
+    private String profilePictureURL;
 }

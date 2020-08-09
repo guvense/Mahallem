@@ -40,7 +40,11 @@ public final class ExceptionCode {
 
     static final String COMMENT_NOT_FOUND = "Exception.commentNotFound";
 
-    static final String TASK_NOT_FOUND_WİTH_THIS_OWNER_ID="Exception.taskNotFoundWithThisOwnerId";
+    static final String TASK_NOT_FOUND_WITH_THIS_OWNER_ID="Exception.taskNotFoundWithThisOwnerId";
+
+    static final String PROFILE_PICTURE_UPDATE_FAILED = "Exception.profilePictureUpdatedFailed";
+
+    static final String UPLOAD_PICTURE_FAILED_EXCEPTION = "Exception.uploadPictureFailed";
 
 
 }

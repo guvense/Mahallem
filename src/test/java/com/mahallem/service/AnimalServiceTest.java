@@ -9,7 +9,7 @@ import com.mahallem.repository.Impl.AnimalRepositoryImpl;
 import com.mahallem.repository.Impl.UserRepositoryImpl;
 import com.mahallem.resource.AnimalResource;
 import com.mahallem.resource.UserResource;
-import com.mahallem.service.Impl.AnimalServicImpl;
+import com.mahallem.service.impl.AnimalServiceImpl;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class AnimalServiceTest {
 
 
     @InjectMocks
-    private AnimalServicImpl animalService;
+    private AnimalServiceImpl animalService;
 
     private AnimalRequest animalRequest;
 

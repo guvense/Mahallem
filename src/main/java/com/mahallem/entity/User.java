@@ -1,16 +1,12 @@
 package com.mahallem.entity;
 
-import com.mahallem.constants.Sex;
 import com.mahallem.constants.Status;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -54,5 +50,9 @@ public class User extends BaseEntity implements Serializable {
 
     @Field("birth_date")
     private Date birthDate;
+
+
+    @Field("profile_picture_url")
+    private String profilePictureURL;
 
 }
