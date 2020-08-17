@@ -83,6 +83,7 @@ public class UserServiceTest {
         assertNotNull(userResponse.getUsername());
         assertNotNull(userResponse.getFirstName());
         assertNotNull(userResponse.getLastName());
+        assertNotNull(userResponse.getAge());
     }
 
     @Test(expected = UserNotFoundException.class)

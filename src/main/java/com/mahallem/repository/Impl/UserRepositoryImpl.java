@@ -1,13 +1,14 @@
 package com.mahallem.repository.Impl;
 
 import com.mahallem.constants.Status;
-import com.mahallem.dto.Request.UserDetailRequest;
 import com.mahallem.entity.User;
 import com.mahallem.exception.ProfilePictureUpdateException;
 import com.mahallem.exception.UserUpdateException;
 import com.mahallem.repository.UserRepository;
+import com.mahallem.util.QueryUtil;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -19,6 +20,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +29,9 @@ import java.util.Optional;
 public class UserRepositoryImpl implements UserRepository {
 
     @NotNull
-    final MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
+
+     private final QueryUtil queryUtil;
 
     @Override
     public User save(User user) {
@@ -42,7 +46,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Long countAllUsers(){
-        //List<User> users = mongoTemplate.findAll(User.class);
        return mongoTemplate.count(Query.query(Criteria.where("status").is(Status.ACTIVE)), User.class);
 
     }
@@ -53,13 +56,13 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
-    public void updateUserDetailInfo(String userId, UserDetailRequest userDetailRequest) {
-        UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(userId)),
-                new Update()
-                        .set("age", userDetailRequest.getAge())
-                        .set("cellPhone", userDetailRequest.getCellPhone())
-                        .set("email", userDetailRequest.getEmail())
-                        .set("sex", userDetailRequest.getSex()), User.class);
+    public void updateUserDetailInfo(String userId, User user) {
+
+        Update update = queryUtil.generateUpdateQuery(user, "create_date");
+        UpdateResult updateResult = mongoTemplate.updateFirst(
+                Query.query(Criteria.where("_id").is(userId)),
+                update,
+                User.class);
 
         if (!updateResult.wasAcknowledged()) {
             throw new UserUpdateException();

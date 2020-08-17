@@ -14,7 +14,7 @@ public interface UserRepository {
 
     Optional<User> findByUserName(String username);
 
-    void updateUserDetailInfo(String userId, UserDetailRequest userDetailRequest);
+    void updateUserDetailInfo(String userId, User userDetailRequest);
 
     void addHouseIdToUser(String userId, ObjectId houseId);
 

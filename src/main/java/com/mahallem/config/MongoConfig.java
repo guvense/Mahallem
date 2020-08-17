@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
 @RequiredArgsConstructor
-
 public class MongoConfig {
 
     private final MongoDbFactory mongoDbFactory;
