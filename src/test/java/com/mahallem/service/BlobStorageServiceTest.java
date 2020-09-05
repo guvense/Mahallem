@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -29,8 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @RunWith(MockitoJUnitRunner.class)
 public class BlobStorageServiceTest {
 
-    @Mock
-    private CloudBlobContainer cloudBlobContainer;
+    // private CloudBlobContainer cloudBlobContainer;
 
     @Mock
     private BlobStorageService blobStorageService;
@@ -40,15 +41,8 @@ public class BlobStorageServiceTest {
 
     @Before
     public void init(){
-        uri = URI.create("http://test");;
+        uri = URI.create("http://test");
         filename = "filename.txt";
-    }
-
-    @Test
-    public void uploadPicture_withAllParameters() throws URISyntaxException, StorageException, IOException {
-
-        URI uri = URI.create("http://test");;
-        String filename = "filename.txt";
 
         MockMultipartFile mockMultipartFile = new MockMultipartFile(
                 "data",
@@ -56,16 +50,11 @@ public class BlobStorageServiceTest {
                 "text/plain",
                 "some xml".getBytes()
         );
-
-        CloudBlockBlob  blob = cloudBlobContainer.getBlockBlobReference(filename);
-        blob.upload(mockMultipartFile.getInputStream(), -1);
-        Mockito.when(blob.getUri()).thenReturn(uri);
-
-        URI response_uri = blobStorageService.uploadPicture(mockMultipartFile);
-        assertEquals(uri,response_uri);
-
     }
 
+    @Test
+    public void uploadPicture_withAllParameters() {
 
+    }
 
 }
