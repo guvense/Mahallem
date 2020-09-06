@@ -55,6 +55,7 @@ public class AuthServiceImpl implements AuthService {
         if (byEmail.isPresent()) {
             throw new EmailExistException();
         }
+        user.setIsEmailVerified(Boolean.FALSE);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
 

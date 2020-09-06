@@ -55,6 +55,6 @@ public class User extends BaseEntity implements Serializable {
     private String profilePictureURL;
 
     @Field("is_email_verified")
-    private Boolean isEmailVerified = Boolean.FALSE;
+    private Boolean isEmailVerified;
 
 }
