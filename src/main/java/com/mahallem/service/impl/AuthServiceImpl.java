@@ -4,6 +4,7 @@ import com.mahallem.dto.Request.AuthRequest;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.elasticsearch.service.EsUserServiceImpl;
 import com.mahallem.entity.User;
+import com.mahallem.exception.EmailExistException;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
 import com.mahallem.mapper.service.AuthMapper;
@@ -46,9 +47,13 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponse registerUser(AuthRequest authRequest) {
         final User user = AuthMapper.map.authRequestToUser(authRequest);
         Optional<User> byUserName = userRepository.findByUserName(authRequest.getUsername());
+        Optional<User> byEmail = userRepository.findByEmail(authRequest.getEmail());
 
         if (byUserName.isPresent()) {
             throw new UsernameExistException();
+        }
+        if (byEmail.isPresent()) {
+            throw new EmailExistException();
         }
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);

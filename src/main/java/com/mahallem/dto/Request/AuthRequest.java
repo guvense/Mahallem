@@ -1,6 +1,7 @@
 package com.mahallem.dto.Request;
 
 
+import com.mahallem.customize.Annotation.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,5 +30,9 @@ public class AuthRequest {
 
     @NotBlank(message = "{password.not.blank}")
     private String password;
+
+    @Email
+    @NotBlank(message = "{email.not.blank}")
+    private String email;
 
 }

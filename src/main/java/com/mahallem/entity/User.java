@@ -51,8 +51,10 @@ public class User extends BaseEntity implements Serializable {
     @Field("birth_date")
     private Date birthDate;
 
-
     @Field("profile_picture_url")
     private String profilePictureURL;
+
+    @Field("is_email_verified")
+    private Boolean isEmailVerified = Boolean.FALSE;
 
 }

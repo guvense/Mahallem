@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -22,6 +23,8 @@ import java.util.Date;
 @Builder
 public class UserDetailRequest {
 
+    @Email
+    @NotBlank(message = "{email.not.blank}")
     private String email;
 
     private String cellPhone;
@@ -34,4 +37,6 @@ public class UserDetailRequest {
     private Date birthDate;
 
     private String profilePictureURL;
+
+    private Boolean isEmailVerified;
 }
