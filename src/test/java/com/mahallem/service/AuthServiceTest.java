@@ -9,6 +9,7 @@ import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
 import com.mahallem.repository.Impl.UserRepositoryImpl;
 import com.mahallem.repository.NotificationSettingsRepository;
+import com.mahallem.repository.UserValidationRepository;
 import com.mahallem.resource.AuthResource;
 import com.mahallem.resource.UserResource;
 import com.mahallem.service.impl.AuthServiceImpl;
@@ -42,6 +43,9 @@ public class AuthServiceTest {
 
     @Mock
     private UserRepositoryImpl userRepository;
+
+    @Mock
+    private UserValidationRepository userValidationRepository;
 
     @Spy
     private JwtUtil jwtUtil;
@@ -103,12 +107,14 @@ public class AuthServiceTest {
     public void register_RegisterUser_CreateUserWithAllProperties() {
 
         when(userRepository.save(any())).thenReturn(user);
+        userValidationRepository.updateEmailVerification(user.getId(), Boolean.FALSE);
         when(bCryptPasswordEncoder.encode(any())).thenReturn("12345");
         when(userRepository.findByUserName(any())).thenReturn(Optional.of(user));
         when(bCryptPasswordEncoder.matches(any(), any())).thenReturn(true);
         doNothing().when(esUserServiceImpl).addRegisterRecord(any());
 
         when(userRepository.findByUserName(anyString())).thenReturn(Optional.empty());
+
         AuthResponse authResponse = authService.registerUser(authRequest);
 
         assertNotNull(authResponse.getToken());
