@@ -41,5 +41,4 @@ public class UserResponse implements Serializable {
 
     private String profilePictureURL;
 
-    private Boolean isEmailVerified;
 }

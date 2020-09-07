@@ -38,5 +38,4 @@ public class UserDetailRequest {
 
     private String profilePictureURL;
 
-    private Boolean isEmailVerified;
 }

@@ -4,12 +4,14 @@ import com.mahallem.dto.Request.AuthRequest;
 import com.mahallem.dto.Response.AuthResponse;
 import com.mahallem.elasticsearch.service.EsUserServiceImpl;
 import com.mahallem.entity.User;
+import com.mahallem.entity.UserValidation;
 import com.mahallem.exception.EmailExistException;
 import com.mahallem.exception.UserOrPasswordWrongException;
 import com.mahallem.exception.UsernameExistException;
 import com.mahallem.mapper.service.AuthMapper;
 import com.mahallem.repository.NotificationSettingsRepository;
 import com.mahallem.repository.UserRepository;
+import com.mahallem.repository.UserValidationRepository;
 import com.mahallem.service.AuthService;
 import com.mahallem.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,9 @@ public class AuthServiceImpl implements AuthService {
 
     @NotNull
     private final UserRepository userRepository;
+
+    @NotNull
+    private final UserValidationRepository userValidationRepository;
 
     @NotNull
     private final NotificationSettingsRepository notificationSettingsRepository;
@@ -55,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
         if (byEmail.isPresent()) {
             throw new EmailExistException();
         }
-        user.setIsEmailVerified(Boolean.FALSE);
+        userValidationRepository.updateEmailVerification(user.getId(), Boolean.FALSE);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
 
