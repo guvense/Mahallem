@@ -46,5 +46,7 @@ public final class ExceptionCode {
 
     static final String UPLOAD_PICTURE_FAILED_EXCEPTION = "Exception.uploadPictureFailed";
 
+    static final String EMAIL_EXIST_EXCEPTION = "Exception.emailExistException";
+
 
 }

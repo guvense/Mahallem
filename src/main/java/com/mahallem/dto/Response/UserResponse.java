@@ -40,4 +40,5 @@ public class UserResponse implements Serializable {
     private Integer age;
 
     private String profilePictureURL;
+
 }

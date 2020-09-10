@@ -56,6 +56,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("email").is(email)), User.class));
+    }
+
     public void updateUserDetailInfo(String userId, User user) {
 
         Update update = queryUtil.generateUpdateQuery(user, "create_date");

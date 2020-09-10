@@ -20,6 +20,7 @@ public class UserResource {
                                   .firstName("test")
                                   .lastName("test")
                                   .birthDate(new Date())
+                                  .email("aaa")
                                   .houseId(new ObjectId("5e1a436310c40031d8a7b6d9"))
                                   .build();
 
