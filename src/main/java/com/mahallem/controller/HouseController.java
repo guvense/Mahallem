@@ -31,9 +31,10 @@ public class HouseController {
         return ResponseUtil.data(houseResponse, HttpStatus.CREATED);
     }
 
-    @GetMapping("detail-house/{id}")
-    public ResponseEntity<MainResponse<HouseResponse>> detailHouse(@PathVariable String id) {
-        return ResponseUtil.data(houseService.getHouse(id));
+    @GetMapping
+    public ResponseEntity<MainResponse<HouseResponse>> detailHouse(HttpServletRequest httpServletRequest) {
+        String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
+        return ResponseUtil.data(houseService.getHouse(userId));
     }
 }
 
