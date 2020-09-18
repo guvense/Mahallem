@@ -18,9 +18,6 @@ public class HouseRequest {
     @NotNull(message = "House name cannot be null")
     private String name;
 
-    @NotNull(message = "House grade cannot be null")
-    private Double grade;
-
     private GeoLocationRequest geoLocation;
 
     @NotNull(message = "House status cannot be null")

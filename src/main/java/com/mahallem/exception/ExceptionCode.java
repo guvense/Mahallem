@@ -20,6 +20,8 @@ public final class ExceptionCode {
 
     static final String USER_UPDATE_FAILED = "Exception.userUpdatedFailed";
 
+    static final String HOUSE_UPDATE_FAILED = "Exception.houseUpdatedFailed";
+
     static final String NOTIFICATION_SETTING_UPDATE_FAILED = "Exception.notificationSettingUpdatedFailed";
 
     static final String NOTIFICATION_NOT_FOUND = "Exception.notificationNotFound";

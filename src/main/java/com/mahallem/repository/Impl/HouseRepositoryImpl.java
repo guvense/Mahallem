@@ -2,7 +2,10 @@ package com.mahallem.repository.Impl;
 
 import com.mahallem.dto.Response.HouseResponse;
 import com.mahallem.entity.House;
+
+import com.mahallem.exception.HouseUpdateException;
 import com.mahallem.repository.HouseRepository;
+import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,6 +14,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -40,6 +44,20 @@ public class HouseRepositoryImpl implements HouseRepository {
         HouseResponse houseResponse = mongoTemplate.aggregate(aggregation, "house", HouseResponse.class).getUniqueMappedResult();
         return houseResponse;
 
+    }
+
+    @Override
+    public House updateHouse(ObjectId houseId, House house) {
+        UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(houseId)),
+                new Update()
+                        .set("houseStatus", house.getHouseStatus())
+                        .set("name", house.getName()), House.class);
+
+        if (!updateResult.wasAcknowledged()) {
+            throw new HouseUpdateException();
+        }
+
+        return mongoTemplate.findOne(Query.query(Criteria.where("_id").is(houseId)), House.class);
     }
 
     private LookupOperation lookupHouseToProperty() {
