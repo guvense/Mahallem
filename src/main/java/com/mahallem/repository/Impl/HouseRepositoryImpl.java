@@ -6,6 +6,7 @@ import com.mahallem.entity.House;
 import com.mahallem.entity.User;
 import com.mahallem.exception.HouseUpdateException;
 import com.mahallem.repository.HouseRepository;
+import com.mahallem.util.QueryUtil;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -25,6 +26,7 @@ import java.util.Optional;
 public class HouseRepositoryImpl implements HouseRepository {
 
     private final MongoTemplate mongoTemplate;
+    private final QueryUtil queryUtil;
 
     @Override
     public Optional<House> getHouse(String id) {
@@ -51,11 +53,19 @@ public class HouseRepositoryImpl implements HouseRepository {
     public House updateHouse(ObjectId userId, House house) {
 
         User user = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(userId)), User.class);
+        Update update = queryUtil.generateUpdateQuery(house, "create_date");
 
-        UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(user.getHouseId())),
+        UpdateResult updateResult = mongoTemplate.updateFirst(
+                Query.query(Criteria.where("_id").is(user.getHouseId())),
+                update,
+                House.class);
+
+        /*UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(user.getHouseId())),
                 new Update()
                         .set("houseStatus", house.getHouseStatus())
                         .set("name", house.getName()), House.class);
+
+        */
 
         if (!updateResult.wasAcknowledged()) {
             throw new HouseUpdateException();
