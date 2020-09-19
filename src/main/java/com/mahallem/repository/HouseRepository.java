@@ -1,5 +1,6 @@
 package com.mahallem.repository;
 
+import com.mahallem.dto.Request.HouseRequest;
 import com.mahallem.dto.Response.HouseResponse;
 import com.mahallem.entity.House;
 import org.bson.types.ObjectId;
@@ -14,5 +15,7 @@ public interface HouseRepository  {
     House save(House house);
 
     HouseResponse getHouseWithProperties(ObjectId id);
+
+    House updateHouse(ObjectId userId, House house);
 
 }

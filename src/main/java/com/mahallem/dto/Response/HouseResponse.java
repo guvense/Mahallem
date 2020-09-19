@@ -28,4 +28,6 @@ public class HouseResponse {
 
     private List<HousePropertyResponse> properties;
 
+    private List<UserResponse> users;
+
 }

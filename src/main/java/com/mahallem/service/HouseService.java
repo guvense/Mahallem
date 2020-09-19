@@ -13,4 +13,6 @@ public interface HouseService {
     HouseResponse getHouse(String id);
 
     HouseResponse getHouseWithProperties(String id);
+
+    HouseResponse updateHouse(String userId, HouseRequest houseRequest);
 }
