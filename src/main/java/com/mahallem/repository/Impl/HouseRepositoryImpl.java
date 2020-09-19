@@ -60,13 +60,6 @@ public class HouseRepositoryImpl implements HouseRepository {
                 update,
                 House.class);
 
-        /*UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(user.getHouseId())),
-                new Update()
-                        .set("houseStatus", house.getHouseStatus())
-                        .set("name", house.getName()), House.class);
-
-        */
-
         if (!updateResult.wasAcknowledged()) {
             throw new HouseUpdateException();
         }
