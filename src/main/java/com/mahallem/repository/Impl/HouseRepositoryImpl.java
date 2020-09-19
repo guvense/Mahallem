@@ -3,6 +3,7 @@ package com.mahallem.repository.Impl;
 import com.mahallem.dto.Response.HouseResponse;
 import com.mahallem.entity.House;
 
+import com.mahallem.entity.User;
 import com.mahallem.exception.HouseUpdateException;
 import com.mahallem.repository.HouseRepository;
 import com.mongodb.client.result.UpdateResult;
@@ -47,8 +48,11 @@ public class HouseRepositoryImpl implements HouseRepository {
     }
 
     @Override
-    public House updateHouse(ObjectId houseId, House house) {
-        UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(houseId)),
+    public House updateHouse(ObjectId userId, House house) {
+
+        User user = mongoTemplate.findOne(Query.query(Criteria.where("_id").is(userId)), User.class);
+
+        UpdateResult updateResult = mongoTemplate.updateFirst(Query.query(Criteria.where("_id").is(user.getHouseId())),
                 new Update()
                         .set("houseStatus", house.getHouseStatus())
                         .set("name", house.getName()), House.class);
@@ -57,7 +61,7 @@ public class HouseRepositoryImpl implements HouseRepository {
             throw new HouseUpdateException();
         }
 
-        return mongoTemplate.findOne(Query.query(Criteria.where("_id").is(houseId)), House.class);
+        return mongoTemplate.findOne(Query.query(Criteria.where("_id").is(user.getHouseId())), House.class);
     }
 
     private LookupOperation lookupHouseToProperty() {

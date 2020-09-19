@@ -37,13 +37,12 @@ public class HouseController {
         return ResponseUtil.data(houseService.getHouse(userId));
     }
 
-    @PatchMapping("/{houseId}")
+    @PatchMapping
     public ResponseEntity<MainResponse<HouseResponse>> updateHouse(
-            @PathVariable String houseId,
             @Valid @RequestBody HouseRequest houseRequest, HttpServletRequest httpServletRequest){
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
-        return ResponseUtil.data(houseService.updateHouse(houseId, houseRequest));
+        return ResponseUtil.data(houseService.updateHouse(userId, houseRequest));
     }
 }
 

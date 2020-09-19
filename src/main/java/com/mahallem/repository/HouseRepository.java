@@ -16,6 +16,6 @@ public interface HouseRepository  {
 
     HouseResponse getHouseWithProperties(ObjectId id);
 
-    House updateHouse(ObjectId houseId, House house);
+    House updateHouse(ObjectId userId, House house);
 
 }
