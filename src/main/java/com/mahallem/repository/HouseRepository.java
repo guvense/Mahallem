@@ -12,10 +12,13 @@ public interface HouseRepository  {
 
     Optional<House> getHouse(String id);
 
+    Optional<House> getHouseByUserId(ObjectId userId);
+
     House save(House house);
 
     HouseResponse getHouseWithProperties(ObjectId id);
 
     House updateHouse(ObjectId userId, House house);
+
 
 }

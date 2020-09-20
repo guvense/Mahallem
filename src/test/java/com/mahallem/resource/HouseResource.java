@@ -17,7 +17,6 @@ public class HouseResource {
     public static House house = House.builder()
             .houseStatus("test")
             .geoLocation(GeoLocation.builder().longitude(10.0).latitude(10.0).build())
-            .grade(10.0)
             .name("test")
             .build();
 

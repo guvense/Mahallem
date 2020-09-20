@@ -4,6 +4,7 @@ import com.mahallem.dto.Request.HouseRequest;
 import com.mahallem.dto.Response.HouseResponse;
 import com.mahallem.entity.House;
 import com.mahallem.exception.HouseNotFoundException;
+import com.mahallem.mapper.service.HouseMapper;
 import com.mahallem.repository.HouseRepository;
 import com.mahallem.resource.HouseResource;
 import com.mahallem.service.impl.HouseServiceImpl;
@@ -18,6 +19,7 @@ import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -40,6 +42,8 @@ public class HouseServiceTest {
     private HouseRequest houseRequest;
 
     private House savedHouse;
+
+    private House existHouse;
 
     @Before
     public void init() {
@@ -73,5 +77,23 @@ public class HouseServiceTest {
         assertNotNull(houseResponse.getId());
         assertNotNull(houseResponse.getName());
         assertNotNull(houseResponse.getHouseStatus());
+    }
+
+    @Test
+    public void updateHouse_WithSomeFields_Success(){
+        existHouse = HouseResource.house;
+
+        when(houseRepository.getHouseByUserId(any())).thenReturn(Optional.ofNullable(existHouse));
+        when(houseRepository.updateHouse(any(),any())).thenReturn(savedHouse);
+
+        HouseResponse houseResponse = houseService.updateHouse("5e1a436310c40031d8a7b6d9", houseRequest);
+        assertEquals(houseRequest.getName(), houseResponse.getName());
+        assertEquals(houseRequest.getHouseStatus(), houseResponse.getHouseStatus());
+    }
+
+    @Test(expected = HouseNotFoundException.class)
+    public void updateHouse_NotExistHouse_HouseNotFoundException(){
+        when(houseRepository.getHouseByUserId(any())).thenReturn(Optional.empty());
+        houseService.updateHouse("5e1a436310c40031d8a7b6d9", houseRequest);
     }
 }
