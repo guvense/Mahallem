@@ -37,9 +37,9 @@ public class HouseController {
         return ResponseUtil.data(houseService.getHouse(userId));
     }
 
-    @PatchMapping
+    @PutMapping
     public ResponseEntity<MainResponse<HouseResponse>> updateHouse(
-            @RequestBody HouseRequest houseRequest, HttpServletRequest httpServletRequest){
+            @RequestBody HouseRequest houseRequest, HttpServletRequest httpServletRequest) {
 
         String userId = JwtUtil.getObjectIdFromRequest(httpServletRequest);
         return ResponseUtil.data(houseService.updateHouse(userId, houseRequest));

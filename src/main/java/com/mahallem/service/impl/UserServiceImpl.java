@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         User user = UserMapper.map.userRequestToUser(userDetailRequest);
         userRepository.updateUserDetailInfo(userId, user);
         User userSaved = userRepository.findById(new ObjectId(userId))
-                .orElseThrow(UserNotFoundException::new);
+                                       .orElseThrow(UserNotFoundException::new);
         return UserMapper.map.userToUserResponse(userSaved);
 
     }
@@ -48,14 +48,14 @@ public class UserServiceImpl implements UserService {
     public UserResponse userInfo(String userId) {
 
         User user = userRepository.getUserInfo(userId)
-                .orElseThrow(UserNotFoundException::new);
+                                  .orElseThrow(UserNotFoundException::new);
         return UserMapper.map.userToUserResponse(user);
     }
 
     @Override
     public UserResponse getUser(String userId) {
         User user = userRepository.getUserInfo(userId)
-                .orElseThrow(UserNotFoundException::new);
+                                  .orElseThrow(UserNotFoundException::new);
 
         return UserMapper.map.userToUserResponse(user);
     }
@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserResponse> getHomemates(String userId) {
         User user = userRepository.getUserInfo(userId)
-                .orElseThrow(UserNotFoundException::new);
+                                  .orElseThrow(UserNotFoundException::new);
         List<User> homemates = userRepository.findHomematesByHouseId(new ObjectId(userId), user.getHouseId());
         return UserMapper.map.userListToUserResponseList(homemates);
     }
