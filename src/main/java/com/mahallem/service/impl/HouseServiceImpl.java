@@ -48,6 +48,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public HouseResponse updateHouse(String userId, HouseRequest houseRequest) {
         final House house = HouseMapper.map.houseRequestToHouse(houseRequest);
+        houseRepository.getHouseByUserId(new ObjectId(userId)).orElseThrow(HouseNotFoundException::new);
         House updateHouse = houseRepository.updateHouse(new ObjectId(userId), house);
         return HouseMapper.map.houseToHouseResponse(updateHouse);
     }

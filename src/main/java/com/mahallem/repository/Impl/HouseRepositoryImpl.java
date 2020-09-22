@@ -35,6 +35,12 @@ public class HouseRepositoryImpl implements HouseRepository {
     }
 
     @Override
+    public Optional<House> getHouseByUserId(ObjectId userId) {
+        House house = mongoTemplate.findOne(Query.query(Criteria.where("user_id").is(userId)), House.class);
+        return Optional.ofNullable(house);
+    }
+
+    @Override
     public House save(House house) {
         return mongoTemplate.save(house);
     }
