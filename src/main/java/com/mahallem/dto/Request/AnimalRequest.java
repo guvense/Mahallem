@@ -26,7 +26,7 @@ public class AnimalRequest {
     private AnimalSex sex;
 
     @NotNull(message = "Animal birthdate cannot be null")
-    //@DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
 
